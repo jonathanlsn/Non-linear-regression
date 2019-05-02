@@ -30,6 +30,15 @@ void Forest::PushBack(Tree x){
   }
 }
 
+void Forest::afficherForest(){
+  Forest* tmp = firstTree_ ; // temporary pointer that will go through the list
+  while(tmp != nullptr){
+  	Tree a = *(tmp->nextNode1_);
+    a.affichage();
+    tmp = tmp -> nextTree_;      
+  }
+}
+
 int Forest::nb_elmts(){
 	return nb_elmts_;
 }
