@@ -11,7 +11,7 @@ class Tree{
     Tree(Node * node);
     Tree(Tree tree);
 //getter
-    Node FirstNode();
+    Node * FirstNode();
     int Fitness();
     NbrNode();
 //setter

@@ -10,7 +10,7 @@ Tree::Tree(Tree tree){
 }
 
 //getter
-Tree::Node FirstNode(){
+Tree::Node * FirstNode(){
   return FirstNode_;
 }
 
