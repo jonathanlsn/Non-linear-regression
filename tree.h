@@ -5,17 +5,21 @@
 #define TREE
 class Tree{
   
+  friend class Forest;
+  
   public:
 
 //constructor
     Tree(Node * node);
-    Tree(Tree tree);
+    //Tree(const Tree&);
 //getter
     Node FirstNode();
     int Fitness();
-    NbrNode();
+    int NbrNode();
 //setter
   
+void generation();
+
 //method
 
 
@@ -24,6 +28,7 @@ class Tree{
     int Fitness_;
     int NbrNode_;
     Tree * nextTree_; 
+    int generation_;
   
 };
 #endif

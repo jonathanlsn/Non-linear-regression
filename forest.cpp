@@ -22,7 +22,7 @@ void Forest::PushBack(Tree x){
   else {
     Tree* dernier = firstTree_;
     Tree* temp = nullptr;
-    for (int i=1; i<nb_elmts ;++i){
+    for (int i=1; i<nb_elmts_ ;++i){
       temp = dernier -> nextTree_ ;
       dernier = temp;
     }
@@ -32,10 +32,10 @@ void Forest::PushBack(Tree x){
 }
 
 void Forest::afficherForest(){
-  Forest* tmp = firstTree_ ; // temporary pointer that will go through the list
+  Tree* tmp = firstTree_ ; // temporary pointer that will go through the list
   while(tmp != nullptr){
-  	Tree a = *(tmp->nextNode1_);
-    a.affichage();
+  	Tree* a = tmp;
+    a -> generation();
     tmp = tmp -> nextTree_;      
   }
 }

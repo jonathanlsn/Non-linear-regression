@@ -6,26 +6,29 @@ Tree::Tree(Node * node){
   Fitness_ = 1;
   NbrNode_ = 1;
   nextTree_ = nullptr; 
+  generation_ = -1;
 }
 
-Tree::Tree(Tree tree){
+//Tree::Tree(Tree tree){
   
-}
+//}
 
 //getter
-Tree::Node FirstNode(){
+Node Tree::FirstNode(){
   return FirstNode_;
 }
 
-Tree::int Fitness(){
+int Tree::Fitness(){
   return Fitness_;
 }
 
-Tree::int NbrNode(){
+int Tree::NbrNode(){
   return NbrNode_;
 }
 
 //setter
 
+void Tree::generation(){
+std::cout << generation_ <<std::endl;
+}
 
-//method
