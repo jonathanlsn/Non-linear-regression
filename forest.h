@@ -1,7 +1,8 @@
+#ifndef FOREST_
+#define FOREST_
+
 #include "tree.h"
 
-#ifndef FOREST
-#define FOREST
 class Forest{
 
     friend class Tree;
@@ -24,4 +25,4 @@ class Forest{
     Tree* firstTree_;
     int nb_elmts_;
 };
-#endif
+#endif // FOREST_
