@@ -3,6 +3,9 @@
 //constructor
 Tree::Tree(Node * node){
   FirstNode_ = node;
+  Fitness_ = 1;
+  NbrNode_ = 1;
+  nextTree_ = nullptr; 
 }
 
 Tree::Tree(Tree tree){
