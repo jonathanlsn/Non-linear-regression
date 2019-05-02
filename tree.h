@@ -1,4 +1,5 @@
 #include "node.h"
+#include <cstdlib>
 #include "forest.h"
 
 #ifndef TREE
