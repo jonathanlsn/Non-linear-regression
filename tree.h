@@ -23,6 +23,7 @@ class Tree{
     Node * FirstNode_;
     int Fitness_;
     int NbrNode_;
+    Tree * nextTree_; 
   
 };
 #endif
