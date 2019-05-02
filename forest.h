@@ -17,6 +17,9 @@ class Forest{
 		// Constructors
     Forest();
     Forest(const Forest&)=delete;  
+
+        // Destructors
+    ~Forest()=default; 
 	
         // getter
     int nb_elmts(); // return the value of the attribut nb_elmts_ of the list.
