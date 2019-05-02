@@ -29,3 +29,7 @@ void Forest::PushBack(Tree x){
    
   }
 }
+
+int Forest::nb_elmts(){
+	return nb_elmts_;
+}

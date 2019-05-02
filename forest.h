@@ -15,6 +15,8 @@ class Forest{
     Forest();
     Forest(const Forest&)=delete;  
 	
+        // getter
+    int nb_elmts(); // return the value of the attribut nb_elmts_ of the list.
   
   protected:
     Tree* firstTree_;
