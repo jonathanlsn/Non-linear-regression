@@ -18,6 +18,10 @@ Tree::int Fitness(){
   return Fitness_;
 }
 
+Tree::int NbrNode(){
+  return NbrNode_;
+}
+
 //setter
 
 

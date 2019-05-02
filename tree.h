@@ -13,6 +13,7 @@ class Tree{
 //getter
     Node FirstNode();
     int Fitness();
+    NbrNode();
 //setter
   
 //method
@@ -21,7 +22,7 @@ class Tree{
   protected:
     Node * FirstNode_;
     int Fitness_;
-    int 
+    int NbrNode_;
   
 };
 #endif
