@@ -8,6 +8,7 @@ class Node{
     Node(std::string str);
     Node(std::string str,Node precedent);
     Node(bool boleen,Node precedent);
+    Node(bool boleen);
 
 //getter
     std::string values();
@@ -23,6 +24,7 @@ class Node{
     Node * FatherNode_;
     Node * NextNode1_;
     Node * NextNode2_;
+    std::string type_;
 
 };
 #endif
