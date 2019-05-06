@@ -33,21 +33,23 @@ int main()
   
   Forest Forest1();
  
-  std::string str="+";
-  Node Node1(str);
-  Node Node2(true);
+  std::string str="&&";
+  Node Node3(str);
+  Node Node1(false,Node3);
+  Node Node2(true,Node3);
+  
 
   Tree Tree1(&Node1);  
+  Tree Tree2(&Node3);
   
   //Verification des parametres
 
   std::cout<< "Verification des parametres" <<std::endl;
-  std::cout<< Node1.values() <<std::endl;
-  std::cout<< Node2.bool_values() <<std::endl;
+  std::cout<< Node1.bool_values() <<std::endl;
+  std::cout<< Node3.values() <<std::endl;
 
 
   std::cout<< "Verification des parametres" <<std::endl;
-  std::cout<< std::boolalpha <<(Node1.FatherNode()==nullptr) <<std::endl;
   std::cout<< std::boolalpha << (Node1.NextNode1()==nullptr) <<std::endl;
   std::cout<< std::boolalpha << (Node1.NextNode2()==nullptr) <<std::endl;
   
@@ -58,6 +60,19 @@ int main()
 
    //Verification des arbres
   std::cout<< "Verification des arbres" <<std::endl;
+  std::cout<< Tree1.FirstNode()<<std::endl;
+  std::cout<< Tree1.FirstNode() -> type()  <<std::endl;
+
+  std::cout<< Tree1.Fitness() << std::endl;
+  std::cout<< Tree1.NbrNode() << std::endl;
+
+  //resultat arbre
+  std::cout<< "resultat arbre"<< std::endl;
+  std::cout << (Tree1.cross(Tree1.FirstNode())==0) << std::endl;
+
+  //resultat sur l arbre avec un opérateur
+  std::cout<< "resultat arbre operateur"<< std::endl;
+  std::cout << Tree1.cross(Tree2.FirstNode()) << std::endl;
 
 
 

@@ -19,7 +19,7 @@ class Tree{
 
 //getter
     Node* FirstNode();
-    int Fitness();
+    bool Fitness();
     int NbrNode();
 
 //setter
@@ -27,7 +27,7 @@ class Tree{
     void generation();
 
 //method
-    int cross(Node * node);
+    bool cross(Node * node);
     void calcul_fitness();
     //void Tree_reading();
 
@@ -36,7 +36,7 @@ class Tree{
 
   protected:
     Node * FirstNode_;
-    int Fitness_;
+    bool Fitness_;
     int NbrNode_;
     Tree * nextTree_; 
     int generation_;
