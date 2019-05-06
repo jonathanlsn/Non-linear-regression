@@ -105,6 +105,6 @@ int Tree::cross(Node * node){
   }
   
   else{
-    return (node -> values());
+    return (node -> bool_values());
   }
 }
