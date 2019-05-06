@@ -14,7 +14,7 @@ class Tree{
     Tree(Node * node);
     //Tree(const Tree&);
 //getter
-    Node FirstNode();
+    Node* FirstNode();
     int Fitness();
     int NbrNode();
 //setter
@@ -23,6 +23,9 @@ class Tree{
 
 //method
     int cross(Node * node);
+
+//void mutation();
+
 
   protected:
     Node * FirstNode_;
