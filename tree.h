@@ -24,8 +24,10 @@ class Tree{
     void generation();
 
 //method
+    int cross(Node * node);
 
 //void mutation();
+
 
   protected:
     Node * FirstNode_;
@@ -33,6 +35,5 @@ class Tree{
     int NbrNode_;
     Tree * nextTree_; 
     int generation_;
-  
 };
 #endif

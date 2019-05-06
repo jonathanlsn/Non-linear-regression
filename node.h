@@ -8,6 +8,7 @@ class Node{
   
   public:
 <<<<<<< HEAD
+<<<<<<< HEAD
 //constructeur
     Node(std::string str);
     Node(std::string str,Node precedent);
