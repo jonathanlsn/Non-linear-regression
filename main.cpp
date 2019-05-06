@@ -40,6 +40,7 @@ int main()
   Tree Tree1(&Node1);  
   
   //Verification des parametres
+
   std::cout<< "Verification des parametres" <<std::endl;
   std::cout<< Node1.values() <<std::endl;
   std::cout<< Node2.bool_values() <<std::endl;
@@ -49,11 +50,11 @@ int main()
   std::cout<< std::boolalpha <<(Node1.FatherNode()==nullptr) <<std::endl;
   std::cout<< std::boolalpha << (Node1.NextNode1()==nullptr) <<std::endl;
   std::cout<< std::boolalpha << (Node1.NextNode2()==nullptr) <<std::endl;
-   
-  std::cout<< std::boolalpha << (Node2.FatherNode()==nullptr) <<std::endl;
-  std::cout<< std::boolalpha << (Node2.NextNode1()==nullptr) <<std::endl;
-  std::cout<< std::boolalpha << (Node2.NextNode2()==nullptr) <<std::endl;
   
+  //Verification des types
+  std::cout<< "Verification des types" <<std::endl;
+  std::cout<< Node2.type()<<std::endl;
+  std::cout<< Node1.type()<<std::endl;
 
    //Verification des arbres
   std::cout<< "Verification des arbres" <<std::endl;
