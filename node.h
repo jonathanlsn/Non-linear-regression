@@ -3,8 +3,8 @@
 #ifndef NODE
 #define NODE
 
-#include "tree.h"
-#include "forest.h"
+
+
 #include <iostream>
 class Node{
   public:

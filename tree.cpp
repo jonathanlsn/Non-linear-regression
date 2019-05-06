@@ -1,5 +1,6 @@
 #include "tree.h"
 #include <iostream>
+#include "node.h"
 
 
 //constructor
@@ -17,7 +18,7 @@ Tree::Tree(Node * node){
 
 //getter
 
-Tree::Node * FirstNode(){
+Node * Tree:: FirstNode(){
 
   return FirstNode_;
 }
@@ -36,7 +37,7 @@ void Tree::generation(){
   std::cout << generation_ <<std::endl;
 }
 
-bool Tree::Tree_reading(){
+/*bool Tree::Tree_reading(){
   Node* actual_Node = FirstNode_;
   
   //DESCENTE
@@ -54,7 +55,7 @@ bool Tree::Tree_reading(){
     //INVERSER ET DESCENDRE
   }
 }
-
+*/
 
 //method
 /* void Tree::mutation(){
@@ -88,21 +89,22 @@ bool Tree::Tree_reading(){
 } */
 
 
-Tree::void calcul_fitness(){
-  fitness_=cross(FirstNode_);
-  return fitness_;
+void Tree::calcul_fitness(){
+  Fitness_=cross(FirstNode_);
 }
 
-int cross(Node * node){
-  if (node.value()=="&&"){
-    return (cross(node.NextNode1()) && cross(node.NextNode2()));
+int Tree::cross(Node * node){
+  if (node ->values()=="&&"){
+    return (cross(node -> NextNode1()) && cross(node -> NextNode2()));
   }
-  if (node.value()=="||"){
-    return (score=cross(node.NextNode1()) || cross(node.NextNode2()));
-  if (node.value()=="!"){
-    return (score=!cross(node.NextNode1()));
+  if (node -> values()=="||"){
+    return (cross(node -> NextNode1()) || cross(node -> NextNode2()));
   }
+  if (node -> values()=="!"){
+    return (!cross(node -> NextNode1()));
+  }
+  
   else{
-    return (node.value());
+    return (node -> values());
   }
 }
