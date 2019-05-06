@@ -1,5 +1,5 @@
 #include "tree.h"
-
+#include <iostream>
 
 
 //constructor
