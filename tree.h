@@ -23,6 +23,8 @@ void generation();
 
 //method
 
+void Tree_reading();
+
 //void mutation();
 
   protected:

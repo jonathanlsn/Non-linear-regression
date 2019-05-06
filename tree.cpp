@@ -31,9 +31,18 @@ int Tree::NbrNode(){
 //setter
 
 void Tree::generation(){
-std::cout << generation_ <<std::endl;
+  std::cout << generation_ <<std::endl;
 }
 
+bool Tree::Tree_reading(){
+  Node* actual_Node = FirstNode_;
+  if (){
+  
+  }
+  else{
+  
+  }
+}
 
 //method
 /* void Tree::mutation(){

@@ -1,7 +1,7 @@
 #ifndef NODE
 #define NODE
 class Node{
-  
+  /*
   public:
   //constructors//
   Node (int var): //Node variable ou constante
@@ -11,6 +11,6 @@ class Node{
   protected:
   char[] valeur;
   Node* next_node1;
-  Node* next_node2; 
+  Node* next_node2; */
 };
 #endif
