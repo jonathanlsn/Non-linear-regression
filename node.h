@@ -1,24 +1,30 @@
+#include "tree.h"
+#include "forest.h"
+#include <iostream>
+
 #ifndef NODE
 #define NODE
 class Node{
   /*
   public:
-    //getters
-    Node NextNode1();
-    Node NextNode2();
-    char value();
-    //setters
-    
-    //constructors//
-    Node (int var): //Node variable ou constante
-    Node (int var,Node* next_node1); // Node pour opérateur not
-    Node (int var,Node* next_node1, Node* next_node2); // node pour opérateur
+
+//constructeur
+    Node(std::string str);
+    Node(std::string str,Node precedent);
+
+//getter
+    std::string values();
+    Node * FatherNode();
+    Node * NextNode1();
+    Node * NextNode2();
   
   protected:
 
-    char[] valeur_;
-    Node* next_node1_;
-    Node* next_node2_; 
- */
+    std::string values_;
+    Node * FatherNode_;
+    Node * NextNode1_;
+    Node * NextNode2_;
+
+
 };
 #endif

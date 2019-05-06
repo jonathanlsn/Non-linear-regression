@@ -13,10 +13,12 @@ class Tree{
 //constructor
     Tree(Node * node);
     //Tree(const Tree&);
+
 //getter
     Node* FirstNode();
     int Fitness();
     int NbrNode();
+
 //setter
   
     void generation();

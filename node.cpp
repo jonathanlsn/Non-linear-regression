@@ -1,27 +1,42 @@
 #include "node.h"
-#include <cstdlib>
+#include <iostream>
 
-Node::Node(){
-  value_=rand()%1 +0;
+//constructor
+Node::Node(std::string str);{
+  values = str;
+  FatherNode_ = nullptr;
+  NextNode1_ = nullptr;
+  Nextnode2_ = nullptr;
 }
 
+Node::Node(std::string str, Node precedent){
+  values_ = str;
+  FatherNode_ = &precedent; 
+  NextNode1_ = nullptr;
+  Nextnode2_ = nullptr;
 
-Node::Node(char value){
-  if (value=="&&"){
-    value_=value;
-    Nextnode1_= new Node node();
-    Nextnode2_= new Node node();
+  if (NextNode1_ == nullptr){
+    precedent.NextNode1_ = &this;
   }
-  if (value=="||"){
-    value_=value;
-    Nextnode1_= new Node node();
-    Nextnode2_= new Node node();
+  else {
+    precedent.NextNode2_ = &this;
   }
-  if (value=="!"){
-    value_=value;
-    Nextnode1_= new Node node();
-  }
-  else{
-  
-  }
+
+}
+
+//getter
+Node::std::string values(){
+  return values_;
+}
+
+Node::Node * FatherNode(){
+  return FatherNode;
+}
+
+Node::Node * NextNode1(){
+  return NextNode1_;
+}
+
+Node::Node * NextNode2(){
+  return NextNode2_;
 }
