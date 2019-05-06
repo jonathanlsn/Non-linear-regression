@@ -1,5 +1,6 @@
-#include "forest.h"
 #include "tree.h"
+#include "forest.h"
+
 
 Forest::Forest() {
   this -> nb_elmts_ = 0; 

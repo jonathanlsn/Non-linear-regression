@@ -1,9 +1,12 @@
-#include "node.h"
-#include <cstdlib>
-#include "forest.h"
+
 
 #ifndef TREE
 #define TREE
+
+#include "node.h"
+#include <cstdlib>
+
+
 class Tree{
   
   friend class Forest;
@@ -11,19 +14,25 @@ class Tree{
   public:
 
 //constructor
-    Tree(Node * node);
+    Tree(Node* node);
     //Tree(const Tree&);
+
 //getter
     Node* FirstNode();
     int Fitness();
     int NbrNode();
+
 //setter
   
-void generation();
+    void generation();
 
 //method
+    int cross(Node * node);
+    void calcul_fitness();
+    //void Tree_reading();
 
 //void mutation();
+
 
   protected:
     Node * FirstNode_;
@@ -31,6 +40,5 @@ void generation();
     int NbrNode_;
     Tree * nextTree_; 
     int generation_;
-  
 };
 #endif
