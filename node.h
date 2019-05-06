@@ -16,6 +16,7 @@ class Node{
     Node * FatherNode();
     Node * NextNode1();
     Node * NextNode2();
+    std::string type();
   
   protected:
 

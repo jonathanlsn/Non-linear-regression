@@ -68,3 +68,7 @@ Node* Node::NextNode1(){
 Node* Node:: NextNode2(){
   return NextNode2_;
 }
+
+std::string Node::type(){
+  return type_;
+}

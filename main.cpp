@@ -43,6 +43,7 @@ int main()
    std::cout<< "Verification des parametres" <<std::endl;
    std::cout<< Node1.values() <<std::endl;
    std::cout<< Node2.bool_values() <<std::endl;
+   std::cout<< Node2.type()<<std::endl;
    
 
   return 0;
