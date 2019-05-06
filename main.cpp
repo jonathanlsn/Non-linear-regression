@@ -33,12 +33,11 @@ int main()
   
   Forest Forest1();
  
-  std::string str="&&";
+  std::string str="!";
   Node Node3(str);
-  Node Node1(false,Node3);
-  Node Node2(true,Node3);
+  Node Node1(true,Node3);
+  Node Node2(true);
   
-
   Tree Tree1(&Node1);  
   Tree Tree2(&Node3);
   
@@ -72,8 +71,14 @@ int main()
 
   //resultat sur l arbre avec un opérateur
   std::cout<< "resultat arbre operateur"<< std::endl;
-  std::cout << Tree1.cross(Tree2.FirstNode()) << std::endl;
+  //std::cout << Tree2.cross(Tree2.FirstNode()) << std::endl;
+  std::cout<< Node3.NextNode1()<< std::endl;
 
+
+
+
+  //Creation of forest
+  //Forest1.PushBack(Tree2);
 
 
   return 0;
