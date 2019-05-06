@@ -5,7 +5,7 @@
 
 #include "node.h"
 #include <cstdlib>
-#include "forest.h"
+
 
 class Tree{
   
@@ -28,8 +28,8 @@ class Tree{
 
 //method
     int cross(Node * node);
-
-void Tree_reading();
+    void calcul_fitness();
+    //void Tree_reading();
 
 //void mutation();
 

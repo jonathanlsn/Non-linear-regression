@@ -1,6 +1,7 @@
+
+#include "node.h"
 #include "tree.h"
 #include "forest.h"
-#include "node.h"
 
 #include <iostream>
 #include <time.h> 
@@ -13,8 +14,22 @@ int main()
   
   
   //Générateur aléatoire dépendant du temps (change la seed toute les secondes)
+  std::cout<< "Tests de random" <<std::endl;
   srand(time(NULL));
   int nbgen=rand()%9+1;    //entre 1-9
   printf("%d\n",nbgen);    //teste affichage
+  
+
+  bool a = true;
+  bool b = true;
+  bool c = false;
+
+  std::cout<< "Tests de nos opérateurs" <<std::endl;
+  std::cout<< std::boolalpha << ((a && b) == 1) <<std::endl;
+  std::cout<< std::boolalpha << ((a || c) == 1) <<std::endl;
+  std::cout<< std::boolalpha << ((! b) == 0) <<std::endl;
+
+
+
   return 0;
 }
