@@ -1,5 +1,5 @@
 #include "tree.h"
-
+#include <iostream>
 
 
 //constructor
@@ -8,30 +8,39 @@ Tree::Tree(Node * node){
   Fitness_ = 1;
   NbrNode_ = 1;
   nextTree_ = nullptr; 
+  generation_ = -1;
 }
 
-Tree::Tree(Tree tree){
+//Tree::Tree(Tree tree){
   
-}
+//}
 
 //getter
+<<<<<<< HEAD
 Tree::Node * FirstNode(){
+=======
+Node* Tree::FirstNode(){
+>>>>>>> 3dfa4639b9c9e85a05bcd70e8725ced888aa20b1
   return FirstNode_;
 }
 
-Tree::int Fitness(){
+int Tree::Fitness(){
   return Fitness_;
 }
 
-Tree::int NbrNode(){
+int Tree::NbrNode(){
   return NbrNode_;
 }
 
 //setter
 
+void Tree::generation(){
+std::cout << generation_ <<std::endl;
+}
+
 
 //method
-Tree::mutation(){
+/* void Tree::mutation(){
   int aleaMut=rand()%3 +1;
   int aleaNode=rand()%nbNodes_ +1;
   int aleaOpe=rand()%3 +1;
@@ -59,4 +68,5 @@ Tree::mutation(){
     std::cout<<"Substitution"<<std::endl;
     //doit regarder si le noeud a modifier est un operateur ou une valeur pour choisir différentes solutions.
   }
-}
+} */
+

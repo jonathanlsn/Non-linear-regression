@@ -7,6 +7,7 @@
 class Node{
   
   public:
+<<<<<<< HEAD
 //constructeur
     Node(std::string str);
     Node(std::string str,Node precedent);
@@ -22,5 +23,6 @@ class Node{
     Node * FatherNode_;
     Node * NextNode1_;
     Node * NextNode2_;
+
 };
 #endif

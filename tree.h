@@ -6,25 +6,33 @@
 #define TREE
 class Tree{
   
+  friend class Forest;
+  
   public:
 
 //constructor
     Tree(Node * node);
-    Tree(Tree tree);
+    //Tree(const Tree&);
+
 //getter
-    Node * FirstNode();
+    Node* FirstNode();
     int Fitness();
-    NbrNode();
+    int NbrNode();
+
 //setter
   
+    void generation();
+
 //method
 
+//void mutation();
 
   protected:
     Node * FirstNode_;
     int Fitness_;
     int NbrNode_;
     Tree * nextTree_; 
+    int generation_;
   
 };
 #endif
