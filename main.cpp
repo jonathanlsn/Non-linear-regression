@@ -29,7 +29,16 @@ int main()
   std::cout<< std::boolalpha << ((a || c) == 1) <<std::endl;
   std::cout<< std::boolalpha << ((! b) == 0) <<std::endl;
 
-
+  //creation de la foret et de l'arbre
+  
+  Forest Forest1();
+  Node Node1("0");
+  Node Node2("1");
+  Tree Tree1(&Node1);  
+  
+  //Verification des parametres
+   std::cout<< "Verification des parametres" <<std::endl;
+   std::cout<< Node2.values() <<std::endl;
 
   return 0;
 }
