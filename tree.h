@@ -1,9 +1,12 @@
+
+
+#ifndef TREE
+#define TREE
+
 #include "node.h"
 #include <cstdlib>
 #include "forest.h"
 
-#ifndef TREE
-#define TREE
 class Tree{
   
   friend class Forest;
@@ -11,7 +14,7 @@ class Tree{
   public:
 
 //constructor
-    Tree(Node * node);
+    Tree(Node* node);
     //Tree(const Tree&);
 
 //getter

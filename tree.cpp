@@ -53,7 +53,6 @@ bool Tree::Tree_reading(){
   else if (actual_Node -> NextNode1 != nullptr and actual_Node -> NextNode2 == nullptr){
     //INVERSER ET DESCENDRE
   }
-
 }
 
 
