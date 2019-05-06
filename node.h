@@ -7,7 +7,6 @@
 class Node{
   
   public:
-
 //constructeur
     Node(std::string str);
     Node(std::string str,Node precedent);
