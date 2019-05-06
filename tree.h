@@ -19,10 +19,10 @@ class Tree{
     int NbrNode();
 //setter
   
-void generation();
+    void generation();
 
 //method
-
+    int cross(Node * node);
 
   protected:
     Node * FirstNode_;
@@ -30,6 +30,5 @@ void generation();
     int NbrNode_;
     Tree * nextTree_; 
     int generation_;
-  
 };
 #endif

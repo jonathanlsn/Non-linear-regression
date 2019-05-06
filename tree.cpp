@@ -66,3 +66,22 @@ Tree::mutation(){
   }
 }
 
+
+Tree::void calcul_fitness(){
+  fitness_=cross(FirstNode_);
+  return fitness_;
+}
+
+int cross(Node * node){
+  if (node.value()=="&&"){
+    return (cross(node.NextNode1()) && cross(node.NextNode2()));
+  }
+  if (node.value()=="||"){
+    return (score=cross(node.NextNode1()) || cross(node.NextNode2()));
+  if (node.value()=="!"){
+    return (score=!cross(node.NextNode1()));
+  }
+  else{
+    return (node.value());
+  }
+}
