@@ -16,11 +16,9 @@ Tree::Tree(Node * node){
 //}
 
 //getter
-<<<<<<< HEAD
+
 Tree::Node * FirstNode(){
-=======
-Node* Tree::FirstNode(){
->>>>>>> 3dfa4639b9c9e85a05bcd70e8725ced888aa20b1
+
   return FirstNode_;
 }
 
@@ -35,7 +33,26 @@ int Tree::NbrNode(){
 //setter
 
 void Tree::generation(){
-std::cout << generation_ <<std::endl;
+  std::cout << generation_ <<std::endl;
+}
+
+bool Tree::Tree_reading(){
+  Node* actual_Node = FirstNode_;
+  
+  //DESCENTE
+  if (actual_Node -> NextNode1 != nullptr and actual_Node -> NextNode2 != nullptr){
+    actual_Node = actual_Node -> NextNode1;
+    actual_Node.Tree_reading();
+  }
+  //END
+  else if (actual_Node -> NextNode1 == nullptr) {
+    //applique
+    //return bool;
+  }
+  // NOT
+  else if (actual_Node -> NextNode1 != nullptr and actual_Node -> NextNode2 == nullptr){
+    //INVERSER ET DESCENDRE
+  }
 }
 
 

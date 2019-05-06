@@ -1,11 +1,12 @@
-#include "tree.h"
-#include "forest.h"
-#include <iostream>
+
 
 #ifndef NODE
 #define NODE
+
+#include "tree.h"
+#include "forest.h"
+#include <iostream>
 class Node{
-  
   public:
 //constructeur
     Node(std::string str);
@@ -18,10 +19,12 @@ class Node{
     Node * NextNode2();
   
   protected:
+
     std::string values_;
     Node * FatherNode_;
     Node * NextNode1_;
     Node * NextNode2_;
+
 
 };
 #endif
