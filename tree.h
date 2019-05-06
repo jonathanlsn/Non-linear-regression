@@ -19,13 +19,15 @@ class Tree{
     int NbrNode();
 //setter
   
-void generation();
+    void generation();
 
 //method
+    int cross(Node * node);
 
 void Tree_reading();
 
 //void mutation();
+
 
   protected:
     Node * FirstNode_;
@@ -33,6 +35,5 @@ void Tree_reading();
     int NbrNode_;
     Tree * nextTree_; 
     int generation_;
-  
 };
 #endif
