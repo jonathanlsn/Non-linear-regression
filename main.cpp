@@ -175,7 +175,9 @@ int main()
   std::cout<< "test debut mutation"<< std::endl;
  
   Tree15.mutation();
-  std::cout <<Tree15.NbrNode() << std::endl;
+  std::cout<< "   "<< std::endl;
+  Tree15.mutation();
+  std::cout <<"Le nombre de noeud après modification " << Tree15.NbrNode() << std::endl;
 
   //Creation of forest
   //Forest1.PushBack(Tree2);
