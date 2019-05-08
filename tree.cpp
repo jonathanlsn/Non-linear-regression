@@ -102,19 +102,23 @@ void Tree::generation(){
 
 
     //Remplacer un noeud    
+
+  if (mut==1){
         if (a->values()=="!"){
         //choix d'une autre opération
+        std::cout<< "rien n'est fait"<< std::endl;
         }
         else if (a->values()=="||"){
           a->setvalues("&&");
-          std::cout<< "c'est une substitution"<< std::endl;
+          std::cout<< "c'est une inversion"<< std::endl;
         }
         else {
-          std::cout<< "c'est une substitution"<< std::endl;
+          std::cout<< "c'est une inversion"<< std::endl;
           a->setvalues("||");
         }
-
+}
     //Ajouter un noeud
+    if (mut==3){
     srand(time(NULL));
     int choice=rand()%3+1;//choix de l'operateur
     std::cout<< "choice pour l'opérateur "<< choice <<std::endl;   
@@ -130,28 +134,36 @@ void Tree::generation(){
 
 
     //Operateur Not
-    if (choice==1){
-      std::cout<< str <<std::endl;   
+
+    if (choice==3){
+      std::cout<< str <<std::endl;  
       if (a ->FatherNode() !=0){
-         
-        std::string typ = a ->FatherNode()->type(); 
-        Node* pere= new  Node(a ->FatherNode(),typ);
-      
+          std::string typ = a ->FatherNode()->type(); 
+          Node* pere= new  Node(a ->FatherNode(),typ); 
         if (pere->NextNode1()==a){
-          std::cout<< "lala "<< choice <<std::endl;    //PBBBBBBBBBB
-          a->setNextNode(NodeNot);
+          std::cout<< "lala "<<std::endl;    
+          NodeNot->setNextNode(a);
+          NodeNot->setFatherNode(pere);
+          pere->setNextNode(NodeNot);
         }
-        else{
-          a->setNextNode2(NodeNot);         
-        }
-        NodeNot->setFatherNode(a->FatherNode());
-        a->setFatherNode(NodeNot);
-        //NodeNot.setNextNode1(a);
+         else{ std::cout<< "lolo "<<std::endl;    
+          NodeNot->setNextNode(a);
+          a->setFatherNode(NodeNot);
+          NodeNot->setFatherNode(pere);
+          pere->setNextNode2(NodeNot);
+         } 
       }
+      else{
+          NodeNot->setNextNode(a);
+          a->setFatherNode(NodeNot);  
+          this ->FirstNode_=NodeNot;    
+       }
+    
+
       //incrémentation du nombre de noeud du a la mutation
       NbrNode_=NbrNode_+1;       
     }
-
+}
     //Application de la modification
     /*
     //La substitution
@@ -263,7 +275,7 @@ void Tree::generation(){
       std::cout <<b-> values()<< std::endl;
     }
 
-    for (int i=1; i<3; ++i){ 
+    for (int i=1; i<4; ++i){ 
       if (b ->NextNode1()!=nullptr){
         b=b->NextNode1();
       }

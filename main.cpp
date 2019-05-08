@@ -182,6 +182,11 @@ int main()
   Tree15.mutation();
   std::cout <<"Le nombre de noeud après modification " << Tree15.NbrNode() << std::endl;
 
+  //Nouvel 
+
+
+
+
   //Creation of forest
   //Forest1.PushBack(Tree2);
 
