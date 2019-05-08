@@ -34,8 +34,9 @@ int main()
   Forest Forest1();
  
   std::string str="!";
+  Node Node4(str);
   Node Node3(str);
-  Node Node1(true,Node3);
+  Node Node1(true);
   Node Node2(true);
   
   Tree Tree1(&Node1);  
@@ -67,14 +68,33 @@ int main()
 
   //resultat arbre
   std::cout<< "resultat arbre"<< std::endl;
-  std::cout << (Tree1.cross(Tree1.FirstNode())==0) << std::endl;
+  std::cout << (Tree1.cross(Tree1.FirstNode())==true) << std::endl;
+
+  //test de la parenté
+
+  Node Node5 (true, &Node4);
+
+  std::cout<< "test de la parenté"<< std::endl;
+  std::cout<< (&Node4==(Node5.FatherNode()))<< std::endl;
+  std::cout<< (&Node5==(Node4.NextNode1())) <<std::endl;
+ 
+  //retourner un pointeur nul test
+  std::cout<< "test du pointeur nul"<< std::endl;
+  int* d =  nullptr;
+  std::cout<< std::boolalpha<< (d ==nullptr) << std::endl;
 
   //resultat sur l arbre avec un opérateur
-  std::cout<< "resultat arbre operateur"<< std::endl;
-  //std::cout << Tree2.cross(Tree2.FirstNode()) << std::endl;
-  std::cout<< Node3.NextNode1()<< std::endl;
+  std::cout<< "resultat arbre operateur not true"<< std::endl;
+  Tree Tree3(&Node4);
+  std::cout << (Tree3.cross(Tree3.FirstNode())==false) << std::endl;
 
 
+
+  std::cout<< "resultat arbre operateur not false"<< std::endl;
+  Node Node7(str);
+  Node Node6 (false, &Node7);
+  Tree Tree6(&Node7);
+  std::cout << (Tree6.cross(Tree6.FirstNode())==true) << std::endl;
 
 
   //Creation of forest
