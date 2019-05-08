@@ -91,7 +91,6 @@ int main()
   std::cout << (Tree3.cross(Tree3.FirstNode())==false) << std::endl;
 
 
-
   std::cout<< "resultat arbre operateur not false"<< std::endl;
   Node Node7(str);
   Node Node6 (false, &Node7);
@@ -156,7 +155,14 @@ int main()
 
 
   //Creation d'un arbre plus complexe
+  std::cout<< "resultat arbre complexe"<< std::endl;
+  Node Node32(str1);
+  Node Node33(str, &Node32);
+  Node Node34(false, &Node33);
+  Node Node35(true, &Node32);
 
+  Tree Tree15(&Node32);
+  std::cout << (Tree15.cross(Tree15.FirstNode())==true) << std::endl;
 
 
   //Creation of forest
