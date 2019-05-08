@@ -20,6 +20,9 @@ class Node{
     
     void setNextNode(Node* NextNode);
   
+//setter
+
+    void setvalues(std::string str);
   protected:
 
     std::string values_;

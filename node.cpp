@@ -80,3 +80,7 @@ std::string Node::type(){
 void Node::setNextNode(Node* NextNode){
   NextNode1_=NextNode;
 }
+
+void Node::setvalues(std::string str){
+  values_=str;
+}
