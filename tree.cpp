@@ -135,7 +135,7 @@ void Tree::generation(){
 
     //Operateur Not
 
-    if (choice==3){
+    if (choice==2){
       std::cout<< str <<std::endl;  
       if (a ->FatherNode() !=0){
           std::string typ = a ->FatherNode()->type(); 
@@ -146,7 +146,7 @@ void Tree::generation(){
           NodeNot->setFatherNode(pere);
           pere->setNextNode(NodeNot);
         }
-         else{ std::cout<< "lolo "<<std::endl;    
+         else{     
           NodeNot->setNextNode(a);
           a->setFatherNode(NodeNot);
           NodeNot->setFatherNode(pere);
@@ -162,6 +162,41 @@ void Tree::generation(){
 
       //incrémentation du nombre de noeud du a la mutation
       NbrNode_=NbrNode_+1;       
+    }
+    if (choice==3){
+      std::cout<< str1 <<std::endl;  
+      if (a ->FatherNode() !=0){
+          std::string typ = a ->FatherNode()->type(); 
+          Node* pere= new  Node(a ->FatherNode(),typ); 
+        if (pere->NextNode1()==a){
+          std::cout<< "lala et "<<std::endl;    
+          NodeAnd->setNextNode(a);
+          NodeAnd->setFatherNode(pere);
+          a->setFatherNode(NodeAnd);
+          NodeT->setFatherNode(NodeAnd);
+          NodeAnd->setNextNode2(NodeT);
+          pere->setNextNode(NodeAnd);
+        }
+         else{    
+          NodeAnd->setNextNode(a);
+          a->setFatherNode(NodeAnd);
+          NodeAnd->setNextNode2(NodeF);
+          NodeF->setFatherNode(NodeAnd);
+          NodeAnd->setFatherNode(pere);
+          pere->setNextNode2(NodeAnd);
+         } 
+      }
+      else{
+          NodeAnd->setNextNode(a);
+          NodeAnd->setNextNode2(NodeT);
+          NodeT->setFatherNode(NodeAnd);
+          a->setFatherNode(NodeAnd);  
+          this ->FirstNode_=NodeAnd;    
+       }
+    
+
+      //incrémentation du nombre de noeud du a la mutation
+      NbrNode_=NbrNode_+2;       
     }
 }
     //Application de la modification
@@ -279,11 +314,6 @@ void Tree::generation(){
     for (int i=1; i<10; ++i){ 
       if (b ->NextNode1()!=nullptr){
         b=b->NextNode1();
-      }
-      else if (b ->NextNode1()==nullptr && b->NextNode2()!=nullptr){
-        b=b->NextNode2();
-      }
-    
       //Affichage des noeuds
       if (b ->type()== "bool"){
         std::cout <<b-> bool_values()<<std::endl;
@@ -291,6 +321,20 @@ void Tree::generation(){
       if(b->type()=="op"){
         std::cout <<b-> values()<< std::endl;
       }
+      }
+      else if (b ->NextNode1()==nullptr && b->NextNode2()!=nullptr){
+        b=b->NextNode2();
+      //Affichage des noeuds
+      if (b ->type()== "bool"){
+        std::cout <<b-> bool_values()<<std::endl;
+      } 
+      if(b->type()=="op"){
+        std::cout <<b-> values()<< std::endl;
+      }
+      }
+
+    
+
     }
 
 }
