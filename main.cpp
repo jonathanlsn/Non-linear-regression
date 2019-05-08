@@ -171,11 +171,14 @@ int main()
   Node Node36(str1);
   Tree Tree16(&Node36);
   //Tree16.mutation();
-
-  std::cout<< "test debut mutation"<< std::endl;
- 
+  std::cout<< "   "<< std::endl;
+  std::cout<< "Premiere mutation"<< std::endl;
   Tree15.mutation();
   std::cout<< "   "<< std::endl;
+  std::cout<< "Deuxieme mutation"<< std::endl;
+  Tree15.mutation();
+  std::cout<< "   "<< std::endl;
+  std::cout<< "Troisieme mutation"<< std::endl;
   Tree15.mutation();
   std::cout <<"Le nombre de noeud après modification " << Tree15.NbrNode() << std::endl;
 
