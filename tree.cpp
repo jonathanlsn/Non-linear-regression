@@ -41,11 +41,9 @@ void Tree::generation(){
 //method
  void Tree::mutation(){
 
-    NbrNode_=4;
     //choix d'un numéro de noeud aléatoirement   
     srand(time(NULL));
     int NumeroNode=rand()%NbrNode_+1;    //entre 1-NbrNode_
-    std::cout<< "nombre aleatoire genéré"<< std::endl;
     printf("%d\n",NumeroNode);    //teste affichage
 
 

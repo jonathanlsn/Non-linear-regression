@@ -11,10 +11,10 @@
 #include "node.h"
 
 // Name for the cpp object "capsules"
-#define NAME_CAPSULE_A "Forest"
-#define NAME_CAPSULE_B "Tree"
+#define NAME_CAPSULE_A "forest"
+#define NAME_CAPSULE_B "tree"
 
-#define NAME_CAPSULE_C "Node"
+#define NAME_CAPSULE_C "node"
 
 // Receives a Python capsule for object A, and extracts the pointer of the C++ object
 static Forest* APythonToC(PyObject* args){
@@ -74,15 +74,15 @@ static PyObject*  PrintA(PyObject* self, PyObject* args){
     Py_INCREF(Py_None);
     return Py_None;
 }
-
+*/
 // Calls the Print function of object B
 static PyObject*  PrintB(PyObject* self, PyObject* args){
     Tree*  my_tree = BPythonToC(args);
-    my_tree->Print();
+    my_tree->NbrNode();
     Py_INCREF(Py_None);
     return Py_None;
 }
-
+/*
 // Calls the Print function of object C
 static PyObject*  PrintC(PyObject* self, PyObject* args){
     Node*  my_node = CPythonToC(args);
