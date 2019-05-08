@@ -98,6 +98,11 @@ void Node::setNextNode(Node* NextNode){
   NextNode1_=NextNode;
 }
 
+void Node::setNextNodeNull(){
+  NextNode1_=nullptr;
+  NextNode2_=nullptr;
+}
+
 void Node::setvalues(std::string str){
   values_=str;
 }

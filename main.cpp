@@ -212,15 +212,15 @@ int main()
 
 
   //Creation of forest
-  Forest Forest1;
+/*  Forest Forest1;
   std::cout <<"Le nombre d'arbres dans la foret " << Forest1.nb_elmts()<< std::endl;
   Forest1.PushBack(Tree2);
   std::cout <<"Le nombre d'arbres dans la foret " << Forest1.nb_elmts()<< std::endl;
-
+*/
 
   //Creation d'un arbre initial
   
-  int Nbrmutation =20;
+/*  int Nbrmutation =20;
   
   Node Node47(true);
   Tree Tree18(&Node47);
@@ -229,7 +229,7 @@ int main()
     std::cout<< "   "<< std::endl;
     std::cout<< "mutation"<< i <<std::endl;
     Tree18.mutation();
-  }
+  }*/
 
   return 0;
 }

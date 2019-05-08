@@ -22,6 +22,8 @@ class Node{
 
 //setter
 
+    void setNextNodeNull();
+
     void setvalues(std::string str);
 
     void setFatherNode(Node* father);

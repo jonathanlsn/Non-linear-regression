@@ -122,7 +122,17 @@ void Tree::generation(){
           std::cout<< "c'est une inversion"<< std::endl;
           a->setvalues("||");
         }
-}
+  }
+
+   if (mut==2){
+      a->setNextNodeNull();
+      std::cout<< "c'est une deletion"<< std::endl;
+      a->setvalues("");
+      a->setboolvalues(true);   
+      a->settype("bool"); // ICI PB DE NB ELMTS
+    }
+
+
     //Ajouter un noeud
     if (mut==3){
     //choix de l'operateur
@@ -273,62 +283,7 @@ void Tree::generation(){
       
     }
 
-    //Creation des noeuds (il faut METTRE DES NEWS ATTENTION)
-    std::string str="!";
-    std::string str1="&&";
-    std::string str2="||";
-    Node NodeNot(str);
-    Node NodeAnd(str1);
-    Node NodeOr(str2);
-    Node NodeT(true);   
-    Node NodeF(false);  
-
-    //L'insertion
-    if (mut==1){
-     std::cout<< op << std::endl;  
- 
-      //Pour les operateurs
-      if (op==2){
-        srand(time(NULL));
-        int choice=rand()%3+1;//choix de l'operateur
-        std::cout<< "choice "<< choice <<std::endl;   
-        //Operateur Not
-        /*if (choice==1){
-          std::cout<< "choice "<< choice <<std::endl;   
-          if (a ->FatherNode()->NextNode1()==a){
-            std::cout<< "lala "<< choice <<std::endl;    //PBBBBBBBBBB
-            a->setNextNode(&NodeNot);
-          }
-          //else{
-            a->setNextNode2(&NodeNot);         
-          }
-          NodeNot.setFatherNode(a->FatherNode());
-          a->setFatherNode(&NodeNot);
-          //NodeNot.setNextNode1(a);
-
-          //incrémentation du nombre de noeud du a la mutation
-          NbrNode_=NbrNode_+1;       
-        }
-
-        //Operateur And
-        if (choice==2){
-          a->setNextNode(&NodeAnd);
-          a->setFatherNode(&NodeAnd); 
-          //incrémentation du nombre de noeud du a la mutation
-          NbrNode_=NbrNode_+2;       
-        }
- 
-        //Operateur Or
-        if (choice==3){
-          a->setNextNode(&NodeOr);
-          a->setFatherNode(&NodeOr);        
-        }!
-
-        std::cout<< "c'est une insertion"<< std::endl;        
-      }
-
-    }
-    if (mut==2){
+      if (mut==2){
       //a->NextNodep(nullptr);
       //a->NextNodep(nullptr);
       std::cout<< "c'est une deletion"<< std::endl;
