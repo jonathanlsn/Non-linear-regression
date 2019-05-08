@@ -84,3 +84,18 @@ void Node::setNextNode(Node* NextNode){
 void Node::setvalues(std::string str){
   values_=str;
 }
+void Node::setFatherNode(Node* father){
+  FatherNode_=father;
+}
+
+void Node::setNextNode2(Node* next){
+  NextNode2_=next;
+}
+
+void Node::setboolvalues(bool str){
+  bool_values_=str;
+}
+
+void Node::settype(std::string str){
+  type_=str;
+}
