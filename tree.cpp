@@ -23,7 +23,7 @@ Node * Tree:: FirstNode(){
   return FirstNode_;
 }
 
-int Tree::Fitness(){
+bool Tree::Fitness(){
   return Fitness_;
 }
 
@@ -57,7 +57,7 @@ void Tree::calcul_fitness(){
   Fitness_=cross(FirstNode_);
 }
 
-int Tree::cross(Node * node){
+bool Tree::cross(Node * node){
   if (node ->values()=="&&"){
     return (cross(node -> NextNode1()) && cross(node -> NextNode2()));
 

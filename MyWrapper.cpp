@@ -74,15 +74,15 @@ static PyObject*  PrintA(PyObject* self, PyObject* args){
     Py_INCREF(Py_None);
     return Py_None;
 }
-
+*/
 // Calls the Print function of object B
 static PyObject*  PrintB(PyObject* self, PyObject* args){
     Tree*  my_tree = BPythonToC(args);
-    my_tree->Print();
+    my_tree->NbrNode();
     Py_INCREF(Py_None);
     return Py_None;
 }
-
+/*
 // Calls the Print function of object C
 static PyObject*  PrintC(PyObject* self, PyObject* args){
     Node*  my_node = CPythonToC(args);
