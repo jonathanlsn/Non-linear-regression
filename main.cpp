@@ -164,6 +164,15 @@ int main()
   Tree Tree15(&Node32);
   std::cout << (Tree15.cross(Tree15.FirstNode())==true) << std::endl;
 
+  //Verification du nombre de noeuds ATTENTION NORMAL
+  //std::cout <<Tree15.NbrNode() << std::endl;
+
+  //Test début mutation
+  Node Node36(str1);
+  Tree Tree16(&Node36);
+  Tree16.mutation();
+
+
 
   //Creation of forest
   //Forest1.PushBack(Tree2);
