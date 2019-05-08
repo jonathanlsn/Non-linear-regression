@@ -275,7 +275,7 @@ void Tree::generation(){
       std::cout <<b-> values()<< std::endl;
     }
 
-    for (int i=1; i<4; ++i){ 
+    for (int i=1; i<6; ++i){ 
       if (b ->NextNode1()!=nullptr){
         b=b->NextNode1();
       }
