@@ -170,9 +170,12 @@ int main()
   //Test début mutation
   Node Node36(str1);
   Tree Tree16(&Node36);
-  Tree16.mutation();
+  //Tree16.mutation();
 
-
+  std::cout<< "test debut mutation"<< std::endl;
+ 
+  Tree15.mutation();
+  std::cout <<Tree15.NbrNode() << std::endl;
 
   //Creation of forest
   //Forest1.PushBack(Tree2);

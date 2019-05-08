@@ -41,17 +41,43 @@ void Tree::generation(){
 //method
  void Tree::mutation(){
 
+    NbrNode_=4;
     //choix d'un numéro de noeud aléatoirement   
     srand(time(NULL));
     int NumeroNode=rand()%NbrNode_+1;    //entre 1-NbrNode_
+    std::cout<< "nombre aleatoire genéré"<< std::endl;
     printf("%d\n",NumeroNode);    //teste affichage
 
     //incrémentation du nombre de noeud du a la mutation
     NbrNode_=NbrNode_+1;
 
+    //descente dans l'arbre
+    Node* a= FirstNode_;
 
- }
+    if (a ->type()== "bool"){
+      std::cout <<a-> bool_values()<<std::endl;
+    } 
+    if(a->type()=="op"){
+      std::cout <<a-> values()<< std::endl;
+    }
+ 
+    for (int i=1; i<NumeroNode; ++i){ 
+      if (a ->NextNode1()!=nullptr){
+        a=a->NextNode1();
+      }
+      else if (a ->NextNode1()==nullptr && a->NextNode2()!=nullptr){
+        a=a->NextNode2();
+      }
 
+    if (a ->type()== "bool"){
+      std::cout <<a-> bool_values()<<std::endl;
+    } 
+    if(a->type()=="op"){
+      std::cout <<a-> values()<< std::endl;
+    }
+
+    }
+  }
 
 void Tree::calcul_fitness(){
   Fitness_=cross(FirstNode_);
