@@ -31,7 +31,7 @@ int main()
 
   //creation de la foret et de l'arbre
   
-  Forest Forest1();
+
  
   std::string str="!";
   std::string str1="&&";
@@ -212,8 +212,10 @@ int main()
 
 
   //Creation of forest
-  //Forest1.PushBack(Tree2);
-
+  Forest Forest1;
+  std::cout <<"Le nombre d'arbres dans la foret " << Forest1.nb_elmts()<< std::endl;
+  Forest1.PushBack(Tree2);
+  std::cout <<"Le nombre d'arbres dans la foret " << Forest1.nb_elmts()<< std::endl;
 
   return 0;
 }
