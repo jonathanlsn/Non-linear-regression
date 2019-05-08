@@ -33,7 +33,7 @@ class Tree{
 
   protected:
     Node * FirstNode_;
-    int Fitness_;
+    bool Fitness_;
     int NbrNode_;
     Tree * nextTree_; 
     int generation_;

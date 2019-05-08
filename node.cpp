@@ -2,6 +2,23 @@
 #include <iostream>
 
 //constructor
+
+Node::Node(Node* node,std::string type){
+
+  FatherNode_ = nullptr;
+  NextNode1_ = nullptr;
+  NextNode2_ = nullptr;
+
+  if (type=="op"){
+    type_= "op";
+    values_ = node->values_;
+  }
+  else{
+    type_= "bool";
+    bool_values_ = node->bool_values_;
+  }
+}
+
 Node::Node(std::string str){
   values_ = str;
   FatherNode_ = nullptr;
