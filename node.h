@@ -6,8 +6,8 @@ class Node{
   public:
 //constructeur
     Node(std::string str);
-    Node(std::string str,Node precedent);
-    Node(bool boleen,Node precedent);
+    Node(std::string str,Node* precedent);
+    Node(bool boleen,Node* precedent);
     Node(bool boleen);
 
 //getter

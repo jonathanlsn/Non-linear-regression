@@ -18,33 +18,36 @@ Node::Node(bool boleen){
   type_= "bool";
 }
 
-Node::Node(std::string str, Node precedent){
+Node::Node(std::string str, Node* precedent){
   values_ = str;
-  FatherNode_ = &precedent; 
+  FatherNode_ = precedent; 
   NextNode1_ = nullptr;
   NextNode2_ = nullptr;
   type_= "op";
 
-  if (NextNode1_ == nullptr){
-    precedent.NextNode1_ = this;
+  if (FatherNode_ ->NextNode1_ == nullptr){
+    FatherNode_ ->NextNode1_ = this;
   }
   else {
-    precedent.NextNode2_ = this;
+    FatherNode_ ->NextNode2_ = this;
   }
 }
 
-Node::Node(bool boleen,Node precedent){
+Node::Node(bool boleen,Node* precedent){
   bool_values_ = boleen;
-  FatherNode_ = &precedent; 
+  FatherNode_ = precedent; 
   NextNode1_ = nullptr;
   NextNode2_ = nullptr;
   type_= "bool";
 
-  if (NextNode1_ == nullptr){
-    precedent.NextNode1_ = this;
+
+ 
+  if (FatherNode_ ->NextNode1_ == nullptr){
+    FatherNode_ ->NextNode1_ = this;
+
   }
   else {
-    precedent.NextNode2_ = this;
+    FatherNode_ ->NextNode2_ = this;
   }
 }
 
