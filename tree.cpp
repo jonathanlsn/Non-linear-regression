@@ -6,7 +6,7 @@
 //constructor
 Tree::Tree(Node * node){
   FirstNode_ = node;
-  Fitness_ = 1;
+  Fitness_ = 0;
   NbrNode_ = 1;
   nextTree_ = nullptr; 
   generation_ = -1;
@@ -23,7 +23,7 @@ Node * Tree:: FirstNode(){
   return FirstNode_;
 }
 
-bool Tree::Fitness(){
+int Tree::Fitness(){
   return Fitness_;
 }
 
@@ -89,8 +89,10 @@ void Tree::generation(){
 } */
 
 
-void Tree::calcul_fitness(){
-  Fitness_=cross(FirstNode_);
+void Tree::calcul_fitness(bool y){
+  if (cross(FirstNode_)!=y){
+    Fitness_-=1;
+  }
 }
 
 bool Tree::cross(Node * node){

@@ -167,7 +167,52 @@ int main()
 
   //Creation of forest
   //Forest1.PushBack(Tree2);
-
+  
+  std::cout<< ""<< std::endl;
+  //Fitness
+  std::cout<< "Test de calcul de fitness"<< std::endl;
+  
+  // Création de la matrice pour une relation x1&&x2=y
+  int nLignes=3;
+  int nColonnes=3;
+  
+  int **matrix;
+  
+  matrix = new int* [ nLignes ];
+  for (int i=0; i < nLignes; i++)
+    matrix[i] = new int[ nColonnes ];
+   
+  for (int i=0; i < nLignes; i++)
+    for (int j=0; j < nColonnes; j++)
+      matrix[i][j] = 0;
+      
+  matrix[0][0]=1;
+  matrix[0][2]=1;
+  matrix[1][1]=1;
+  matrix[1][2]=1;
+  matrix[2][2]=1;
+  
+  /* Affichage */
+  for (int i=0; i < nLignes; i++) {
+    for (int j=0; j < nColonnes; j++){
+      std::cout << matrix[i][j] << " ";
+    }
+    std::cout << std::endl;
+  }
+  
+  //Test fonction Fitness
+  Node node1("&&");
+  Node node2 (true, &Node1);
+  Node node3 (true, &Node1);
+  Tree tree(&Node1);
+  
+  bool y=1;
+  tree.calcul_fitness(y);
+  std::cout<<tree.Fitness()<<std::endl;
+  
+  bool z=0;
+  tree.calcul_fitness(z);
+  std::cout<<tree.Fitness()<<std::endl;
 
   return 0;
 }
