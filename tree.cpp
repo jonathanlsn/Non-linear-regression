@@ -245,7 +245,8 @@ void Tree::generation(){
         if (choice==3){
           a->setNextNode(&NodeOr);
           a->setFatherNode(&NodeOr);        
-        }
+        }!
+
         std::cout<< "c'est une insertion"<< std::endl;        
       }
 
@@ -275,7 +276,7 @@ void Tree::generation(){
       std::cout <<b-> values()<< std::endl;
     }
 
-    for (int i=1; i<6; ++i){ 
+    for (int i=1; i<10; ++i){ 
       if (b ->NextNode1()!=nullptr){
         b=b->NextNode1();
       }
