@@ -1,0 +1,21 @@
+digraph G {
+	3 [label=false color=firebrick1 style=filled]
+	1 [label="&&" color=deepskyblue4 style=filled]
+	7 [label=false color=firebrick1 style=filled]
+	8 [label=true color=firebrick1 style=filled]
+	9 [label="!" color=deepskyblue4 style=filled]
+	6 [label="!" color=deepskyblue4 style=filled]
+	4 [label="||" color=deepskyblue4 style=filled]
+	5 [label="&&" color=deepskyblue4 style=filled]
+	2 [label="!" color=deepskyblue4 style=filled]
+	10 [label=true color=firebrick1 style=filled]
+	1 -> 2
+	1 -> 4
+	2 -> 3
+	4 -> 9
+	4 -> 5
+	5 -> 8
+	5 -> 6
+	6 -> 7
+	9 -> 10
+}
