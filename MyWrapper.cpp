@@ -11,10 +11,10 @@
 #include "node.h"
 
 // Name for the cpp object "capsules"
-#define NAME_CAPSULE_A "Forest"
-#define NAME_CAPSULE_B "Tree"
+#define NAME_CAPSULE_A "forest"
+#define NAME_CAPSULE_B "tree"
 
-#define NAME_CAPSULE_C "Node"
+#define NAME_CAPSULE_C "node"
 
 // Receives a Python capsule for object A, and extracts the pointer of the C++ object
 static Forest* APythonToC(PyObject* args){
