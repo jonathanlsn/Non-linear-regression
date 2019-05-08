@@ -217,5 +217,19 @@ int main()
   Forest1.PushBack(Tree2);
   std::cout <<"Le nombre d'arbres dans la foret " << Forest1.nb_elmts()<< std::endl;
 
+
+  //Creation d'un arbre initial
+  
+  int Nbrmutation =20;
+  
+  Node Node47(true);
+  Tree Tree18(&Node47);
+  
+  for (int i=0; i<Nbrmutation; ++i){
+    std::cout<< "   "<< std::endl;
+    std::cout<< "mutation"<< i <<std::endl;
+    Tree18.mutation();
+  }
+
   return 0;
 }
