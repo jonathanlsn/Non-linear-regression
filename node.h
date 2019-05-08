@@ -17,6 +17,8 @@ class Node{
     Node * NextNode1();
     Node * NextNode2();
     std::string type();
+    
+    void setNextNode(Node* NextNode);
   
   protected:
 

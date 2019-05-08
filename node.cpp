@@ -75,3 +75,8 @@ Node* Node:: NextNode2(){
 std::string Node::type(){
   return type_;
 }
+
+//setter
+void Node::setNextNode(Node* NextNode){
+  NextNode1_=NextNode;
+}
