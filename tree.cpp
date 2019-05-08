@@ -63,19 +63,24 @@ void Tree::generation(){
     for (int i=1; i<NumeroNode; ++i){ 
       if (a ->NextNode1()!=nullptr){
         a=a->NextNode1();
-      }
-      else if (a ->NextNode1()==nullptr && a->NextNode2()!=nullptr){
-        a=a->NextNode2();
-      }
-    
-      //Affciage des noeuds
       if (a ->type()== "bool"){
         std::cout <<a-> bool_values()<<std::endl;
       } 
       if(a->type()=="op"){
         std::cout <<a-> values()<< std::endl;
       }
+      }
+      else if (a ->NextNode1()==nullptr && a->NextNode2()!=nullptr){
+        a=a->NextNode2();
+      if (a ->type()== "bool"){
+        std::cout <<a-> bool_values()<<std::endl;
+      } 
+      if(a->type()=="op"){
+        std::cout <<a-> values()<< std::endl;
+      }
+      }
     }
+
 
     //Test pour savoir quel noeud on modifie
     int op =0;
@@ -163,6 +168,7 @@ void Tree::generation(){
       //incrémentation du nombre de noeud du a la mutation
       NbrNode_=NbrNode_+1;       
     }
+
     if (choice==3){
       std::cout<< str1 <<std::endl;  
       if (a ->FatherNode() !=0){
@@ -192,6 +198,42 @@ void Tree::generation(){
           NodeT->setFatherNode(NodeAnd);
           a->setFatherNode(NodeAnd);  
           this ->FirstNode_=NodeAnd;    
+       }
+    
+
+      //incrémentation du nombre de noeud du a la mutation
+      NbrNode_=NbrNode_+2;       
+    }
+
+    if (choice==1){
+      std::cout<< str1 <<std::endl;  
+      if (a ->FatherNode() !=0){
+          std::string typ = a ->FatherNode()->type(); 
+          Node* pere= new  Node(a ->FatherNode(),typ); 
+        if (pere->NextNode1()==a){
+          std::cout<< "lala et "<<std::endl;    
+          NodeOr->setNextNode(a);
+          NodeOr->setFatherNode(pere);
+          a->setFatherNode(NodeOr);
+          NodeT->setFatherNode(NodeOr);
+          NodeOr->setNextNode2(NodeT);
+          pere->setNextNode(NodeOr);
+        }
+         else{    
+          NodeOr->setNextNode(a);
+          a->setFatherNode(NodeOr);
+          NodeOr->setNextNode2(NodeF);
+          NodeF->setFatherNode(NodeOr);
+          NodeOr->setFatherNode(pere);
+          pere->setNextNode2(NodeOr);
+         } 
+      }
+      else{
+          NodeOr->setNextNode(a);
+          NodeOr->setNextNode2(NodeT);
+          NodeT->setFatherNode(NodeOr);
+          a->setFatherNode(NodeOr);  
+          this ->FirstNode_=NodeOr;    
        }
     
 

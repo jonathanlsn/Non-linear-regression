@@ -220,7 +220,7 @@ int main()
 
   //Creation d'un arbre initial
   
-  int Nbrmutation =2;
+  int Nbrmutation =20;
   
   Node Node47(true);
   Tree Tree18(&Node47);
