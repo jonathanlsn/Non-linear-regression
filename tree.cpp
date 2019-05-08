@@ -89,6 +89,7 @@ void Tree::generation(){
     //Choix de la modification
     srand(time(NULL));
     int mut=rand()%3+1;    //entre 1-NbrNode_
+    int choice=rand()%3+1;
     std::cout<< "   "<< std::endl;
     std::cout <<"le nombre choisi pour la mutation : "<< mut <<std::endl;
     std::cout <<"le noeud visé : " <<std::endl;
@@ -119,8 +120,7 @@ void Tree::generation(){
 }
     //Ajouter un noeud
     if (mut==3){
-    srand(time(NULL));
-    int choice=rand()%3+1;//choix de l'operateur
+    //choix de l'operateur
     std::cout<< "choice pour l'opérateur "<< choice <<std::endl;   
 
     std::string str="!";
