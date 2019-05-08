@@ -6,9 +6,9 @@
 #include <zlib.h>
 #include <errno.h>
 #include "def_PyC.h"
-#include "Forest.h"
-#include "Tree.h"
-#include "Node.h"
+#include "forest.h"
+#include "tree.h"
+#include "node.h"
 
 // Name for the cpp object "capsules"
 #define NAME_CAPSULE_A "Forest"
@@ -66,7 +66,7 @@ void CCapsuleDestructor(PyObject* capsule){
 	Node* my_node = (Node*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_C);
   delete my_node;
 }
-
+/*
 // Calls the Print function of object A
 static PyObject*  PrintA(PyObject* self, PyObject* args){
     Forest*  my_forest = APythonToC(args);
@@ -173,4 +173,4 @@ static struct PyModuleDef moduledef = {
 PyMODINIT_FUNC PyInit_my_wrapper_c(void){
     PyObject* module = PyModule_Create(&moduledef);
 		return module;
-}
+}*/
