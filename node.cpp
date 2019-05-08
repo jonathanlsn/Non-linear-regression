@@ -40,7 +40,7 @@ Node::Node(bool boleen,Node* precedent){
   NextNode2_ = nullptr;
   type_= "bool";
 
-  Node Node9(true);
+
  
   if (FatherNode_ ->NextNode1_ == nullptr){
     FatherNode_ ->NextNode1_ = this;

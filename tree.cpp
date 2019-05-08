@@ -95,9 +95,7 @@ void Tree::calcul_fitness(){
 
 bool Tree::cross(Node * node){
   if (node ->values()=="&&"){
-    std::cout << "lala" << std::endl;
-    std::cout << node -> NextNode1() << std::endl;
-    std::cout << node -> NextNode2() <<std::endl;
+
     return (cross(node -> NextNode1()) and cross(node -> NextNode2()));
   }
   if (node -> values()=="||"){
