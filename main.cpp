@@ -35,6 +35,7 @@ int main()
  
   std::string str="!";
   std::string str1="&&";
+  std::string str2="||";
   Node Node4(str);
   Node Node3(str);
   Node Node1(true);
@@ -124,6 +125,37 @@ int main()
   Node Node19 (true, &Node17);
   Tree Tree10(&Node17);
   std::cout << (Tree10.cross(Tree10.FirstNode())==true) << std::endl;
+
+  std::cout<< "resultat arbre operateur ou VV"<< std::endl;
+  Node Node20(str2);
+  Node Node21 (true, &Node20);
+  Node Node22 (true, &Node20);
+  Tree Tree11(&Node20);
+  std::cout << (Tree11.cross(Tree11.FirstNode())==true) << std::endl;
+
+  std::cout<< "resultat arbre operateur ou VF"<< std::endl;
+  Node Node23(str2);
+  Node Node24 (true, &Node23);
+  Node Node25 (false, &Node23);
+  Tree Tree12(&Node23);
+  std::cout << (Tree12.cross(Tree12.FirstNode())==true) << std::endl;
+
+  std::cout<< "resultat arbre operateur ou FV"<< std::endl;
+  Node Node26(str2);
+  Node Node27 (false, &Node26);
+  Node Node28 (true, &Node26);
+  Tree Tree13(&Node26);
+  std::cout << (Tree13.cross(Tree13.FirstNode())==true) << std::endl;
+
+  std::cout<< "resultat arbre operateur ou FF"<< std::endl;
+  Node Node29(str2);
+  Node Node30 (false, &Node29);
+  Node Node31 (false, &Node29);
+  Tree Tree14(&Node29);
+  std::cout << (Tree14.cross(Tree14.FirstNode())==false) << std::endl;
+
+
+  //Creation d'un arbre plus complexe
 
 
 
