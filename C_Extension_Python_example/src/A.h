@@ -5,8 +5,8 @@ class A{
 public:
     A(int val);
     ~A();
-    int a;
-    int* array;
+    bool a;
+    bool* array;
 
     void Clone(A* other);
     void Print();

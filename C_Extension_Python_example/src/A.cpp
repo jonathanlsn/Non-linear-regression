@@ -4,7 +4,7 @@
 
 A::A(int val){
   a = val;
-  array = (int*) malloc (a * sizeof(a));
+  array = (bool*) malloc (a * sizeof(a));
   for (int i = 0; i < a; i ++){
     array[i] = i*2;
   }
@@ -12,7 +12,7 @@ A::A(int val){
 
 void A::Clone(A* other){
     a = other->a;
-    array = (int*) realloc(array, a * sizeof(a));
+    array = (bool*) realloc(array, a * sizeof(a));
     for (int i = 0; i < a; i ++){
       array[i] = other->array[i];
     }
@@ -25,7 +25,7 @@ A::~A(){
 void A::Print(){
     printf("*****************************************************\n");
     printf("––––––PRINTING A–––––\n");
-    printf("a: %i\n",a);
+    printf("a: %d\n",a);
     printf("----------values in array------------\n");
     for(int i = 0; i < a; i ++){
         printf("value at index %d : %d\n",i,array[i]);

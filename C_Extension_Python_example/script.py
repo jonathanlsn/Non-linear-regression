@@ -1,10 +1,8 @@
 import my_wrapper_c as mwc
-a1 = mwc.generate_A(12)
-a2 = mwc.generate_A(3)
-b1 = mwc.generate_B(12)
-mwc.print_B(b1)
+a1 = mwc.generate_A(True)
+a2 = mwc.generate_A(False)
 mwc.print_A(a1)
-l = [mwc.generate_A(1),mwc.generate_A(1),mwc.generate_A(1)]
+l = [mwc.generate_A(True),mwc.generate_A(False),mwc.generate_A(True)]
 print(l)
 ax,a = mwc.sum_list_As(l)
 print("added A")
