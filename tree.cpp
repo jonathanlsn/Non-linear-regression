@@ -46,8 +46,7 @@ void Tree::generation(){
     int NumeroNode=rand()%NbrNode_+1;    //entre 1-NbrNode_
     printf("%d\n",NumeroNode);    //teste affichage
 
-    //incrémentation du nombre de noeud du a la mutation
-    NbrNode_=NbrNode_+1;
+
 
     //descente dans l'arbre
     Node* a= FirstNode_;
@@ -126,58 +125,60 @@ void Tree::generation(){
       
     }
     
+      std::string str="!";
+      std::string str1="&&";
+      std::string str2="||";
+      Node NodeNot(str);
+      Node NodeAnd(str1);
+      Node NodeOr(str2);
+      Node NodeT(true);   
+      Node NodeF(false);  
+
     if (mut==1){
       if (op==2){
-        if (a->values()=="!"){
-           ;
+          srand(time(NULL));
+          int choice=rand()%3+1;
+        Node Nodef();
+        if (choice==1){
+          if (a ->FatherNode()->NextNode1()==a){
+          a->setNextNode(&NodeNot);
+          }
+          else{
+          a->setNextNode2(&NodeNot);         
+          }
+          NodeNot.setFatherNode(a->FatherNode());
+          a->setFatherNode(&NodeNot);
+          //NodeNot.setNextNode1(a);
+
+          //incrémentation du nombre de noeud du a la mutation
+          NbrNode_=NbrNode_+1;       
         }
-        else if (a->values()=="||"){
-          a->setvalues("&&");
-          std::cout<< "c'est une mutation"<< std::endl;}
-        else {
-          std::cout<< "c'est une mutation"<< std::endl;}
-          a->setvalues("||");
+        if (choice==2){
+          a->setNextNode(&NodeAnd);
+          a->setFatherNode(&NodeAnd); 
+          //incrémentation du nombre de noeud du a la mutation
+          NbrNode_=NbrNode_+2;       
         }
-       if(op==1){
-         if (a->bool_values()==true){
- 
-          std::cout<< "c'est une mutation"<< std::endl;
-         }
-         else{
- 
-          std::cout<< "c'est une mutation"<< std::endl;
-         }
+        if (choice==3){
+          a->setNextNode(&NodeOr);
+          a->setFatherNode(&NodeOr);        
+        }
+        std::cout<< "c'est une insertion"<< std::endl;
+        
       }
 
     }
     if (mut==2){
-
-      if (op==2){
-        if (a->values()=="!"){
-          std::cout<< "c'est une deletion"<< std::endl;
-        }
-        else if (a->values()=="||"){
-          a->setvalues("&&");
-          std::cout<< "c'est une deletion"<< std::endl;
-        }
-        else {
-          std::cout<< "c'est une deletion"<< std::endl;
-          a->setvalues("||");
-        }
-       if(op==1){
-         if (a->bool_values()==true){
- 
-          std::cout<< "c'est une deletion"<< std::endl;
-         }
-         else{
- 
-          std::cout<< "c'est une deletion"<< std::endl;
-         }
-      }
+      //a->NextNodep(nullptr);
+      //a->NextNodep(nullptr);
+      std::cout<< "c'est une deletion"<< std::endl;
+      a->setvalues("");
+      //a->setboolvalues(true);   //ICI FAUDRAIT QUE CE SOIT DEJA INITIALISER
+      a->settype("bool");
     }
 
     
-  }
+  
     std::cout<< "   "<< std::endl;
     std::cout<< "   "<< std::endl;
 }
