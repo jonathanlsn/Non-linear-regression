@@ -349,11 +349,17 @@ void Tree::generation(){
     }
 
 }
-/*
-void Tree::calcul_fitness(){
-  Fitness_=cross(FirstNode_,);
+
+void Tree::calcul_fitness(bool y){
+  Fitness_=0;
+  int nb_elem=0;
+  if (cross(FirstNode_,nb_elem)!=y){
+    Fitness_-=1;
+  }
 }
-*/
+
+
+
 int Tree::cross(Node * node, int &nb_node_son){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
   if (node ->values()=="&&"){
     nb_node_son=nb_node_son+1;

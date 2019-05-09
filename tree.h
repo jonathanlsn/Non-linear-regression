@@ -25,8 +25,8 @@ class Tree{
     void generation();
 
 //method
-    int cross(Node * node,int &nb_elem);
-    //void calcul_fitness();
+    bool cross(Node * node,int &nb_elem);
+    void calcul_fitness(bool y);
     void mutation();
 
 

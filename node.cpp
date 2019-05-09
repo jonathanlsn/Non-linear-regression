@@ -13,9 +13,13 @@ Node::Node(Node* node,std::string type){
     type_= "op";
     values_ = node->values_;
   }
-  else{
+  if (type=="bool"){
     type_= "bool";
     bool_values_ = node->bool_values_;
+  }
+  if (type=="param"){
+    type_= "param";
+    param_values_ = node->param_values_;
   }
 }
 
