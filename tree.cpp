@@ -335,24 +335,32 @@ void Tree::generation(){
     }
 
 }
-
+/*
 void Tree::calcul_fitness(){
-  Fitness_=cross(FirstNode_);
+  Fitness_=cross(FirstNode_,);
 }
-
-int Tree::cross(Node * node){
+*/
+int Tree::cross(Node * node, int &nb_elem){ // WARNING &nb_elem permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
   if (node ->values()=="&&"){
-    return (cross(node -> NextNode1()) && cross(node -> NextNode2()));
+    nb_elem=nb_elem+1;
+    std::cout<<"lala"<<std::endl;
+    return (cross(node -> NextNode1(),nb_elem) && cross(node -> NextNode2(),nb_elem));
 
   }
   if (node -> values()=="||"){
-    return (cross(node -> NextNode1()) || cross(node -> NextNode2()));
+    nb_elem=nb_elem+1;
+    std::cout<<"hey listen"<<std::endl;
+    return (cross(node -> NextNode1(),nb_elem) || cross(node -> NextNode2(),nb_elem));
   }
   if (node -> values()=="!"){
-    return (!cross(node -> NextNode1()));
+    nb_elem=nb_elem+1;
+    std::cout<<"It's muffin time!"<<std::endl;
+    return (!cross(node -> NextNode1(),nb_elem));
   }
   
   else{
+    nb_elem=nb_elem+1;
+    std::cout<<"Mario"<<std::endl;
     return (node -> bool_values());
   }
 }

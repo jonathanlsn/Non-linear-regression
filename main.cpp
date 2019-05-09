@@ -23,7 +23,9 @@ int main()
   bool a = true;
   bool b = true;
   bool c = false;
-
+    
+ 
+  
   std::cout<< "Tests de nos opérateurs" <<std::endl;
   std::cout<< std::boolalpha << ((a && b) == 1) <<std::endl;
   std::cout<< std::boolalpha << ((a || c) == 1) <<std::endl;
@@ -44,6 +46,16 @@ int main()
   Tree Tree1(&Node1);  
   Tree Tree2(&Node3);
   
+  std::cout<<"Test du bon fonctionnement du nouveau cross (nombre d'elem)"<<std::endl;
+  int nb_elem=0;
+  Node node100(str1);
+  Node node101(true,&node100);
+  Node node102(false,&node100);
+  Tree tree20(&node100);
+  std::cout << (tree20.cross(tree20.FirstNode(),nb_elem)==false)<<"\t"<<nb_elem<< std::endl;
+  nb_elem=0;
+  std::cout << (tree20.cross(&node101,nb_elem)==false)<<"\t"<<nb_elem<< std::endl;
+
   //Verification des parametres
 
   std::cout<< "Verification des parametres" <<std::endl;
@@ -70,7 +82,8 @@ int main()
 
   //resultat arbre
   std::cout<< "resultat arbre"<< std::endl;
-  std::cout << (Tree1.cross(Tree1.FirstNode())==true) << std::endl;
+  nb_elem=0;
+  //std::cout << (Tree2.cross(Tree2.FirstNode(),nb_elem)==true) << std::endl;
 
   //test de la parenté
 
@@ -88,70 +101,70 @@ int main()
   //resultat sur l arbre avec un opérateur
   std::cout<< "resultat arbre operateur not true"<< std::endl;
   Tree Tree3(&Node4);
-  std::cout << (Tree3.cross(Tree3.FirstNode())==false) << std::endl;
+  std::cout << (Tree3.cross(Tree3.FirstNode(),nb_elem)==false) << std::endl;
 
 
   std::cout<< "resultat arbre operateur not false"<< std::endl;
   Node Node7(str);
   Node Node6 (false, &Node7);
   Tree Tree6(&Node7);
-  std::cout << (Tree6.cross(Tree6.FirstNode())==true) << std::endl;
+  std::cout << (Tree6.cross(Tree6.FirstNode(),nb_elem)==true) << std::endl;
 
   std::cout<< "resultat arbre operateur et FF"<< std::endl;
   Node Node8(str1);
   Node Node9 (false, &Node8);
   Node Node10 (false, &Node8);
   Tree Tree7(&Node8);
-  std::cout << (Tree7.cross(Tree7.FirstNode())==false) << std::endl;
+  std::cout << (Tree7.cross(Tree7.FirstNode(),nb_elem)==false) << std::endl;
 
   std::cout<< "resultat arbre operateur et FV"<< std::endl;
   Node Node11(str1);
   Node Node12 (false, &Node11);
   Node Node13 (true, &Node11);
   Tree Tree8(&Node11);
-  std::cout << (Tree8.cross(Tree8.FirstNode())==false) << std::endl;
+  std::cout << (Tree8.cross(Tree8.FirstNode(),nb_elem)==false) << std::endl;
 
   std::cout<< "resultat arbre operateur et VF"<< std::endl;
   Node Node14(str1);
   Node Node15 (true, &Node14);
   Node Node16 (false, &Node14);
   Tree Tree9(&Node14);
-  std::cout << (Tree9.cross(Tree9.FirstNode())==false) << std::endl;
+  std::cout << (Tree9.cross(Tree9.FirstNode(),nb_elem)==false) << std::endl;
 
   std::cout<< "resultat arbre operateur et VV"<< std::endl;
   Node Node17(str1);
   Node Node18 (true, &Node17);
   Node Node19 (true, &Node17);
   Tree Tree10(&Node17);
-  std::cout << (Tree10.cross(Tree10.FirstNode())==true) << std::endl;
+  std::cout << (Tree10.cross(Tree10.FirstNode(),nb_elem)==true) << std::endl;
 
   std::cout<< "resultat arbre operateur ou VV"<< std::endl;
   Node Node20(str2);
   Node Node21 (true, &Node20);
   Node Node22 (true, &Node20);
   Tree Tree11(&Node20);
-  std::cout << (Tree11.cross(Tree11.FirstNode())==true) << std::endl;
+  std::cout << (Tree11.cross(Tree11.FirstNode(),nb_elem)==true) << std::endl;
 
   std::cout<< "resultat arbre operateur ou VF"<< std::endl;
   Node Node23(str2);
   Node Node24 (true, &Node23);
   Node Node25 (false, &Node23);
   Tree Tree12(&Node23);
-  std::cout << (Tree12.cross(Tree12.FirstNode())==true) << std::endl;
+  std::cout << (Tree12.cross(Tree12.FirstNode(),nb_elem)==true) << std::endl;
 
   std::cout<< "resultat arbre operateur ou FV"<< std::endl;
   Node Node26(str2);
   Node Node27 (false, &Node26);
   Node Node28 (true, &Node26);
   Tree Tree13(&Node26);
-  std::cout << (Tree13.cross(Tree13.FirstNode())==true) << std::endl;
+  std::cout << (Tree13.cross(Tree13.FirstNode(),nb_elem)==true) << std::endl;
 
   std::cout<< "resultat arbre operateur ou FF"<< std::endl;
   Node Node29(str2);
   Node Node30 (false, &Node29);
   Node Node31 (false, &Node29);
   Tree Tree14(&Node29);
-  std::cout << (Tree14.cross(Tree14.FirstNode())==false) << std::endl;
+  std::cout << (Tree14.cross(Tree14.FirstNode(),nb_elem)==false) << std::endl;
 
 
   //Creation d'un arbre plus complexe
@@ -162,7 +175,7 @@ int main()
   Node Node35(true, &Node32);
 
   Tree Tree15(&Node32);
-  std::cout << (Tree15.cross(Tree15.FirstNode())==true) << std::endl;
+  std::cout << (Tree15.cross(Tree15.FirstNode(),nb_elem)==true) << std::endl;
 
   //Verification du nombre de noeuds ATTENTION NORMAL
   //std::cout <<Tree15.NbrNode() << std::endl;
@@ -184,7 +197,7 @@ int main()
 
   //Nouvel arbre
 
-
+/*
   Node Node37(str1);
   Node Node38(str2,&Node37);
   Node Node39(str1,&Node38);
@@ -230,6 +243,7 @@ int main()
     std::cout<< "mutation"<< i <<std::endl;
     Tree18.mutation();
   }*/
+
 
   return 0;
 }
