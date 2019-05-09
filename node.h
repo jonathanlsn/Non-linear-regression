@@ -9,6 +9,7 @@ class Node{
     Node(std::string str,Node* precedent);
     Node(bool boleen,Node* precedent);
     Node(bool boleen);
+    Node(Node* node,std::string type);
 
 //getter
     std::string values();

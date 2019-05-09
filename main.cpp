@@ -32,7 +32,7 @@ int main()
 
   //creation de la foret et de l'arbre
   
-  Forest Forest1();
+
  
   std::string str="!";
   std::string str1="&&";
@@ -165,11 +165,80 @@ int main()
   Tree Tree15(&Node32);
   std::cout << (Tree15.cross(Tree15.FirstNode())==true) << std::endl;
 
+  //Verification du nombre de noeuds ATTENTION NORMAL
+  //std::cout <<Tree15.NbrNode() << std::endl;
+
+  //Test début mutation
+  Node Node36(str1);
+  Tree Tree16(&Node36);
+  //Tree15.mutation();
+/*  std::cout<< "   "<< std::endl;
+  std::cout<< "Premiere mutation"<< std::endl;
+  Tree15.mutation();
+  std::cout<< "   "<< std::endl;
+  std::cout<< "Deuxieme mutation"<< std::endl;
+  Tree15.mutation();
+  std::cout<< "   "<< std::endl;
+  std::cout<< "Troisieme mutation"<< std::endl;
+  Tree15.mutation();
+  std::cout <<"Le nombre de noeud après modification " << Tree15.NbrNode() << std::endl;*/
+
+  //Nouvel arbre
+
+
+  Node Node37(str1);
+  Node Node38(str2,&Node37);
+  Node Node39(str1,&Node38);
+  Node Node40(str,&Node39);
+  Node Node41(false,&Node40);
+  Node Node42(true,&Node39);
+  Node Node43(str,&Node38);
+  Node Node44(true,&Node43);
+  Node Node45(str,&Node37);
+  Node Node46(false,&Node45);   
+
+  Tree Tree17(&Node37);
+
+  std::cout<< "   "<< std::endl;
+  std::cout<< "Premiere mutation"<< std::endl;
+  Tree17.mutation();
+  std::cout<< "   "<< std::endl;
+  std::cout<< "Deuxieme mutation"<< std::endl;
+  Tree17.mutation();
+  std::cout<< "   "<< std::endl;
+  std::cout<< "Troisieme mutation"<< std::endl;
+  Tree17.mutation();
+  std::cout <<"Le nombre de noeud après modification " << Tree17.NbrNode() << std::endl;
+
+
 
   //Creation of forest
   //Forest1.PushBack(Tree2);
   
-  std::cout<< ""<< std::endl;
+  /*  Forest Forest1;
+  std::cout <<"Le nombre d'arbres dans la foret " << Forest1.nb_elmts()<< std::endl;
+  Forest1.PushBack(Tree2);
+  std::cout <<"Le nombre d'arbres dans la foret " << Forest1.nb_elmts()<< std::endl;
+*/
+
+  //Creation d'un arbre initial
+  
+/*  int Nbrmutation =20;
+  
+  Node Node47(true);
+  Tree Tree18(&Node47);
+  
+  for (int i=0; i<Nbrmutation; ++i){
+    std::cout<< "   "<< std::endl;
+    std::cout<< "mutation"<< i <<std::endl;
+    Tree18.mutation();
+  }*/
+
+  
+  
+  
+  
+  std::cout<< std::endl;
   //Fitness
   std::cout<< "Test de calcul de fitness"<< std::endl;
   
@@ -229,6 +298,8 @@ int main()
   matrix.nlignes();
   matrix.ncolonnes();
   matrix.show();
+
+
 
   return 0;
 }

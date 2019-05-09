@@ -29,9 +29,8 @@ class Tree{
 //method
     bool cross(Node * node);
     void calcul_fitness(bool y);
-    //void Tree_reading();
+    void mutation();
 
-//void mutation();
 
 
   protected:

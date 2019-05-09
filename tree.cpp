@@ -37,57 +37,304 @@ void Tree::generation(){
   std::cout << generation_ <<std::endl;
 }
 
-/*bool Tree::Tree_reading(){
-  Node* actual_Node = FirstNode_;
-  
-  //DESCENTE
-  if (actual_Node -> NextNode1 != nullptr and actual_Node -> NextNode2 != nullptr){
-    actual_Node = actual_Node -> NextNode1;
-    actual_Node.Tree_reading();
-  }
-  //END
-  else if (actual_Node -> NextNode1 == nullptr) {
-    //applique
-    //return bool;
-  }
-  // NOT
-  else if (actual_Node -> NextNode1 != nullptr and actual_Node -> NextNode2 == nullptr){
-    //INVERSER ET DESCENDRE
-  }
-}
-*/
 
 //method
-/* void Tree::mutation(){
-  int aleaMut=rand()%3 +1;
-  int aleaNode=rand()%nbNodes_ +1;
-  int aleaOpe=rand()%3 +1;
-  int aleaVar=rand()//%nombre de variable+1 +0;
-  
-  if (aleaMut==1){
-    std::cout<<"Insertion"<<std::endl;
-    if (aleaOpe==1){
-      std::cout<<"Operator AND"<<std::endl;
-      newNodevaleur=new Node();//"valeur de variable ou cste");
-      newNodeoperateur=new Node("AND",,); //adresse du noeud correspondant à aleaNode, adresse du nouveau noeud créé juste avant
-    }
-    if (aleaOpe==2){
-      std::cout<<"Operator OR"<<std::endl;
-    }
-    if (aleOpe==3){
-      std::cout<<"Operator NOT"<<std::endl;
-    }
-  }
-  if (aleaMut==2){
-    std::cout<<"Deletion"<<std::endl;
-    //parcours de l'arbre à partir du noeud en question et destruction des noeuds les uns après les autres via le parcours.
-  }
-  if (aleaMut==3){
-    std::cout<<"Substitution"<<std::endl;
-    //doit regarder si le noeud a modifier est un operateur ou une valeur pour choisir différentes solutions.
-  }
-} */
+ void Tree::mutation(){
 
+    //choix d'un numéro de noeud aléatoirement   
+    srand(time(NULL));
+    int NumeroNode=rand()%NbrNode_+1;    //entre 1-NbrNode_
+    std::cout <<"Le numéro du noeud visé: "<<NumeroNode<<std::endl;
+
+
+    //descente dans l'arbre
+    Node* a= FirstNode_;
+    std::cout <<"Lecture des noeuds avant la mutation"<<std::endl;
+
+    //Affichage du noeud
+    if (a ->type()== "bool"){
+      std::cout <<a-> bool_values()<<std::endl;
+    } 
+    if(a->type()=="op"){
+      std::cout <<a-> values()<< std::endl;
+    }
+
+    //Descsente dans l'arbre
+    for (int i=1; i<NumeroNode; ++i){ 
+      if (a ->NextNode1()!=nullptr){
+        a=a->NextNode1();
+      if (a ->type()== "bool"){
+        std::cout <<a-> bool_values()<<std::endl;
+      } 
+      if(a->type()=="op"){
+        std::cout <<a-> values()<< std::endl;
+      }
+      }
+      else if (a ->NextNode1()==nullptr && a->NextNode2()!=nullptr){
+        a=a->NextNode2();
+      if (a ->type()== "bool"){
+        std::cout <<a-> bool_values()<<std::endl;
+      } 
+      if(a->type()=="op"){
+        std::cout <<a-> values()<< std::endl;
+      }
+      }
+    }
+
+
+    //Test pour savoir quel noeud on modifie
+    int op =0;
+    if (a ->type()== "bool"){
+      op=1;
+    } 
+    if(a->type()=="op"){
+       op=2;
+    }
+
+    //Choix de la modification
+    srand(time(NULL));
+    int mut=rand()%3+1;    //entre 1-NbrNode_
+    int choice=rand()%3+1;
+    std::cout<< "   "<< std::endl;
+    std::cout <<"le nombre choisi pour la mutation : "<< mut <<std::endl;
+    std::cout <<"le noeud visé : " <<std::endl;
+      if (a ->type()== "bool"){
+        std::cout <<a-> bool_values()<<std::endl;
+      } 
+      if(a->type()=="op"){
+        std::cout <<a-> values()<< std::endl;
+      }
+    std::cout<< "   "<< std::endl;
+
+
+    //Remplacer un noeud    
+
+  if (mut==1){
+        if (a->values()=="!"){
+        //choix d'une autre opération
+        std::cout<< "rien n'est fait"<< std::endl;
+        }
+        else if (a->values()=="||"){
+          a->setvalues("&&");
+          std::cout<< "c'est une inversion"<< std::endl;
+        }
+        else {
+          std::cout<< "c'est une inversion"<< std::endl;
+          a->setvalues("||");
+        }
+  }
+
+   if (mut==2){
+      a->setNextNodeNull();
+      std::cout<< "c'est une deletion"<< std::endl;
+      a->setvalues("");
+      a->setboolvalues(true);   
+      a->settype("bool"); // ICI PB DE NB ELMTS
+    }
+
+
+    //Ajouter un noeud
+    if (mut==3){
+    //choix de l'operateur
+    std::cout<< "choice pour l'opérateur "<< choice <<std::endl;   
+
+    std::string str="!";
+    std::string str1="&&";
+    std::string str2="||";
+    Node* NodeNot = new Node(str);
+    Node* NodeAnd= new Node(str1);
+    Node* NodeOr = new Node(str2);
+    Node* NodeT= new Node(true);   
+    Node* NodeF= new Node(false);  
+
+
+    //Operateur Not
+
+    if (choice==2){
+      std::cout<< str <<std::endl;  
+      if (a ->FatherNode() !=0){
+          std::string typ = a ->FatherNode()->type(); 
+          Node* pere= new  Node(a ->FatherNode(),typ); 
+        if (pere->NextNode1()==a){
+          std::cout<< "lala "<<std::endl;    
+          NodeNot->setNextNode(a);
+          NodeNot->setFatherNode(pere);
+          pere->setNextNode(NodeNot);
+        }
+         else{     
+          NodeNot->setNextNode(a);
+          a->setFatherNode(NodeNot);
+          NodeNot->setFatherNode(pere);
+          pere->setNextNode2(NodeNot);
+         } 
+      }
+      else{
+          NodeNot->setNextNode(a);
+          a->setFatherNode(NodeNot);  
+          this ->FirstNode_=NodeNot;    
+       }
+    
+
+      //incrémentation du nombre de noeud du a la mutation
+      NbrNode_=NbrNode_+1;       
+    }
+
+    if (choice==3){
+      std::cout<< str1 <<std::endl;  
+      if (a ->FatherNode() !=0){
+          std::string typ = a ->FatherNode()->type(); 
+          Node* pere= new  Node(a ->FatherNode(),typ); 
+        if (pere->NextNode1()==a){
+          std::cout<< "lala et "<<std::endl;    
+          NodeAnd->setNextNode(a);
+          NodeAnd->setFatherNode(pere);
+          a->setFatherNode(NodeAnd);
+          NodeT->setFatherNode(NodeAnd);
+          NodeAnd->setNextNode2(NodeT);
+          pere->setNextNode(NodeAnd);
+        }
+         else{    
+          NodeAnd->setNextNode(a);
+          a->setFatherNode(NodeAnd);
+          NodeAnd->setNextNode2(NodeF);
+          NodeF->setFatherNode(NodeAnd);
+          NodeAnd->setFatherNode(pere);
+          pere->setNextNode2(NodeAnd);
+         } 
+      }
+      else{
+          NodeAnd->setNextNode(a);
+          NodeAnd->setNextNode2(NodeT);
+          NodeT->setFatherNode(NodeAnd);
+          a->setFatherNode(NodeAnd);  
+          this ->FirstNode_=NodeAnd;    
+       }
+    
+
+      //incrémentation du nombre de noeud du a la mutation
+      NbrNode_=NbrNode_+2;       
+    }
+
+    if (choice==1){
+      std::cout<< str1 <<std::endl;  
+      if (a ->FatherNode() !=0){
+          std::string typ = a ->FatherNode()->type(); 
+          Node* pere= new  Node(a ->FatherNode(),typ); 
+        if (pere->NextNode1()==a){
+          std::cout<< "lala et "<<std::endl;    
+          NodeOr->setNextNode(a);
+          NodeOr->setFatherNode(pere);
+          a->setFatherNode(NodeOr);
+          NodeT->setFatherNode(NodeOr);
+          NodeOr->setNextNode2(NodeT);
+          pere->setNextNode(NodeOr);
+        }
+         else{    
+          NodeOr->setNextNode(a);
+          a->setFatherNode(NodeOr);
+          NodeOr->setNextNode2(NodeF);
+          NodeF->setFatherNode(NodeOr);
+          NodeOr->setFatherNode(pere);
+          pere->setNextNode2(NodeOr);
+         } 
+      }
+      else{
+          NodeOr->setNextNode(a);
+          NodeOr->setNextNode2(NodeT);
+          NodeT->setFatherNode(NodeOr);
+          a->setFatherNode(NodeOr);  
+          this ->FirstNode_=NodeOr;    
+       }
+    
+
+      //incrémentation du nombre de noeud du a la mutation
+      NbrNode_=NbrNode_+2;       
+    }
+}
+    //Application de la modification
+    /*
+    //La substitution
+    if (mut==3){
+
+      //Pour les opérateurs
+      if (op==2){
+        if (a->values()=="!"){
+          srand(time(NULL));
+          mut=rand()%2+1; ;//choix d'une autre opération
+        }
+        else if (a->values()=="||"){
+          a->setvalues("&&");
+          std::cout<< "c'est une substitution"<< std::endl;
+        }
+        else {
+          std::cout<< "c'est une substitution"<< std::endl;
+          a->setvalues("||");
+        }
+      }
+      //Pour les valeurs
+      if(op==1){
+        if (a->bool_values()==true){
+          std::cout<< "c'est une substitution"<< std::endl;
+        }
+        else{
+          std::cout<< "c'est une substitution"<< std::endl;
+        }
+      }
+      
+    }
+
+      if (mut==2){
+      //a->NextNodep(nullptr);
+      //a->NextNodep(nullptr);
+      std::cout<< "c'est une deletion"<< std::endl;
+      a->setvalues("");
+      //a->setboolvalues(true);   //ICI FAUDRAIT QUE CE SOIT DEJA INITIALISER
+      a->settype("bool");
+    }
+
+    */
+  
+    std::cout<< "   "<< std::endl;
+    std::cout<< "   "<< std::endl;
+
+
+
+    std::cout <<"Final"<<std::endl;
+    Node* b= FirstNode_;
+    if (b ->type()== "bool"){
+      std::cout <<b-> bool_values()<<std::endl;
+    } 
+    if(b->type()=="op"){
+      std::cout <<b-> values()<< std::endl;
+    }
+
+    for (int i=1; i<10; ++i){ 
+      if (b ->NextNode1()!=nullptr){
+        b=b->NextNode1();
+      //Affichage des noeuds
+      if (b ->type()== "bool"){
+        std::cout <<b-> bool_values()<<std::endl;
+      } 
+      if(b->type()=="op"){
+        std::cout <<b-> values()<< std::endl;
+      }
+      }
+      else if (b ->NextNode1()==nullptr && b->NextNode2()!=nullptr){
+        b=b->NextNode2();
+      //Affichage des noeuds
+      if (b ->type()== "bool"){
+        std::cout <<b-> bool_values()<<std::endl;
+      } 
+      if(b->type()=="op"){
+        std::cout <<b-> values()<< std::endl;
+      }
+      }
+
+    
+
+    }
+
+}
 
 void Tree::calcul_fitness(bool y){
   Fitness_=0;
@@ -98,11 +345,11 @@ void Tree::calcul_fitness(bool y){
 
 bool Tree::cross(Node * node){
   if (node ->values()=="&&"){
+    return (cross(node -> NextNode1()) && cross(node -> NextNode2()));
 
-    return (cross(node -> NextNode1()) and cross(node -> NextNode2()));
   }
   if (node -> values()=="||"){
-    return (cross(node -> NextNode1()) or cross(node -> NextNode2()));
+    return (cross(node -> NextNode1()) || cross(node -> NextNode2()));
   }
   if (node -> values()=="!"){
     return (!cross(node -> NextNode1()));

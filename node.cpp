@@ -2,6 +2,23 @@
 #include <iostream>
 
 //constructor
+
+Node::Node(Node* node,std::string type){
+
+  FatherNode_ = nullptr;
+  NextNode1_ = nullptr;
+  NextNode2_ = nullptr;
+
+  if (type=="op"){
+    type_= "op";
+    values_ = node->values_;
+  }
+  else{
+    type_= "bool";
+    bool_values_ = node->bool_values_;
+  }
+}
+
 Node::Node(std::string str){
   values_ = str;
   FatherNode_ = nullptr;
@@ -74,4 +91,33 @@ Node* Node:: NextNode2(){
 
 std::string Node::type(){
   return type_;
+}
+
+//setter
+void Node::setNextNode(Node* NextNode){
+  NextNode1_=NextNode;
+}
+
+void Node::setNextNodeNull(){
+  NextNode1_=nullptr;
+  NextNode2_=nullptr;
+}
+
+void Node::setvalues(std::string str){
+  values_=str;
+}
+void Node::setFatherNode(Node* father){
+  FatherNode_=father;
+}
+
+void Node::setNextNode2(Node* next){
+  NextNode2_=next;
+}
+
+void Node::setboolvalues(bool str){
+  bool_values_=str;
+}
+
+void Node::settype(std::string str){
+  type_=str;
 }
