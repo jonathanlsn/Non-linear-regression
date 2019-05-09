@@ -152,11 +152,10 @@ void Tree::generation(){
 
     if (choice==2){
       std::cout<< str <<std::endl;  
-      if (a ->FatherNode() !=0){
+      if (a ->FatherNode() !=nullptr){
           std::string typ = a ->FatherNode()->type(); 
           Node* pere= new  Node(a ->FatherNode(),typ); 
         if (pere->NextNode1()==a){
-          std::cout<< "lala "<<std::endl;    
           NodeNot->setNextNode(a);
           NodeNot->setFatherNode(pere);
           pere->setNextNode(NodeNot);
@@ -181,11 +180,10 @@ void Tree::generation(){
 
     if (choice==3){
       std::cout<< str1 <<std::endl;  
-      if (a ->FatherNode() !=0){
+      if (a ->FatherNode() !=nullptr){
           std::string typ = a ->FatherNode()->type(); 
           Node* pere= new  Node(a ->FatherNode(),typ); 
         if (pere->NextNode1()==a){
-          std::cout<< "lala et "<<std::endl;    
           NodeAnd->setNextNode(a);
           NodeAnd->setFatherNode(pere);
           a->setFatherNode(NodeAnd);
@@ -217,11 +215,12 @@ void Tree::generation(){
 
     if (choice==1){
       std::cout<< str1 <<std::endl;  
-      if (a ->FatherNode() !=0){
+
+
+      if (a ->FatherNode() !=nullptr){
           std::string typ = a ->FatherNode()->type(); 
           Node* pere= new  Node(a ->FatherNode(),typ); 
         if (pere->NextNode1()==a){
-          std::cout<< "lala et "<<std::endl;    
           NodeOr->setNextNode(a);
           NodeOr->setFatherNode(pere);
           a->setFatherNode(NodeOr);
@@ -230,6 +229,7 @@ void Tree::generation(){
           pere->setNextNode(NodeOr);
         }
          else{    
+
           NodeOr->setNextNode(a);
           a->setFatherNode(NodeOr);
           NodeOr->setNextNode2(NodeF);
