@@ -125,16 +125,28 @@ void Tree::generation(){
   }
 
    if (mut==2){
+      //Recherche du nombre de fils
+      int nb_elem=0;
+      this->cross(a,nb_elem); //Met en forme le nb elmt du fils
+      std::cout<< NbrNode_ <<"avant"<< std::endl;
+      std::cout<< nb_elem-1 <<"c'est le nombre d'élements du dessous" << std::endl;
+
+      //Mise a jour du nombre d'élements
+      NbrNode_=NbrNode_-(nb_elem-1);
+      std::cout<< NbrNode_ <<"apres"<< std::endl;
+
       a->setNextNodeNull();
       std::cout<< "c'est une deletion"<< std::endl;
       a->setvalues("");
       a->setboolvalues(true);   
-      a->settype("bool"); // ICI PB DE NB ELMTS
+      a->settype("bool"); 
+
+
     }
 
 
     //Ajouter un noeud
-    if (mut==3){
+    if (mut==3){ //C'est le cas ou on ajoute un noeud
     //choix de l'operateur
     std::cout<< "choice pour l'opérateur "<< choice <<std::endl;   
 
@@ -150,7 +162,7 @@ void Tree::generation(){
 
     //Operateur Not
 
-    if (choice==2){
+    if (choice==2){ //L'operateur Not qui est ajouté
       std::cout<< str <<std::endl;  
       if (a ->FatherNode() !=nullptr){
           std::string typ = a ->FatherNode()->type(); 
@@ -178,7 +190,7 @@ void Tree::generation(){
       NbrNode_=NbrNode_+1;       
     }
 
-    if (choice==3){
+    if (choice==3){ //L'opérateur ET
       std::cout<< str1 <<std::endl;  
       if (a ->FatherNode() !=nullptr){
           std::string typ = a ->FatherNode()->type(); 
@@ -213,7 +225,7 @@ void Tree::generation(){
       NbrNode_=NbrNode_+2;       
     }
 
-    if (choice==1){
+    if (choice==1){ //L'operateur Ou
       std::cout<< str1 <<std::endl;  
 
 
@@ -300,6 +312,8 @@ void Tree::generation(){
 
 
     std::cout <<"Final"<<std::endl;
+
+    //Affichage de l'arbre au final 
     Node* b= FirstNode_;
     if (b ->type()== "bool"){
       std::cout <<b-> bool_values()<<std::endl;

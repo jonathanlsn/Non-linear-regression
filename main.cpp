@@ -236,17 +236,17 @@ int main()
 
   int Nbrmutation =20;
   
-/*  Node Node47(true);
+  Node Node47(true);
   Tree Tree18(&Node47);
   
   for (int i=0; i<Nbrmutation; ++i){
     std::cout<< "   "<< std::endl;
     std::cout<< "mutation"<< i <<std::endl;
     Tree18.mutation();
-  }*/
+  }
 
 
-  Node Node52 (str1);
+/*  Node Node52 (str1);
   Node Node51(str,&Node52);
   Node Node50(true,&Node51);
 
@@ -256,7 +256,7 @@ int main()
     std::cout<< "mutation"<< i <<std::endl;
     Tree52.mutation();
     }
-
+*/
 
   return 0;
 }
