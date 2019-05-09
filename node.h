@@ -36,7 +36,7 @@ class Node{
 
     void settype(std::string str);
 
-  protected:
+  protected:  
 
     std::string values_;
     bool bool_values_;

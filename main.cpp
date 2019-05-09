@@ -211,7 +211,7 @@ int main()
 
   Tree Tree17(&Node37);
 
-  std::cout<< "   "<< std::endl;
+/*  std::cout<< "   "<< std::endl;
   std::cout<< "Premiere mutation"<< std::endl;
   Tree17.mutation();
   std::cout<< "   "<< std::endl;
@@ -221,7 +221,7 @@ int main()
   std::cout<< "Troisieme mutation"<< std::endl;
   Tree17.mutation();
   std::cout <<"Le nombre de noeud après modification " << Tree17.NbrNode() << std::endl;
-
+*/
 
 
   //Creation of forest
@@ -233,9 +233,10 @@ int main()
 
   //Creation d'un arbre initial
   
-/*  int Nbrmutation =20;
+
+  int Nbrmutation =20;
   
-  Node Node47(true);
+/*  Node Node47(true);
   Tree Tree18(&Node47);
   
   for (int i=0; i<Nbrmutation; ++i){
@@ -243,6 +244,18 @@ int main()
     std::cout<< "mutation"<< i <<std::endl;
     Tree18.mutation();
   }*/
+
+
+  Node Node52 (str1);
+  Node Node51(str,&Node52);
+  Node Node50(true,&Node51);
+
+  Tree Tree52(&Node52);
+  for (int i=0; i<Nbrmutation; ++i){
+    std::cout<< "   "<< std::endl;
+    std::cout<< "mutation"<< i <<std::endl;
+    Tree52.mutation();
+    }
 
 
   return 0;
