@@ -2,6 +2,7 @@
 #include "node.h"
 #include "tree.h"
 #include "forest.h"
+#include "matrix.h"
 
 #include <iostream>
 #include <time.h> 
@@ -172,6 +173,22 @@ int main()
   //Fitness
   std::cout<< "Test de calcul de fitness"<< std::endl;
   
+    //Test fonction Fitness
+  Node node1("&&");
+  Node node2 (true, &node1);
+  Node node3 (true, &node1);
+  Tree tree(&node1);
+  
+  bool y=1;
+  tree.calcul_fitness(y);
+  std::cout<< "Fitness 1&&1=1 : "<<tree.Fitness()<<std::endl;
+  
+  bool z=0;
+  tree.calcul_fitness(z);
+  std::cout<< "Fitness 1&&1=0 : "<<tree.Fitness()<<std::endl;
+  
+  
+  /*
   // Création de la matrice pour une relation x1&&x2=y
   int nLignes=3;
   int nColonnes=3;
@@ -192,27 +209,26 @@ int main()
   matrix[1][2]=1;
   matrix[2][2]=1;
   
-  /* Affichage */
+  // Affichage 
   for (int i=0; i < nLignes; i++) {
     for (int j=0; j < nColonnes; j++){
       std::cout << matrix[i][j] << " ";
     }
     std::cout << std::endl;
   }
+  */
   
-  //Test fonction Fitness
-  Node node1("&&");
-  Node node2 (true, &Node1);
-  Node node3 (true, &Node1);
-  Tree tree(&Node1);
+  std::cout<< std::endl;
+  // test matrix
+  std::cout<< "tests matrix"<< std::endl;
   
-  bool y=1;
-  tree.calcul_fitness(y);
-  std::cout<<tree.Fitness()<<std::endl;
-  
-  bool z=0;
-  tree.calcul_fitness(z);
-  std::cout<<tree.Fitness()<<std::endl;
+  int tab[]={1,0,0,0,1,0,1,1,1};
+  int nligne=3;
+  int ncolonne=3;
+  Matrix matrix(tab,nligne,ncolonne);
+  matrix.nlignes();
+  matrix.ncolonnes();
+  matrix.show();
 
   return 0;
 }
