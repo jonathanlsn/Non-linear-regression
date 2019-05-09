@@ -152,11 +152,10 @@ void Tree::generation(){
 
     if (choice==2){
       std::cout<< str <<std::endl;  
-      if (a ->FatherNode() !=0){
+      if (a ->FatherNode() !=nullptr){
           std::string typ = a ->FatherNode()->type(); 
           Node* pere= new  Node(a ->FatherNode(),typ); 
         if (pere->NextNode1()==a){
-          std::cout<< "lala "<<std::endl;    
           NodeNot->setNextNode(a);
           NodeNot->setFatherNode(pere);
           pere->setNextNode(NodeNot);
@@ -181,11 +180,10 @@ void Tree::generation(){
 
     if (choice==3){
       std::cout<< str1 <<std::endl;  
-      if (a ->FatherNode() !=0){
+      if (a ->FatherNode() !=nullptr){
           std::string typ = a ->FatherNode()->type(); 
           Node* pere= new  Node(a ->FatherNode(),typ); 
         if (pere->NextNode1()==a){
-          std::cout<< "lala et "<<std::endl;    
           NodeAnd->setNextNode(a);
           NodeAnd->setFatherNode(pere);
           a->setFatherNode(NodeAnd);
@@ -217,11 +215,12 @@ void Tree::generation(){
 
     if (choice==1){
       std::cout<< str1 <<std::endl;  
-      if (a ->FatherNode() !=0){
+
+
+      if (a ->FatherNode() !=nullptr){
           std::string typ = a ->FatherNode()->type(); 
           Node* pere= new  Node(a ->FatherNode(),typ); 
         if (pere->NextNode1()==a){
-          std::cout<< "lala et "<<std::endl;    
           NodeOr->setNextNode(a);
           NodeOr->setFatherNode(pere);
           a->setFatherNode(NodeOr);
@@ -230,6 +229,7 @@ void Tree::generation(){
           pere->setNextNode(NodeOr);
         }
          else{    
+
           NodeOr->setNextNode(a);
           a->setFatherNode(NodeOr);
           NodeOr->setNextNode2(NodeF);
@@ -338,24 +338,29 @@ void Tree::generation(){
 
 void Tree::calcul_fitness(bool y){
   Fitness_=0;
-  if (cross(FirstNode_)!=y){
+  int nb_elem=0;
+  if (cross(FirstNode_,nb_elem)!=y){
     Fitness_-=1;
   }
 }
 
-bool Tree::cross(Node * node){
+bool Tree::cross(Node * node, int &nb_elem){ // WARNING &nb_elem permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
   if (node ->values()=="&&"){
-    return (cross(node -> NextNode1()) && cross(node -> NextNode2()));
+    nb_elem=nb_elem+1;
+    return (cross(node -> NextNode1(),nb_elem) && cross(node -> NextNode2(),nb_elem));
 
   }
   if (node -> values()=="||"){
-    return (cross(node -> NextNode1()) || cross(node -> NextNode2()));
+    nb_elem=nb_elem+1;
+    return (cross(node -> NextNode1(),nb_elem) || cross(node -> NextNode2(),nb_elem));
   }
   if (node -> values()=="!"){
-    return (!cross(node -> NextNode1()));
+    nb_elem=nb_elem+1;
+    return (!cross(node -> NextNode1(),nb_elem));
   }
   
   else{
+    nb_elem=nb_elem+1;
     return (node -> bool_values());
   }
 }

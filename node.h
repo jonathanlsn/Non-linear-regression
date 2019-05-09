@@ -40,6 +40,7 @@ class Node{
 
     std::string values_;
     bool bool_values_;
+    int param_values_;
     Node * FatherNode_;
     Node * NextNode1_;
     Node * NextNode2_;

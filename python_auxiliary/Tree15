@@ -1,0 +1,9 @@
+digraph G {
+	2 [label="!" color=deepskyblue4 style=filled]
+	3 [label=false color=firebrick1 style=filled]
+	4 [label=true color=firebrick1 style=filled]
+	1 [label="&&" color=deepskyblue4 style=filled]
+	1 -> 2
+	1 -> 4
+	2 -> 3
+}
