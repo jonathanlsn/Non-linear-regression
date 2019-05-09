@@ -19,4 +19,4 @@ matrix.o: matrix.cpp matrix.h
 	g++ -o matrix.o -c matrix.cpp
 
 clean: 
-	rm main main.o forest.o tree.o node.o
+	rm main main.o forest.o tree.o node.o matrix.o
