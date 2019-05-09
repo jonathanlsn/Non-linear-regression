@@ -18,8 +18,25 @@ class Node{
     Node * NextNode1();
     Node * NextNode2();
     std::string type();
-  
-  protected:
+    
+
+//setter
+
+    void setNextNodeNull();
+
+    void setvalues(std::string str);
+
+    void setFatherNode(Node* father);
+
+    void setNextNode2(Node* next);
+
+    void setNextNode(Node* NextNode);
+ 
+    void setboolvalues(bool str);
+
+    void settype(std::string str);
+
+  protected:  
 
     std::string values_;
     bool bool_values_;

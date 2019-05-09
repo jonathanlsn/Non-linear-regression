@@ -19,7 +19,6 @@ class Matrix{
     int nLignes_;
     int nColonnes_;
     int **matrix_;
-
 };
 
 #endif

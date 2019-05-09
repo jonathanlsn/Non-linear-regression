@@ -3,6 +3,8 @@
 
 //Constructor
 Matrix::Matrix(int * tab, int nLignes,int nColonnes){
+  nLignes_=nLignes;
+  nColonnes_=nColonnes;
   matrix_ = new int* [ nLignes ];
   for (int i=0; i < nLignes; i++){
     matrix_[i] = new int[ nColonnes ];
@@ -27,10 +29,12 @@ void Matrix::show(){
 }
 
 int Matrix::nlignes(){
+  std::cout<< nLignes_<<std::endl;
   return(nLignes_);
 }
 
 int Matrix::ncolonnes(){
+  std::cout<< nColonnes_<<std::endl;
   return(nColonnes_);
 }
 
@@ -42,13 +46,14 @@ int** Matrix::x(){
   int **x;
   x=new int*[nLignes_];
   for (int i=0; i < nLignes_; i++){
-    matrix_[i] = new int[ nColonnes_-1 ];
+    x[i] = new int[ nColonnes_-1 ];
   }
   for (int h=0; h < nLignes_; h++){
     for (int j=0; j < nColonnes_-1; j++){
       x[h][j] = matrix_[h][j];
     }
   }
+  
   return(x);
 }
 
