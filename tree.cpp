@@ -2,11 +2,12 @@
 #include <iostream>
 #include "node.h"
 
+int nulltab[2];
 
 //constructor
 Tree::Tree(Node * node){
   FirstNode_ = node;
-  Fitness_ = 1;
+  Fitness_ = 0;
   NbrNode_ = 1;
   nextTree_ = nullptr; 
   generation_ = -1;
@@ -127,7 +128,7 @@ void Tree::generation(){
    if (mut==2){
       //Recherche du nombre de fils
       int nb_elem=0;
-      this->cross(a,nb_elem); //Met en forme le nb elmt du fils
+      this->cross(a,nulltab,nb_elem); //Met en forme le nb elmt du fils
       std::cout<< NbrNode_ <<"avant"<< std::endl;
       std::cout<< nb_elem-1 <<"c'est le nombre d'élements du dessous" << std::endl;
 
@@ -350,31 +351,37 @@ void Tree::generation(){
 
 }
 
-void Tree::calcul_fitness(bool y){
-  Fitness_=0;
+void Tree::calcul_fitness(int * x,bool y){
   int nb_elem=0;
-  if (cross(FirstNode_,nb_elem)!=y){
+  if (cross(FirstNode_,x,nb_elem)!=y){
     Fitness_-=1;
   }
 }
 
 
 
-int Tree::cross(Node * node, int &nb_node_son){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
+bool Tree::cross(Node * node,int * x, int &nb_node_son){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
   if (node ->values()=="&&"){
     nb_node_son=nb_node_son+1;
-    return (cross(node -> NextNode1(),nb_node_son) && cross(node -> NextNode2(),nb_node_son));
+    return (cross(node -> NextNode1(),x,nb_node_son) && cross(node -> NextNode2(),x,nb_node_son));
 
   }
   if (node -> values()=="||"){
     nb_node_son=nb_node_son+1;
-    return (cross(node -> NextNode1(),nb_node_son) || cross(node -> NextNode2(),nb_node_son));
+    return (cross(node -> NextNode1(),x,nb_node_son) || cross(node -> NextNode2(),x,nb_node_son));
   }
   if (node -> values()=="!"){
     nb_node_son=nb_node_son+1;
-    return (!cross(node -> NextNode1(),nb_node_son));
+    return (!cross(node -> NextNode1(),x,nb_node_son));
   }
-  
+  if (node -> type()=="x1"){
+    nb_node_son=nb_node_son+1;
+    return (x[0]);
+  }
+  if (node -> type()=="x2"){
+    nb_node_son=nb_node_son+1;
+    return (x[1]);
+  }
   else{
     nb_node_son=nb_node_son+1;
     return (node -> bool_values());

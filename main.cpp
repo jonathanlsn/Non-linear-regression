@@ -9,7 +9,8 @@
 
 int main()
 {
-
+  
+  int nulltab[2];
   //Creation on an environment of work
   //std::cout<<"Hello World"<<std::endl;
   
@@ -53,9 +54,9 @@ int main()
   Node node101(true,&node100);
   Node node102(false,&node100);
   Tree tree20(&node100);
-  std::cout << (tree20.cross(tree20.FirstNode(),nb_elem)==false)<<"\t"<<nb_elem<< std::endl;
+  std::cout << (tree20.cross(tree20.FirstNode(),nulltab,nb_elem)==false)<<"\t"<<nb_elem<< std::endl;
   nb_elem=0;
-  std::cout << (tree20.cross(&node101,nb_elem)==false)<<"\t"<<nb_elem<< std::endl;
+  std::cout << (tree20.cross(&node101,nulltab,nb_elem)==false)<<"\t"<<nb_elem<< std::endl;
 
   //Verification des parametres
 
@@ -87,7 +88,8 @@ int main()
   //std::cout << (Tree2.cross(Tree2.FirstNode(),nb_elem)==true) << std::endl;
 
   //test de la parenté
-
+  
+  
   Node Node5 (true, &Node4);
 
   std::cout<< "test de la parenté"<< std::endl;
@@ -102,70 +104,70 @@ int main()
   //resultat sur l arbre avec un opérateur
   std::cout<< "resultat arbre operateur not true"<< std::endl;
   Tree Tree3(&Node4);
-  std::cout << (Tree3.cross(Tree3.FirstNode(),nb_elem)==false) << std::endl;
+  std::cout << (Tree3.cross(Tree3.FirstNode(),nulltab,nb_elem)==false) << std::endl;
 
 
   std::cout<< "resultat arbre operateur not false"<< std::endl;
   Node Node7(str);
   Node Node6 (false, &Node7);
   Tree Tree6(&Node7);
-  std::cout << (Tree6.cross(Tree6.FirstNode(),nb_elem)==true) << std::endl;
+  std::cout << (Tree6.cross(Tree6.FirstNode(),nulltab,nb_elem)==true) << std::endl;
 
   std::cout<< "resultat arbre operateur et FF"<< std::endl;
   Node Node8(str1);
   Node Node9 (false, &Node8);
   Node Node10 (false, &Node8);
   Tree Tree7(&Node8);
-  std::cout << (Tree7.cross(Tree7.FirstNode(),nb_elem)==false) << std::endl;
+  std::cout << (Tree7.cross(Tree7.FirstNode(),nulltab,nb_elem)==false) << std::endl;
 
   std::cout<< "resultat arbre operateur et FV"<< std::endl;
   Node Node11(str1);
   Node Node12 (false, &Node11);
   Node Node13 (true, &Node11);
   Tree Tree8(&Node11);
-  std::cout << (Tree8.cross(Tree8.FirstNode(),nb_elem)==false) << std::endl;
+  std::cout << (Tree8.cross(Tree8.FirstNode(),nulltab,nb_elem)==false) << std::endl;
 
   std::cout<< "resultat arbre operateur et VF"<< std::endl;
   Node Node14(str1);
   Node Node15 (true, &Node14);
   Node Node16 (false, &Node14);
   Tree Tree9(&Node14);
-  std::cout << (Tree9.cross(Tree9.FirstNode(),nb_elem)==false) << std::endl;
+  std::cout << (Tree9.cross(Tree9.FirstNode(),nulltab,nb_elem)==false) << std::endl;
 
   std::cout<< "resultat arbre operateur et VV"<< std::endl;
   Node Node17(str1);
   Node Node18 (true, &Node17);
   Node Node19 (true, &Node17);
   Tree Tree10(&Node17);
-  std::cout << (Tree10.cross(Tree10.FirstNode(),nb_elem)==true) << std::endl;
+  std::cout << (Tree10.cross(Tree10.FirstNode(),nulltab,nb_elem)==true) << std::endl;
 
   std::cout<< "resultat arbre operateur ou VV"<< std::endl;
   Node Node20(str2);
   Node Node21 (true, &Node20);
   Node Node22 (true, &Node20);
   Tree Tree11(&Node20);
-  std::cout << (Tree11.cross(Tree11.FirstNode(),nb_elem)==true) << std::endl;
+  std::cout << (Tree11.cross(Tree11.FirstNode(),nulltab,nb_elem)==true) << std::endl;
 
   std::cout<< "resultat arbre operateur ou VF"<< std::endl;
   Node Node23(str2);
   Node Node24 (true, &Node23);
   Node Node25 (false, &Node23);
   Tree Tree12(&Node23);
-  std::cout << (Tree12.cross(Tree12.FirstNode(),nb_elem)==true) << std::endl;
+  std::cout << (Tree12.cross(Tree12.FirstNode(),nulltab,nb_elem)==true) << std::endl;
 
   std::cout<< "resultat arbre operateur ou FV"<< std::endl;
   Node Node26(str2);
   Node Node27 (false, &Node26);
   Node Node28 (true, &Node26);
   Tree Tree13(&Node26);
-  std::cout << (Tree13.cross(Tree13.FirstNode(),nb_elem)==true) << std::endl;
+  std::cout << (Tree13.cross(Tree13.FirstNode(),nulltab,nb_elem)==true) << std::endl;
 
   std::cout<< "resultat arbre operateur ou FF"<< std::endl;
   Node Node29(str2);
   Node Node30 (false, &Node29);
   Node Node31 (false, &Node29);
   Tree Tree14(&Node29);
-  std::cout << (Tree14.cross(Tree14.FirstNode(),nb_elem)==false) << std::endl;
+  std::cout << (Tree14.cross(Tree14.FirstNode(),nulltab,nb_elem)==false) << std::endl;
 
 
   //Creation d'un arbre plus complexe
@@ -176,7 +178,7 @@ int main()
   Node Node35(true, &Node32);
 
   Tree Tree15(&Node32);
-  std::cout << (Tree15.cross(Tree15.FirstNode(),nb_elem)==true) << std::endl;
+  std::cout << (Tree15.cross(Tree15.FirstNode(),nulltab,nb_elem)==true) << std::endl;
 
   //Verification du nombre de noeuds ATTENTION NORMAL
   //std::cout <<Tree15.NbrNode() << std::endl;
@@ -276,13 +278,12 @@ int main()
   Tree tree(&node1);
   
   bool y=1;
-  tree.calcul_fitness(y);
+  tree.calcul_fitness(nulltab,y);
   std::cout<< "Fitness 1&&1=1 : "<<tree.Fitness()<<std::endl;
   
   bool z=0;
-  tree.calcul_fitness(z);
+  tree.calcul_fitness(nulltab,z);
   std::cout<< "Fitness 1&&1=0 : "<<tree.Fitness()<<std::endl;
-  
   
   /*
   // Création de la matrice pour une relation x1&&x2=y
@@ -317,18 +318,40 @@ int main()
   std::cout<< std::endl;
   // test matrix
   std::cout<< "tests matrix"<< std::endl;
+  std::cout<< std::endl;
   
-  int tab[]={1,0,0,0,1,0,1,1,1};
+  int tab[]={1,0,0,0,1,0,1,1,1};  // (!x1||!x2)||(x1&&x2)
+  int tab2[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
   int nligne=3;
   int ncolonne=3;
-  Matrix matrix(tab,nligne,ncolonne);
+  Matrix matrix(tab2,nligne,ncolonne);
   matrix.nlignes();
-  matrix.ncolonnes();
+  ;
   matrix.show();
-  std::cout<< matrix.x()[0][0] <<std::endl;
-  std::cout<<matrix.y()[0]<<std::endl;;
+  
+  std::cout<< std::endl;
+  // Utilisation de la fiteness avec la matrice de données
+  Node node4 ("||");
+  Node node5 ("||", &node4);
+  Node node6 ("&&", &node4);
+  Node node7 ("x1", &node5);
+  Node node8 ("x2", &node5);
+  Node node9 ("x1", &node6);
+  Node node10 ("x2", &node6);
+  Tree tree2 (&node4);
   
   
+  int ** x_=matrix.x();
+  int * y_=matrix.y(); 
+  for (int i=0;i<matrix.nlignes();++i){
+    int x[matrix.ncolonnes()];
+    x[0]=x_[i][0];
+    x[1]=x_[i][1];
+    int y1=y_[i];
+    tree2.calcul_fitness(x,y1);
+    
+  }
+  std::cout<<"Fitness of tree : "<< tree2.Fitness() <<std::endl;
 
 
   return 0;

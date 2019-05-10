@@ -13,13 +13,9 @@ Node::Node(Node* node,std::string type){
     type_= "op";
     values_ = node->values_;
   }
-  if (type=="bool"){
+  else{
     type_= "bool";
     bool_values_ = node->bool_values_;
-  }
-  if (type=="param"){
-    type_= "param";
-    param_values_ = node->param_values_;
   }
 }
 
@@ -38,6 +34,14 @@ Node::Node(bool boleen){
   NextNode2_ = nullptr;
   type_= "bool";
 }
+
+/* Node::Node(std::string param,bool boleen){
+  bool_values_ = boleen;
+  FatherNode_ = nullptr;
+  NextNode1_ = nullptr;
+  NextNode2_ = nullptr;
+  type_= param;
+} */
 
 Node::Node(std::string str, Node* precedent){
   values_ = str;
