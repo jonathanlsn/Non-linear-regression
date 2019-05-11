@@ -5,6 +5,7 @@
 
 //constructor
 Tree::Tree(Node * node){
+//Initialisation of a tree
   FirstNode_ = node;
   Fitness_ = 1;
   NbrNode_ = 1;
@@ -12,9 +13,10 @@ Tree::Tree(Node * node){
   generation_ = -1;
 }
 
-//Tree::Tree(Tree tree){
+Tree::Tree(Tree tree){ 
+//Creation of a Tree by copy using Node copy
   
-//}
+}
 
 //getter
 
