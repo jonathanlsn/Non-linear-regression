@@ -1,175 +1,187 @@
-
+//Include of documents
 #include "node.h"
 #include "tree.h"
 #include "forest.h"
 #include "matrix.h"
 
+//Include of libraries
 #include <iostream>
 #include <time.h> 
+
 
 int main()
 {
 
   //Creation on an environment of work
-  //std::cout<<"Hello World"<<std::endl;
+  /*std::cout<<"Hello World"<<std::endl;*/
   
   
-  //Générateur aléatoire dépendant du temps (change la seed toute les secondes)
+  //Random number taking care of time (change the seed every second)
   std::cout<< "Tests de random" <<std::endl;
   srand(time(NULL));
-  int nbgen=rand()%9+1;    //entre 1-9
-  printf("%d\n",nbgen);    //teste affichage
-  
+  int nbgen=rand()%9+1;    //between 1-9
+  printf("%d\n",nbgen);    //print the number
+  std::cout<< "   "<< std::endl;
 
+  //Creation of boolen
   bool a = true;
   bool b = true;
   bool c = false;
     
  
-  
-  std::cout<< "Tests de nos opérateurs" <<std::endl;
-  std::cout<< std::boolalpha << ((a && b) == 1) <<std::endl;
-  std::cout<< std::boolalpha << ((a || c) == 1) <<std::endl;
-  std::cout<< std::boolalpha << ((! b) == 0) <<std::endl;
+  //Test of operators
+  std::cout<< "Test of operators" <<std::endl;
+  std::cout<< std::boolalpha << ((a && b) == 1) <<std::endl; //AND
+  std::cout<< std::boolalpha << ((a || c) == 1) <<std::endl; //OR
+  std::cout<< std::boolalpha << ((! b) == 0) <<std::endl;    //NOT
+  std::cout<< "   "<< std::endl;
 
-  //creation de la foret et de l'arbre
-  
-
- 
+  //creation of string of operator
   std::string str="!";
   std::string str1="&&";
   std::string str2="||";
+
+
+  //Creation of Node
   Node Node4(str);
   Node Node3(str);
   Node Node1(true);
   Node Node2(true);
   
+
+  //Creation of Tree artificial
   Tree Tree1(&Node1);  
   Tree Tree2(&Node3);
   
-  std::cout<<"Test du bon fonctionnement du nouveau cross (nombre d'elem)"<<std::endl;
-  int nb_elem=0;
+
+  //Test of cross
+  std::cout<<"Test of cross"<<std::endl;
+  int nb_elem=0; //we need to initialise it
+
+  //Creation of Tree artificial
   Node node100(str1);
   Node node101(true,&node100);
   Node node102(false,&node100);
   Tree tree20(&node100);
+
+  //Test of cross and determination on number of elements under a Node
   std::cout << (tree20.cross(tree20.FirstNode(),nb_elem)==false)<<"\t"<<nb_elem<< std::endl;
   nb_elem=0;
-  std::cout << (tree20.cross(&node101,nb_elem)==false)<<"\t"<<nb_elem<< std::endl;
+  std::cout << (tree20.cross(&node101,nb_elem)==true)<<"\t"<<nb_elem<< std::endl;
+  std::cout<< "   "<< std::endl;
 
-  //Verification des parametres
-
+  //Verification of parameters
   std::cout<< "Verification des parametres" <<std::endl;
   std::cout<< Node1.bool_values() <<std::endl;
   std::cout<< Node3.values() <<std::endl;
+  std::cout<< "   "<< std::endl;
 
-
-  std::cout<< "Verification des parametres" <<std::endl;
+  std::cout<< "Verification of NextNode at nullptr" <<std::endl;
   std::cout<< std::boolalpha << (Node1.NextNode1()==nullptr) <<std::endl;
   std::cout<< std::boolalpha << (Node1.NextNode2()==nullptr) <<std::endl;
-  
+  std::cout<< "   "<< std::endl;  
+
   //Verification des types
-  std::cout<< "Verification des types" <<std::endl;
+  std::cout<< "Verification of types" <<std::endl;
   std::cout<< Node2.type()<<std::endl;
   std::cout<< Node1.type()<<std::endl;
+  std::cout<< "   "<< std::endl;  
 
    //Verification des arbres
-  std::cout<< "Verification des arbres" <<std::endl;
+  std::cout<< "Verification of tree and it initilisation" <<std::endl;
   std::cout<< Tree1.FirstNode()<<std::endl;
   std::cout<< Tree1.FirstNode() -> type()  <<std::endl;
-
   std::cout<< Tree1.Fitness() << std::endl;
   std::cout<< Tree1.NbrNode() << std::endl;
+  std::cout<< "   "<< std::endl; 
 
-  //resultat arbre
-  std::cout<< "resultat arbre"<< std::endl;
-  nb_elem=0;
-  //std::cout << (Tree2.cross(Tree2.FirstNode(),nb_elem)==true) << std::endl;
 
-  //test de la parenté
-
+  //test of FatherNode (Kinship)
   Node Node5 (true, &Node4);
 
   std::cout<< "test de la parenté"<< std::endl;
   std::cout<< (&Node4==(Node5.FatherNode()))<< std::endl;
   std::cout<< (&Node5==(Node4.NextNode1())) <<std::endl;
+  std::cout<< "   "<< std::endl; 
  
-  //retourner un pointeur nul test
-  std::cout<< "test du pointeur nul"<< std::endl;
+  //return nullptr
+  std::cout<< "test nullptr"<< std::endl;
   int* d =  nullptr;
   std::cout<< std::boolalpha<< (d ==nullptr) << std::endl;
+  std::cout<< "   "<< std::endl; 
 
-  //resultat sur l arbre avec un opérateur
-  std::cout<< "resultat arbre operateur not true"<< std::endl;
+  //result opeartors
+  std::cout<< "result tree operator  not T"<< std::endl;
   Tree Tree3(&Node4);
   std::cout << (Tree3.cross(Tree3.FirstNode(),nb_elem)==false) << std::endl;
 
 
-  std::cout<< "resultat arbre operateur not false"<< std::endl;
+  std::cout<< "result tree operator  not F"<< std::endl;
   Node Node7(str);
   Node Node6 (false, &Node7);
   Tree Tree6(&Node7);
   std::cout << (Tree6.cross(Tree6.FirstNode(),nb_elem)==true) << std::endl;
 
-  std::cout<< "resultat arbre operateur et FF"<< std::endl;
+  std::cout<< "result tree operator and FF"<< std::endl;
   Node Node8(str1);
   Node Node9 (false, &Node8);
   Node Node10 (false, &Node8);
   Tree Tree7(&Node8);
   std::cout << (Tree7.cross(Tree7.FirstNode(),nb_elem)==false) << std::endl;
 
-  std::cout<< "resultat arbre operateur et FV"<< std::endl;
+  std::cout<< "resultat tree operator and FV"<< std::endl;
   Node Node11(str1);
   Node Node12 (false, &Node11);
   Node Node13 (true, &Node11);
   Tree Tree8(&Node11);
   std::cout << (Tree8.cross(Tree8.FirstNode(),nb_elem)==false) << std::endl;
 
-  std::cout<< "resultat arbre operateur et VF"<< std::endl;
+  std::cout<< "result tree operator and VF"<< std::endl;
   Node Node14(str1);
   Node Node15 (true, &Node14);
   Node Node16 (false, &Node14);
   Tree Tree9(&Node14);
   std::cout << (Tree9.cross(Tree9.FirstNode(),nb_elem)==false) << std::endl;
 
-  std::cout<< "resultat arbre operateur et VV"<< std::endl;
+  std::cout<< "result tree operator and TT"<< std::endl;
   Node Node17(str1);
   Node Node18 (true, &Node17);
   Node Node19 (true, &Node17);
   Tree Tree10(&Node17);
   std::cout << (Tree10.cross(Tree10.FirstNode(),nb_elem)==true) << std::endl;
 
-  std::cout<< "resultat arbre operateur ou VV"<< std::endl;
+  std::cout<< "resultat tree operator or VV"<< std::endl;
   Node Node20(str2);
   Node Node21 (true, &Node20);
   Node Node22 (true, &Node20);
   Tree Tree11(&Node20);
   std::cout << (Tree11.cross(Tree11.FirstNode(),nb_elem)==true) << std::endl;
 
-  std::cout<< "resultat arbre operateur ou VF"<< std::endl;
+  std::cout<< "result tree operator or VF"<< std::endl;
   Node Node23(str2);
   Node Node24 (true, &Node23);
   Node Node25 (false, &Node23);
   Tree Tree12(&Node23);
   std::cout << (Tree12.cross(Tree12.FirstNode(),nb_elem)==true) << std::endl;
 
-  std::cout<< "resultat arbre operateur ou FV"<< std::endl;
+  std::cout<< "result tree operator or FV"<< std::endl;
   Node Node26(str2);
   Node Node27 (false, &Node26);
   Node Node28 (true, &Node26);
   Tree Tree13(&Node26);
   std::cout << (Tree13.cross(Tree13.FirstNode(),nb_elem)==true) << std::endl;
 
-  std::cout<< "resultat arbre operateur ou FF"<< std::endl;
+  std::cout<< "result tree operator or FF"<< std::endl;
   Node Node29(str2);
   Node Node30 (false, &Node29);
   Node Node31 (false, &Node29);
   Tree Tree14(&Node29);
   std::cout << (Tree14.cross(Tree14.FirstNode(),nb_elem)==false) << std::endl;
+  std::cout<< " "<< std::endl;
 
 
-  //Creation d'un arbre plus complexe
-  std::cout<< "resultat arbre complexe"<< std::endl;
+  //Creation complexe tree
+  std::cout<< "resultat complexe tree"<< std::endl;
   Node Node32(str1);
   Node Node33(str, &Node32);
   Node Node34(false, &Node33);
@@ -177,15 +189,13 @@ int main()
 
   Tree Tree15(&Node32);
   std::cout << (Tree15.cross(Tree15.FirstNode(),nb_elem)==true) << std::endl;
+  std::cout<< " "<< std::endl;
 
-  //Verification du nombre de noeuds ATTENTION NORMAL
-  //std::cout <<Tree15.NbrNode() << std::endl;
-
-  //Test début mutation
+  //Test mutation
   Node Node36(str1);
   Tree Tree16(&Node36);
-  //Tree15.mutation();
-/*  std::cout<< "   "<< std::endl;
+  /*Tree15.mutation();
+  std::cout<< "   "<< std::endl;
   std::cout<< "Premiere mutation"<< std::endl;
   Tree15.mutation();
   std::cout<< "   "<< std::endl;
@@ -198,7 +208,7 @@ int main()
 
   //Nouvel arbre
 
-/*
+
   Node Node37(str1);
   Node Node38(str2,&Node37);
   Node Node39(str1,&Node38);
@@ -226,27 +236,26 @@ int main()
 
 
   //Creation of forest
-  //Forest1.PushBack(Tree2);
-  
-  /*  Forest Forest1;
-  std::cout <<"Le nombre d'arbres dans la foret " << Forest1.nb_elmts()<< std::endl;
+  Forest Forest1;
   Forest1.PushBack(Tree2);
-  std::cout <<"Le nombre d'arbres dans la foret " << Forest1.nb_elmts()<< std::endl;
-*/
 
-  //Creation d'un arbre initial
-  
+  //Test of Pushback
+  std::cout <<"Number of tree in forest " << Forest1.nb_elmts()<< std::endl;
+  //Forest1.PushBack(Tree3);
+  std::cout <<"Number of tree in forest " << Forest1.nb_elmts()<< std::endl;
+  std::cout<< " "<< std::endl;
 
+  //Creation of initial tree
   int Nbrmutation =20;
   
   Node Node47(true);
   Tree Tree18(&Node47);
   
-  for (int i=0; i<Nbrmutation; ++i){
+ /* for (int i=0; i<Nbrmutation; ++i){
     std::cout<< "   "<< std::endl;
     std::cout<< "mutation"<< i <<std::endl;
     Tree18.mutation();
-  }
+  }*/
 
 
 /*  Node Node52 (str1);
@@ -261,13 +270,9 @@ int main()
     }
 */
 
-  
-  
-  
-  
-  std::cout<< std::endl;
+
   //Fitness
-  std::cout<< "Test de calcul de fitness"<< std::endl;
+  std::cout<< "Test calcul of fitness"<< std::endl;
   
     //Test fonction Fitness
   Node node1("&&");
@@ -315,16 +320,22 @@ int main()
   */
   
   std::cout<< std::endl;
-  // test matrix
-  std::cout<< "tests matrix"<< std::endl;
+
   
+  //Creation of matrix
   int tab[]={1,0,0,0,1,0,1,1,1};
   int nligne=3;
   int ncolonne=3;
   Matrix matrix(tab,nligne,ncolonne);
+
+  std::cout<< "tests dimension"<< std::endl;
   matrix.nlignes();
   matrix.ncolonnes();
-  matrix.show();
+
+  std::cout<< "matrix"<< std::endl;
+  matrix.show();//Show the matrix
+
+  std::cout<< "tests matrix"<< std::endl;
   std::cout<< matrix.x()[0][0] <<std::endl;
   std::cout<<matrix.y()[0]<<std::endl;;
   
