@@ -67,7 +67,7 @@ int main()
   //Test of cross and determination on number of elements under a Node
   std::cout << (tree20.cross(tree20.FirstNode(),nb_elem)==false)<<"\t"<<nb_elem<< std::endl;
   nb_elem=0;
-  std::cout << (tree20.cross(&node101,nb_elem)==true)<<"\t"<<nb_elem<< std::endl;
+  //std::cout << (tree20.cross(&node101,nb_elem)==true)<<"\t"<<nb_elem<< std::endl;
   std::cout<< "   "<< std::endl;
 
   //Verification of parameters
@@ -339,7 +339,20 @@ int main()
   std::cout<< matrix.x()[0][0] <<std::endl;
   std::cout<<matrix.y()[0]<<std::endl;;
   
-  
+  //Test of new cross
+
+  Node nod3(str2);
+  Node nod1(true,&nod3);
+  Node nod2(false,&nod3);
+
+  Tree tr1(&nod3);
+
+  bool copy=true;
+  int nb=0;
+
+  std::cout<<tr1.cross(tr1.FirstNode(),nb, copy, &nod2)<< std::endl;
+  Tree tr2(&nod2);
+  std::cout<<tr1.cross(tr2.FirstNode(),nb)<< std::endl;
 
 
   return 0;

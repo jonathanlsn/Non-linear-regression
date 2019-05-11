@@ -13,10 +13,11 @@ Tree::Tree(Node * node){
   generation_ = -1;
 }
 
-Tree::Tree(Tree tree){ 
+//Tree::Tree(Tree tree){ 
 //Creation of a Tree by copy using Node copy
+
   
-}
+//}
 
 //getter
 
@@ -362,23 +363,90 @@ void Tree::calcul_fitness(bool y){
 
 
 
-bool Tree::cross(Node * node, int &nb_node_son){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
-  if (node ->values()=="&&"){
-    nb_node_son=nb_node_son+1;
-    return (cross(node -> NextNode1(),nb_node_son) && cross(node -> NextNode2(),nb_node_son));
+bool Tree::cross(Node * node, int &nb_node_son, bool copy, Node initialcopy ){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
+//  +la posiiblite de copier
 
-  }
-  if (node -> values()=="||"){
-    nb_node_son=nb_node_son+1;
-    return (cross(node -> NextNode1(),nb_node_son) || cross(node -> NextNode2(),nb_node_son));
-  }
-  if (node -> values()=="!"){
-    nb_node_son=nb_node_son+1;
-    return (!cross(node -> NextNode1(),nb_node_son));
-  }
+  if (copy==true){
+    if (node ->values()=="&&"){
+      Node* Nodecopy = new Node(node);
+      if (&nb_node_son==0){
+        initialcopy= Nodecopy;
+      }
+      nb_node_son=nb_node_son+1;
+      return (cross(node -> NextNode1(),nb_node_son,copy, initialcopy) && cross(node -> NextNode2(),nb_node_son,copy,initialcopy));
+
+    }
+    if (node -> values()=="||"){
+      Node* Nodecopy = new Node(node);
+      if (&nb_node_son==0){
+        initialcopy= Nodecopy;
+      }
+      nb_node_son=nb_node_son+1;
+      return (cross(node -> NextNode1(),nb_node_son,copy,initialcopy) || cross(node -> NextNode2(),nb_node_son,copy,initialcopy));
+    }
+    if (node -> values()=="!"){
+      Node* Nodecopy = new Node(node);
+      if (&nb_node_son==0){
+        initialcopy= Nodecopy;
+      }
+      nb_node_son=nb_node_son+1;
+      return (!cross(node -> NextNode1(),nb_node_son,copy,initialcopy));
+    }
   
+    else{
+      Node* Nodecopy = new Node(node);
+      if (&nb_node_son==0){
+        initialcopy= Nodecopy;
+      }
+      nb_node_son=nb_node_son+1;
+      return (node -> bool_values());
+    }
+  }
+
   else{
-    nb_node_son=nb_node_son+1;
-    return (node -> bool_values());
+    if (node ->values()=="&&"){
+      nb_node_son=nb_node_son+1;
+      return (cross(node -> NextNode1(),nb_node_son,copy,initialcopy) && cross(node -> NextNode2(),nb_node_son,copy,initialcopy));
+
+    }
+    if (node -> values()=="||"){
+      nb_node_son=nb_node_son+1;
+      return (cross(node -> NextNode1(),nb_node_son,copy,initialcopy) || cross(node -> NextNode2(),nb_node_son,copy,initialcopy));
+    }
+    if (node -> values()=="!"){
+      nb_node_son=nb_node_son+1;
+      return (!cross(node -> NextNode1(),nb_node_son,copy,initialcopy));
+    }
+  
+    else{
+      nb_node_son=nb_node_son+1;
+      return (node -> bool_values());
+    }
   }
 }
+
+bool Tree::cross(Node * node, int &nb_node_son ){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
+//  +la posiiblite de copier
+
+
+    if (node ->values()=="&&"){
+      nb_node_son=nb_node_son+1;
+      return (cross(node -> NextNode1(),nb_node_son) && cross(node -> NextNode2(),nb_node_son));
+
+    }
+    if (node -> values()=="||"){
+      nb_node_son=nb_node_son+1;
+      return (cross(node -> NextNode1(),nb_node_son) || cross(node -> NextNode2(),nb_node_son));
+    }
+    if (node -> values()=="!"){
+      nb_node_son=nb_node_son+1;
+      return (!cross(node -> NextNode1(),nb_node_son));
+    }
+  
+    else{
+      nb_node_son=nb_node_son+1;
+      return (node -> bool_values());
+    }
+  }
+
+
