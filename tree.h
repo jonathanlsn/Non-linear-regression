@@ -13,7 +13,7 @@ class Tree{
 
 //constructor
     Tree(Node* node);
-    //Tree(const Tree&);
+    Tree(Tree* Tree);
 
 //getter
     Node* FirstNode();

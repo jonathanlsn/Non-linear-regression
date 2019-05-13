@@ -14,9 +14,6 @@ class Forest{
      // Methods for insertions
      void PushBack(Tree* tree); // this method allows us to add a Tree at the end. It takes a Tree as parameter.
 
-     void afficherForest();
-			// this method allows us to print all Trees of the Forest.
-
 		// Constructors
     Forest();
     Forest(const Forest&)=delete;  

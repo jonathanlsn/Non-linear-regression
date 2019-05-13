@@ -17,11 +17,9 @@ Tree::Tree(Node * node){
 
 
 
-//Tree::Tree(Tree tree){ 
+Tree::Tree(Tree* tree){ 
 //Creation of a Tree by copy using Node copy
-
-  
-//}
+}
 
 
 //getter

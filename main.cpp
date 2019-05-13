@@ -449,48 +449,72 @@ int main()
 
 
 
-/* 
+
 
   // Début du vrai programme
   
 int tab3[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
 int nligne=3;
 int ncolonne=3;
-Matrix matrix(tab2,nligne,ncolonne);
+Matrix matrixdonne(tab2,nligne,ncolonne);
 matrix.show();
-int ** x_=matrix.x();
-int * y_=matrix.y(); 
-  
-Forest forest;
-//forest.init();   // Initialisation de la forêt
-int lambda=6;
-Tree * field[lambda];
-Tree * best;
-for (int g=0;g<10;++g){       // génération
-   Tree * parent=forest2.lastTree();
-   field[0]=parent;
-   best=parent;
-   for (int k=1;k<lambda;++k){   // potentiels enfants
-      //mutation
-     //field[k]=parent.mutation();
-     for (int i=0;i<matrix.nlignes();++i){
-       int * x[matrix.ncolonnes()];
-       x[0]=x_[i][0];
-       x[1]=x_[i][1];
-       int y=y_[i];
-       field[k] -> calcul_fitness(x,y);
-     }
-     if (best->Fitness()<field[k]->Fitness()){
-       best=field[k];
-     }
-   forest.PushBack(best);
-}
+int ** xt_=matrix.x();
+int * yt_=matrix.y(); 
 
+Forest forest;
+Node nodet(true);
+Tree Treet(&nodet);//Creation of firest Tree with variable
+forest.PushBack(&Treet);//Initialisation of forest
+
+//forest.init();   // Initialisation de la forêt
+int lambda=5; //Nbe children tests
+Tree * fiel[lambda+1]; //Stock children and one parent
+Tree * best = &Treet; // To store the best individual
+
+for (int g=0;g<10;++g){       // génération (after while+condition)
+   Tree * parent=forest.lastTree(); 
+   fiel[0]=parent;
+   best=parent;
+  std::cout<<"jooooo1"<< std::endl;
+   for (int k=1;k<lambda+1;++k){   // potentiels enfants
+     //mutation
+
+     std::cout<<"jooooo2"<< std::endl;
+     Tree cop_parent(parent);
+     fiel[k]=parent;//cop
+     std::cout<<parent->show()<<std::endl;
+     std::cout<<fiel[k]->show()<<std::endl;
+
+     //cop_parent.mutation();
+  std::cout<<"jooooo3"<< std::endl;
+     for (int i=0;i<nligne;++i){//Calcul of fitness
+ std::cout<<"jooooo9"<< std::endl;
+       int xt[ncolonne];
+ std::cout<<"jooooo10"<< std::endl;
+       xt[0]=xt_[i][0];
+       xt[1]=xt_[i][1];
+       int yt=yt_[i];
+ std::cout<<"jooooo11"<< std::endl;
+       std::cout<<fiel[k]->show()<<std::endl;
+       fiel[k] -> calcul_fitness(xt,yt);
+ std::cout<<"jooooo4"<< std::endl;
+     }
+ std::cout<<"jooooo5"<< std::endl;
+     if (best->Fitness()<fiel[k]->Fitness()){
+       best=fiel[k];
+     }
+std::cout<<"jooooo6"<< std::endl;
+    }
+    forest.PushBack(best);
+ std::cout<<"jooooo7"<< std::endl;
+}
+ std::cout<<"jooooo8"<< std::endl;
 forest.show();
-*/  
+
+
   std::cout<<" " <<std::endl;
   std::cout<<"lala " <<tr1.nextTree()<<std::endl;
-  tr1.link(Tree1);
+  tr1.link(&Tree1);
   std::cout<<"lala " <<tr1.nextTree()<<std::endl;
   std::cout<<&Tree1<<std::endl;
 

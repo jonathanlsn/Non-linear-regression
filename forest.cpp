@@ -38,35 +38,17 @@ void Forest::PushBack(Tree x){
 
 
 void Forest::PushBack(Tree * tree){
-  std::cout<< tree <<std::endl;
-  std::cout<< "Hey" <<std::endl;
   if (firstTree_!=nullptr){
     lastTree_->link(tree);
-    std::cout<< "Nope" <<std::endl;
   }
-  std::cout<< "Hello" <<std::endl;
   if (firstTree_==nullptr){
     firstTree_=tree;
-    std::cout<< "Coucou" <<std::endl;
   }
   lastTree_=tree;
   nb_elmts_+=1;
-  std::cout<< nb_elmts_ <<std::endl;
-  std::cout<< firstTree_ <<std::endl;
-  std::cout<< lastTree_ <<std::endl;
 } 
 
 
-
-
-void Forest::afficherForest(){
-  Tree* tmp = firstTree_ ; // temporary pointer that will go through the list
-  while(tmp->nextTree() != nullptr){
-  	Tree* a = tmp;
-    a -> generation();
-    tmp = tmp -> nextTree_;      
-  }
-}
 
 void Forest::show(){
   Tree * tmp=firstTree_;
