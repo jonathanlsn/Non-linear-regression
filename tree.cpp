@@ -2,22 +2,27 @@
 #include <iostream>
 #include "node.h"
 
+int nulltab[2];
 
 //constructor
 Tree::Tree(Node * node){
 //Initialisation of a tree
   FirstNode_ = node;
-  Fitness_ = 1;
+  Fitness_ = 0;
   NbrNode_ = 1;
   nextTree_ = nullptr; 
   generation_ = -1;
 }
+
+
+
 
 //Tree::Tree(Tree tree){ 
 //Creation of a Tree by copy using Node copy
 
   
 //}
+
 
 //getter
 
@@ -35,6 +40,10 @@ int Tree::NbrNode(){
 }
 
 //setter
+
+Tree * Tree::nextTree(){
+  return(nextTree_);
+}
 
 void Tree::generation(){
   std::cout << generation_ <<std::endl;
@@ -130,7 +139,7 @@ void Tree::generation(){
    if (mut==2){
       //Recherche du nombre de fils
       int nb_elem=0;
-      this->cross(a,nb_elem); //Met en forme le nb elmt du fils
+      this->cross(a,nulltab,nb_elem); //Met en forme le nb elmt du fils
       std::cout<< NbrNode_ <<"avant"<< std::endl;
       std::cout<< nb_elem-1 <<"c'est le nombre d'élements du dessous" << std::endl;
 
@@ -353,14 +362,36 @@ void Tree::generation(){
 
 }
 
-void Tree::calcul_fitness(bool y){
-  Fitness_=0;
+void Tree::calcul_fitness(int * x,bool y){
   int nb_elem=0;
-  if (cross(FirstNode_,nb_elem)!=y){
+  if (cross(FirstNode_,x,nb_elem)!=y){
     Fitness_-=1;
   }
 }
 
+
+bool Tree::cross(Node * node,int * x, int &nb_node_son){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
+  if (node ->values()=="&&"){
+    nb_node_son=nb_node_son+1;
+    return (cross(node -> NextNode1(),x,nb_node_son) && cross(node -> NextNode2(),x,nb_node_son));
+  }
+  if (node -> values()=="||"){
+    nb_node_son=nb_node_son+1;
+    return (cross(node -> NextNode1(),x,nb_node_son) || cross(node -> NextNode2(),x,nb_node_son));
+  }
+  if (node -> values()=="!"){
+    nb_node_son=nb_node_son+1;
+    return (!cross(node -> NextNode1(),x,nb_node_son));
+  }
+  if (node -> type()=="x1"){
+    nb_node_son=nb_node_son+1;
+    return (x[0]);
+  }
+  if (node -> type()=="x2"){
+    nb_node_son=nb_node_son+1;
+    return (x[1]);
+  }
+}
 
 
 bool Tree::cross(Node * node, int &nb_node_son, bool copy, Node initialcopy, Node * passant  ){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
@@ -434,6 +465,7 @@ bool Tree::cross(Node * node, int &nb_node_son, bool copy, Node initialcopy, Nod
   
     else{
       Node* Nodecopy = new Node(node);
+      std::cout<<&Nodecopy<< std::endl;
       if (&nb_node_son==0){
         initialcopy= Nodecopy;
         passant=Nodecopy;
@@ -450,11 +482,13 @@ bool Tree::cross(Node * node, int &nb_node_son, bool copy, Node initialcopy, Nod
         }
         Nodecopy ->setFatherNode(passant);
         passant=Nodecopy;
+        std::cout<<Nodecopy ->FatherNode()<< std::endl;
       }
     }
       return (node -> bool_values());
     }
   
+
 
   else{
     if (node ->values()=="&&"){
@@ -477,6 +511,37 @@ bool Tree::cross(Node * node, int &nb_node_son, bool copy, Node initialcopy, Nod
     }
   }
 }
+
+
+
+
+std::string Tree::show(){
+  return(parcour(FirstNode_));
+}
+
+
+std::string Tree::parcour(Node * node){
+  if (node -> values()=="||" or node -> values()=="&&"){
+    return("(" + parcour(node->NextNode1()) + node->values() + parcour(node->NextNode2()) + ")");
+  }
+  if (node -> values()=="!"){
+    return(node->values() + parcour(node->NextNode1()));
+  }
+  if (node -> type()=="bool"){
+    return(node->bool_values() ? "true" : "false");
+  }
+  else{
+    return(node->values());
+  }
+}
+
+
+
+void Tree::link(Tree tree){
+  nextTree_=&tree;
+}
+
+
 
 bool Tree::cross(Node * node, int &nb_node_son ){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
 //  +la posiiblite de copier
