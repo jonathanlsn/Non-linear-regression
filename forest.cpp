@@ -58,23 +58,11 @@ void Forest::PushBack(Tree * tree){
 
 
 
-
-void Forest::afficherForest(){
-  Tree* tmp = firstTree_ ; // temporary pointer that will go through the list
-  while(tmp->nextTree() != nullptr){
-  	Tree* a = tmp;
-    a -> generation();
-    tmp = tmp -> nextTree_;      
-  }
-}
-
 void Forest::show(){
   Tree * tmp=firstTree_;
-  for (int i=0;i<nb_elmts_;++i){
+  for (int i=0;i<=nb_elmts_-1;++i){
     std::cout<< "génération "  << i << " : " << tmp->show() <<std::endl;
     tmp = tmp->nextTree();
-    //std::cout<< "Nope" <<std::endl;
-    ++i;
   }
 }
 

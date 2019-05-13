@@ -391,14 +391,16 @@ int main()
   //Tree * generation2=forest2.firstTree();
   //std::cout<<generation2->show()<<std::endl;
   
-  //forest2.PushBack(Tree10); 
+  forest2.PushBack(&Tree10); 
   
   
   tree2.link(&tree3);
   Tree * Next=tree2.nextTree();
   std::cout<<Next->show()<<std::endl;
   
+  std::cout<<std::endl;
   
+  forest2.show();
   //Tree * g1=forest2.lastTree();
   //std::cout<<g1->show()<<std::endl;
   //std::cout<< std::boolalpha<< (g1==g2)<<std::endl;
@@ -416,20 +418,25 @@ int main()
 
   
   //Test of new cross
-
+/*
   Node nod3(str2);
   Node nod1(true,&nod3);
   Node nod2(false,&nod3);
 
   Tree tr1(&nod3);
 
+
+
   bool copy=true;
   int nb=0;
-/*
+
   std::cout<<tr1.cross(tr1.FirstNode(),nb, copy, &nod2)<< std::endl;
   Tree tr2(&nod2);
   std::cout<<tr1.cross(tr2.FirstNode(),nb)<< std::endl;
 */
+
+
+
 
 
 /* 
