@@ -21,14 +21,16 @@ class Tree{
     int NbrNode();
 
 //setter
-  
+    Tree * nextTree();
     void generation();
 
 //method
     bool cross(Node * node,int * x,int &nb_elem);
     void calcul_fitness(int * x, bool y);
     void mutation();
-
+    std::string show();
+    std::string parcour(Node * node);
+    void link(Tree tree);
 
 
   protected:

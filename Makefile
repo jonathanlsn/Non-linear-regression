@@ -12,7 +12,7 @@ node.o: node.cpp node.h
 tree.o: tree.cpp tree.h node.h 
 	g++ -o tree.o -c tree.cpp
 	
-forest.o: forest.cpp forest.h tree.h node.h 
+forest.o: forest.cpp forest.h tree.h node.h matrix.h
 	g++ -o forest.o -c forest.cpp
 
 matrix.o: matrix.cpp matrix.h 

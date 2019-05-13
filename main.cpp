@@ -10,7 +10,7 @@
 int main()
 {
   
-  int nulltab[2];
+  int nulltab[2]={0,0};
   //Creation on an environment of work
   //std::cout<<"Hello World"<<std::endl;
   
@@ -267,6 +267,8 @@ int main()
   
   
   
+  
+  
   std::cout<< std::endl;
   //Fitness
   std::cout<< "Test de calcul de fitness"<< std::endl;
@@ -322,37 +324,108 @@ int main()
   
   int tab[]={1,0,0,0,1,0,1,1,1};  // (!x1||!x2)||(x1&&x2)
   int tab2[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
-  int nligne=3;
-  int ncolonne=3;
-  Matrix matrix(tab2,nligne,ncolonne);
-  matrix.nlignes();
-  ;
+  int nligne_=3;
+  int ncolonne_=3;
+  Matrix matrix(tab2,nligne_,ncolonne_);
   matrix.show();
   
   std::cout<< std::endl;
   // Utilisation de la fiteness avec la matrice de données
-  Node node4 ("||");
-  Node node5 ("||", &node4);
-  Node node6 ("&&", &node4);
-  Node node7 ("x1", &node5);
-  Node node8 ("x2", &node5);
-  Node node9 ("x1", &node6);
-  Node node10 ("x2", &node6);
+  std::string str1_="&&";
+  std::string str2_="||";
+  std::string str3_="!";
+  std::string x1="x1";
+  std::string x2="x2";
+  
+  Node node4 (str2_);
+  Node node5 (str2_, &node4);
+  Node node6 (str1_, &node4);
+  Node node7 (x1, &node5);
+  Node node8 (x2, &node5);
+  Node node9 (x1, &node6);
+  Node node10 (x2, &node6);
   Tree tree2 (&node4);
   
+  Node node11 (str2_);
+  Node node12 (x1, &node11);
+  Node node13 (x2, &node11);
+  Tree tree3 (&node11);
   
-  int ** x_=matrix.x();
-  int * y_=matrix.y(); 
-  for (int i=0;i<matrix.nlignes();++i){
-    int x[matrix.ncolonnes()];
-    x[0]=x_[i][0];
-    x[1]=x_[i][1];
-    int y1=y_[i];
-    tree2.calcul_fitness(x,y1);
-    
-  }
-  std::cout<<"Fitness of tree : "<< tree2.Fitness() <<std::endl;
+  std::cout<<tree3.show()<<std::endl;
+  std::cout<<tree2.show()<<std::endl;
+  std::cout<<Tree10.show()<<std::endl;
+  
+  Forest forest2;
+  forest2.PushBack(tree3);
+  
+  //Tree * generation1=forest2.firstTree();
+  //std::cout<<generation1->show()<<std::endl;
+  
+  forest2.PushBack(tree2);
+  
+  //Tree * generation2=forest2.firstTree();
+  //std::cout<<generation2->show()<<std::endl;
+  
+  //forest2.PushBack(Tree10); 
+  
+  
+  
+  
+  
+  //Tree * g1=forest2.lastTree();
+  //std::cout<<g1->show()<<std::endl;
+  //std::cout<< std::boolalpha<< (g1==g2)<<std::endl;
+  
+  //forest2.show();
+  
+  
+  
+
+  
+  
+  // Début du vrai programme
 
 
+/* 
+int tab3[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
+int nligne=3;
+int ncolonne=3;
+Matrix matrix(tab2,nligne,ncolonne);
+matrix.show();
+int ** x_=matrix.x();
+int * y_=matrix.y(); 
+  
+Forest forest;
+//forest.init();   // Initialisation de la forêt
+int lambda=6;
+Tree * field[lambda];
+Tree * best;
+for (int g=0;g<10;++g){       // génération
+   Tree * parent=forest2.lastTree();
+   field[0]=parent;
+   best=parent;
+   for (int k=1;k<lambda;++k){   // potentiels enfants
+      //mutation
+     //field[k]=parent.mutation();
+     for (int i=0;i<matrix.nlignes();++i){
+       int * x[matrix.ncolonnes()];
+       x[0]=x_[i][0];
+       x[1]=x_[i][1];
+       int y=y_[i];
+       field[k] -> calcul_fitness(x,y);
+     }
+     if (best->Fitness()<field[k]->Fitness()){
+       best=field[k];
+     }
+   forest.PushBack(best);
+}
+
+forest.show();
+*/  
+  
+  
+  
+  
+  
   return 0;
 }

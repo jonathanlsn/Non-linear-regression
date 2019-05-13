@@ -13,9 +13,7 @@ Tree::Tree(Node * node){
   generation_ = -1;
 }
 
-//Tree::Tree(Tree tree){
-  
-//}
+
 
 //getter
 
@@ -33,6 +31,10 @@ int Tree::NbrNode(){
 }
 
 //setter
+
+Tree * Tree::nextTree(){
+  return(nextTree_);
+}
 
 void Tree::generation(){
   std::cout << generation_ <<std::endl;
@@ -358,8 +360,6 @@ void Tree::calcul_fitness(int * x,bool y){
   }
 }
 
-
-
 bool Tree::cross(Node * node,int * x, int &nb_node_son){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
   if (node ->values()=="&&"){
     nb_node_son=nb_node_son+1;
@@ -387,3 +387,32 @@ bool Tree::cross(Node * node,int * x, int &nb_node_son){ // WARNING &nb_node_son
     return (node -> bool_values());
   }
 }
+
+
+
+std::string Tree::show(){
+  return(parcour(FirstNode_));
+}
+
+std::string Tree::parcour(Node * node){
+  if (node -> values()=="||" or node -> values()=="&&"){
+    return("(" + parcour(node->NextNode1()) + node->values() + parcour(node->NextNode2()) + ")");
+  }
+  if (node -> values()=="!"){
+    return(node->values() + parcour(node->NextNode1()));
+  }
+  if (node -> type()=="bool"){
+    return(node->bool_values() ? "true" : "false");
+  }
+  else{
+    return(node->values());
+  }
+}
+
+
+
+void Tree::link(Tree tree){
+  nextTree_=&tree;
+}
+
+
