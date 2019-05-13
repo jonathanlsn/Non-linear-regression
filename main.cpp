@@ -341,18 +341,25 @@ int main()
   
   //Test of new cross
 
-  Node nod3(str2);
+  Node nod3(str1);
   Node nod1(true,&nod3);
-  Node nod2(false,&nod3);
+  Node nod2(true,&nod3);
+
+  Node nodnull(false);
 
   Tree tr1(&nod3);
 
   bool copy=true;
   int nb=0;
 
-  std::cout<<tr1.cross(tr1.FirstNode(),nb, copy, &nod2)<< std::endl;
-  Tree tr2(&nod2);
-  std::cout<<tr1.cross(tr2.FirstNode(),nb)<< std::endl;
+  std::cout<<tr1.cross(tr1.FirstNode(),nb, copy, &nodnull,&nodnull)<< std::endl;
+  std::cout<<nodnull.NextNode1()<< std::endl;
+  std::cout<<nodnull.NextNode2()<< std::endl;
+
+  Tree tr2(&nodnull);
+
+
+  std::cout<<tr2.cross(tr2.FirstNode(),nb)<< std::endl;
 
 
   return 0;
