@@ -1,7 +1,13 @@
 La création de l'arbre par copie
-La méthode Pushbach qui ne fonctionne pas
-Les mutations doivent conserver le parent , juste renvoyer un nouveau.
-C'est pas void!!!!!!!!!
 
 Les deletes
-e choix de l'enfant
+
+Faire le lien
+
+Modifier les mutations!
+
+Pourquoi ca va deux générations a la fois?
+
+
+
+

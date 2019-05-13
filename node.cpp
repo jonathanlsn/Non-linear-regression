@@ -19,6 +19,26 @@ Node::Node(Node* node,std::string type){
   }
 }
 
+Node::Node( Node * node){  // Copy constructor
+  if (node->type()=="bool"){
+    FatherNode_ = node -> FatherNode();
+    NextNode1_ = node ->NextNode1();
+    NextNode2_ = node ->NextNode2();
+    type_= "bool";
+    bool_values_ = node->bool_values();
+
+  }
+  else{
+    FatherNode_ = node -> FatherNode();
+    NextNode1_ = node ->NextNode1();
+    NextNode2_ = node ->NextNode2();
+    type_= "op";
+    values_ = node->values();
+  }
+} 
+
+
+
 Node::Node(std::string str){
   values_ = str;
   FatherNode_ = nullptr;

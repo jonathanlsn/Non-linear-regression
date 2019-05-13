@@ -452,7 +452,7 @@ int main()
 
 
   // Début du vrai programme
-  
+/*  
 int tab3[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
 int nligne=3;
 int ncolonne=3;
@@ -518,6 +518,20 @@ forest.show();
   std::cout<<"lala " <<tr1.nextTree()<<std::endl;
   std::cout<<&Tree1<<std::endl;
 
+
+  Tree nodetTree(&nodet);
+
+  Node nodetest(&nodet);
+
+  Tree nodetestTree(&nodetest);
+  Tree nodetTree1(&nodet);
+  std::cout<<nodetTree1.show()<<std::endl;
+
+  std::cout<<nodetTree1.show()<<std::endl;
+  std::cout<<nodetTree.show()<<std::endl;
+  std::cout<<nodetestTree.show()<<std::endl;
+
+*/
   
   return 0;
 }
