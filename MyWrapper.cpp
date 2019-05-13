@@ -13,8 +13,10 @@
 // Name for the cpp object "capsules"
 #define NAME_CAPSULE_A "forest"
 #define NAME_CAPSULE_B "tree"
-
 #define NAME_CAPSULE_C "node"
+
+#define NAME_CPASULE_Matrice "matrice"
+
 
 // Receives a Python capsule for object A, and extracts the pointer of the C++ object
 static Forest* APythonToC(PyObject* args){

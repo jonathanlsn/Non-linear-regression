@@ -3,6 +3,8 @@
 
 #include "tree.h"
 #include "matrix.h"
+#include "node.h"
+
 
 class Forest{
 
