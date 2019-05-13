@@ -2,6 +2,7 @@
 #define FOREST_
 
 #include "tree.h"
+#include "node.h"
 
 class Forest{
 
