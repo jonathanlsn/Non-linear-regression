@@ -36,7 +36,7 @@ void Forest::PushBack(Tree x){
 }
 */
 
-/*
+
 void Forest::PushBack(Tree tree){
   if (firstTree_!=nullptr){
     lastTree_->link(tree);
@@ -51,7 +51,7 @@ void Forest::PushBack(Tree tree){
   std::cout<< nb_elmts_ <<std::endl;
   std::cout<< firstTree_->show() <<std::endl;
 } 
-*/
+
 
 
 
