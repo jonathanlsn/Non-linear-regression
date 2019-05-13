@@ -9,6 +9,7 @@ class Node{
     Node(std::string str,Node* precedent);
     Node(bool boleen,Node* precedent);
     Node(bool boleen);
+    Node(Node* node,std::string type);
 
 //getter
     std::string values();
@@ -20,6 +21,8 @@ class Node{
     
 
 //setter
+
+    void setNextNodeNull();
 
     void setvalues(std::string str);
 
@@ -33,10 +36,11 @@ class Node{
 
     void settype(std::string str);
 
-  protected:
+  protected:  
 
     std::string values_;
     bool bool_values_;
+    int param_values_;
     Node * FatherNode_;
     Node * NextNode1_;
     Node * NextNode2_;

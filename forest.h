@@ -26,7 +26,7 @@ class Forest{
     int nb_elmts(); // return the value of the attribut nb_elmts_ of the list.
   
   protected:
-    Tree* firstTree_;   
+    Tree* firstTree_; 
     int nb_elmts_;
 };
 #endif // FOREST_

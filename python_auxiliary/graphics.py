@@ -37,11 +37,17 @@ def plot_adjacency_list(edges_list,file_name):
     g.render()
     
 
-node1 = ("1", 'OR', 'deepskyblue4')
-node2 = ("2", 'x1', 'firebrick1')
-node3 = ("3", 'x2', 'firebrick1')
-node4=("4",'-','deepskyblue4')
-node5=("5",'x3','firebrick1')
-edges = [(node1, node2), (node1, node3),(node1,node4),(node4,node5)]
-plot_adjacency_list(edges,"test")
+node1 = ("1", '&&', 'deepskyblue4')
+node2 = ("2", '!', 'deepskyblue4')
+node3 = ("3", 'false', 'firebrick1')
+node4 = ("4",'||','deepskyblue4')
+node5 = ("5",'&&','deepskyblue4')
+node6 = ("6",'!','deepskyblue4')
+node7 = ("7",'false','firebrick1')
+node8 = ("8",'true','firebrick1')
+node9 = ("9",'!','deepskyblue4')
+node10 = ("10",'true','firebrick1')
+
+edges = [(node1, node2), (node1, node4),(node2,node3),(node4,node9),(node4,node5),(node5,node8),(node5,node6),(node6,node7),(node9,node10)]
+plot_adjacency_list(edges,"Tree17")
 

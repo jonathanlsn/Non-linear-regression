@@ -146,7 +146,7 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
   	return Py_BuildValue("Oi",capsule,a);
 }
 
-
+*/
 // Module functions {<python function name>, <function in wrapper>, <parameters flag>, <doctring>}
 // https://docs.python.org/3/c-api/structures.html
 static PyMethodDef module_funcs[] = {
@@ -175,4 +175,4 @@ static struct PyModuleDef moduledef = {
 PyMODINIT_FUNC PyInit_my_wrapper_c(void){
     PyObject* module = PyModule_Create(&moduledef);
 		return module;
-}*/
+}

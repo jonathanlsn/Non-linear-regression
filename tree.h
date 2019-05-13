@@ -1,5 +1,3 @@
-
-
 #ifndef TREE
 #define TREE
 
@@ -27,8 +25,9 @@ class Tree{
     void generation();
 
 //method
-    int cross(Node * node);
-    void calcul_fitness();
+    bool cross(Node * node,int &nb_elem, bool copy, Node initialcopy);
+    bool cross(Node * node, int &nb_node_son );
+    void calcul_fitness(bool y);
     void mutation();
 
 
