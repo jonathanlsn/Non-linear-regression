@@ -37,19 +37,23 @@ void Forest::PushBack(Tree x){
 */
 
 
-void Forest::PushBack(Tree tree){
+void Forest::PushBack(Tree * tree){
+  std::cout<< tree <<std::endl;
+  std::cout<< "Hey" <<std::endl;
   if (firstTree_!=nullptr){
     lastTree_->link(tree);
     std::cout<< "Nope" <<std::endl;
   }
+  std::cout<< "Hello" <<std::endl;
   if (firstTree_==nullptr){
-    firstTree_=&tree;
+    firstTree_=tree;
     std::cout<< "Coucou" <<std::endl;
   }
-  lastTree_=&tree;
+  lastTree_=tree;
   nb_elmts_+=1;
   std::cout<< nb_elmts_ <<std::endl;
-  std::cout<< firstTree_->show() <<std::endl;
+  std::cout<< firstTree_ <<std::endl;
+  std::cout<< lastTree_ <<std::endl;
 } 
 
 

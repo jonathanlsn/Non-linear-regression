@@ -537,8 +537,8 @@ std::string Tree::parcour(Node * node){
 
 
 
-void Tree::link(Tree tree){
-  nextTree_=&tree;
+void Tree::link(Tree * tree){
+  nextTree_=tree;
 }
 
 

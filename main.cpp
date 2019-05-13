@@ -364,22 +364,29 @@ int main()
   Node node10 (x2, &node6);
   Tree tree2 (&node4);
   
+  
   Node node11 (str2_);
   Node node12 (x1, &node11);
   Node node13 (x2, &node11);
   Tree tree3 (&node11);
   
-  std::cout<<tree3.show()<<std::endl;
-  std::cout<<tree2.show()<<std::endl;
-  std::cout<<Tree10.show()<<std::endl;
+  
+  std::cout<< "adresse tree2 : " <<&tree2<< " : "<<tree2.show()<<std::endl;
+  std::cout<<"adresse tree3 : " <<&tree3<< " : "<<tree3.show()<<std::endl;
+  std::cout<<"adresse Tree10 : " <<&Tree10<< " : "<<Tree10.show()<<std::endl;
+  
+  std::cout<<std::endl;
   
   Forest forest2;
-  forest2.PushBack(tree3);
+  
+  std::cout<< "adresse tree2 : " <<&tree2<< " : "<<tree2.show()<<std::endl;
+  forest2.PushBack(&tree2);
+  std::cout<< "adresse tree2 : " <<&tree2<< " : "<<tree2.show()<<std::endl;
   
   //Tree * generation1=forest2.firstTree();
   //std::cout<<generation1->show()<<std::endl;
   
-  forest2.PushBack(tree2);
+  forest2.PushBack(&tree3);
   
   //Tree * generation2=forest2.firstTree();
   //std::cout<<generation2->show()<<std::endl;
@@ -387,7 +394,9 @@ int main()
   //forest2.PushBack(Tree10); 
   
   
-  
+  tree2.link(&tree3);
+  Tree * Next=tree2.nextTree();
+  std::cout<<Next->show()<<std::endl;
   
   
   //Tree * g1=forest2.lastTree();

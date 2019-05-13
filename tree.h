@@ -40,7 +40,7 @@ class Tree{
 
     std::string show();
     std::string parcour(Node * node);
-    void link(Tree tree);
+    void link(Tree * tree);
 
 
   protected:
