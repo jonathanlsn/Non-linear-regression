@@ -29,12 +29,10 @@ void Matrix::show(){
 }
 
 int Matrix::nlignes(){
-  std::cout<< nLignes_<<std::endl;
   return(nLignes_);
 }
 
 int Matrix::ncolonnes(){
-  std::cout<< nColonnes_<<std::endl;
   return(nColonnes_);
 }
 
@@ -53,7 +51,6 @@ int** Matrix::x(){
       x[h][j] = matrix_[h][j];
     }
   }
-  
   return(x);
 }
 
