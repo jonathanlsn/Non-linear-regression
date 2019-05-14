@@ -348,7 +348,7 @@ int main()
   matrix.show();
   
   std::cout<< std::endl;
-  // Utilisation de la fiteness avec la matrice de données
+  // Utilisation de la fitness avec la matrice de données
   std::string str1_="&&";
   std::string str2_="||";
   std::string str3_="!";
@@ -415,31 +415,34 @@ int main()
   
 
   
-  //Test of new cross
+  //Test of Tree by copy with cross
+  std::cout<<" "<< std::endl;
+  std::cout<<"Test of Tree by copy with cross"<< std::endl;
 
+  //Creation of a tree: true and true.
   Node nod3(str1);
   Node nod1(true,&nod3);
   Node nod2(true,&nod3);
-
-  Node nodnull(false);
-  Node nodpassant(true);
-
   Tree tr1(&nod3);
+
+  //Initialisation of parameters
+  Node nodrecup(false);
+  Node nodpassant(true);
 
   bool copy=true;
   int nb=0;
 
+  std::cout<<tr1.cross(tr1.FirstNode(),nb, copy, &nodrecup,&nodpassant)<< std::endl;
+  std::cout<<"les noeuds suivants"<< std::endl;
+  std::cout<<nodrecup.NextNode1()<< std::endl;
+  std::cout<<nodrecup.NextNode2()<< std::endl;
 
-  std::cout<<tr1.cross(tr1.FirstNode(),nb, copy, &nodnull,&nodpassant)<< std::endl;
-  std::cout<<nodnull.NextNode1()<< std::endl;
-  std::cout<<nodnull.NextNode2()<< std::endl;
+  //Creation new tree with the new node
+  Tree tr2(&nodrecup);
+  std::cout<<"Trees:"<< std::endl;
+  std::cout<<"Tree :"<<tr1.show()<<std::endl;
+  std::cout<<"Tree copy :" <<tr2.show()<<std::endl;
 
-  Tree tr2(&nodnull);
-  std::cout<<tr2.show()<<std::endl;
-  std::cout<<tr1.show()<<std::endl;
-
-
-  std::cout<<tr2.cross(tr2.FirstNode(),nb)<< std::endl;
 
 /*
   std::cout<<tr1.cross(tr1.FirstNode(),nb, copy, &nod2)<< std::endl;
@@ -520,6 +523,7 @@ forest.show();
 
 */
 
+  std::cout<<" " <<std::endl;
 
   std::cout<<"Test of node by copy" <<std::endl;
 
