@@ -66,36 +66,30 @@ void Tree::generation(){
     Node* a= FirstNode_;
     std::cout <<"Lecture des noeuds avant la mutation"<<std::endl;
 
-    //Affichage du noeud
-    if (a ->type()== "bool"){
-      std::cout <<a-> bool_values()<<std::endl;
-    } 
-    if(a->type()=="op"){
-      std::cout <<a-> values()<< std::endl;
-    }
+
 
     //Descsente dans l'arbre
     for (int i=1; i<NumeroNode; ++i){ 
       if (a ->NextNode1()!=nullptr){
         a=a->NextNode1();
       if (a ->type()== "bool"){
-        std::cout <<a-> bool_values()<<std::endl;
       } 
       if(a->type()=="op"){
-        std::cout <<a-> values()<< std::endl;
+
       }
       }
       else if (a ->NextNode1()==nullptr && a->NextNode2()!=nullptr){
         a=a->NextNode2();
       if (a ->type()== "bool"){
-        std::cout <<a-> bool_values()<<std::endl;
+
       } 
       if(a->type()=="op"){
-        std::cout <<a-> values()<< std::endl;
-      }
-      }
-    }
 
+      }
+      }
+
+    }
+     std::cout<<this->show()<<std::endl;
 
     //Test pour savoir quel noeud on modifie
     int op =0;
@@ -326,42 +320,11 @@ void Tree::generation(){
 
 
 
-    std::cout <<"Final"<<std::endl;
+    std::cout <<"Final tree after mutation:"<<std::endl;
 
     //Affichage de l'arbre au final 
-    Node* b= FirstNode_;
-    if (b ->type()== "bool"){
-      std::cout <<b-> bool_values()<<std::endl;
-    } 
-    if(b->type()=="op"){
-      std::cout <<b-> values()<< std::endl;
-    }
 
-    for (int i=1; i<10; ++i){ 
-      if (b ->NextNode1()!=nullptr){
-        b=b->NextNode1();
-      //Affichage des noeuds
-      if (b ->type()== "bool"){
-        std::cout <<b-> bool_values()<<std::endl;
-      } 
-      if(b->type()=="op"){
-        std::cout <<b-> values()<< std::endl;
-      }
-      }
-      else if (b ->NextNode1()==nullptr && b->NextNode2()!=nullptr){
-        b=b->NextNode2();
-      //Affichage des noeuds
-      if (b ->type()== "bool"){
-        std::cout <<b-> bool_values()<<std::endl;
-      } 
-      if(b->type()=="op"){
-        std::cout <<b-> values()<< std::endl;
-      }
-      }
-
-    
-
-    }
+      std::cout<<this->show()<<std::endl;
 
 }
 

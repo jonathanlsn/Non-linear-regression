@@ -263,6 +263,7 @@ int main()
     std::cout<< "   "<< std::endl;
     std::cout<< "mutation"<< i <<std::endl;
     Tree18.mutation();
+    
   }*/
 
 
@@ -405,15 +406,7 @@ int main()
   
   //forest2.show();
   
-  
-  
-
-  
-  
-
-
-  
-
+ 
   
   //Test of Tree by copy with cross
   std::cout<<" "<< std::endl;
@@ -539,7 +532,13 @@ forest.show();
   std::cout<< nocopy.type()<<std::endl;
   std::cout<< no1.type()<<std::endl;
 
+  for (int i=0; i<Nbrmutation; ++i){
+    std::cout<< "   "<< std::endl;
+    std::cout<< "mutation"<< i <<std::endl;
+    Tree18.mutation();
 
+    
+  }
 
   
   return 0;
