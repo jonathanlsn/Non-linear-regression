@@ -19,7 +19,7 @@ Tree::Tree(Node * node){
 
 Tree::Tree(Tree* tree){ 
 //Creation of a Tree by copy using Node copy
-  FirstNode_ = new Node * FirstNode();
+  FirstNode_ = new Node  (FirstNode());
   Fitness_ = 0;
   NbrNode_ = 1;
   nextTree_ = nullptr; 

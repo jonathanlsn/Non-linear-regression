@@ -518,20 +518,25 @@ forest.show();
   std::cout<<"lala " <<tr1.nextTree()<<std::endl;
   std::cout<<&Tree1<<std::endl;
 
+*/
 
-  Tree nodetTree(&nodet);
 
-  Node nodetest(&nodet);
+  std::cout<<"Test of node by copy" <<std::endl;
 
-  Tree nodetestTree(&nodetest);
-  Tree nodetTree1(&nodet);
-  std::cout<<nodetTree1.show()<<std::endl;
+  Node no1(false);
+  Tree Treeno1(&no1);
+  Node nocopy(&no1);
 
-  std::cout<<nodetTree1.show()<<std::endl;
-  std::cout<<nodetTree.show()<<std::endl;
+  Tree nodetestTree(&nocopy);
+
+  std::cout<<Treeno1.show()<<std::endl;
   std::cout<<nodetestTree.show()<<std::endl;
 
-*/
+  std::cout<< nocopy.type()<<std::endl;
+  std::cout<< no1.type()<<std::endl;
+
+
+
   
   return 0;
 }
