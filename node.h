@@ -11,7 +11,8 @@ class Node{
     Node(bool boleen);
     //Node(std::string param,bool boleen);
     Node(Node* node,std::string type);
-
+    Node( Node * node);
+    
 //getter
     std::string values();
     bool bool_values();
@@ -19,7 +20,7 @@ class Node{
     Node * NextNode1();
     Node * NextNode2();
     std::string type();
-    
+
 
 //setter
 

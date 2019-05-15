@@ -13,7 +13,7 @@ class Tree{
 
 //constructor
     Tree(Node* node);
-    //Tree(const Tree&);
+    Tree(Tree* Tree);
 
 //getter
     Node* FirstNode();
@@ -22,16 +22,23 @@ class Tree{
 
 //setter
     Tree * nextTree();
-    void generation();
+    void generation(int x);
 
 //method
 
+    bool cross(Node * node,int &nb_elem, bool copy, Node initialcopy,  Node * passant);
+    bool cross(Node * node, int &nb_node_son );
+    void calcul_fitness(bool y);
+    void mutation();
+
+
     bool cross(Node * node,int * x,int &nb_elem);
     void calcul_fitness(int * x, bool y);
-    //bool cross(Node * node,int &nb_elem, bool copy, Node initialcopy);
-    //bool cross(Node * node, int &nb_node_son );
+    
+    bool cross(Node * node,int &nb_elem, bool copy, Node initialcopy);
 
-    void mutation();
+
+
     std::string show();
     std::string parcour(Node * node);
     void link(Tree * tree);

@@ -26,6 +26,7 @@ class Forest{
     void show();
     Tree * lastTree();
     Tree * firstTree();
+    
   
   protected:
     Tree* firstTree_;

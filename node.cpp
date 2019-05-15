@@ -19,12 +19,60 @@ Node::Node(Node* node,std::string type){
   }
 }
 
+
+Node::Node( Node * node){  // Copy constructor
+  FatherNode_ = nullptr;
+  NextNode1_ = nullptr;
+  NextNode2_ = nullptr;
+  type_=node->type();
+  values_=node->values();
+  if (type_=="bool"){
+    bool_values_=node->bool_values();
+  }
+}
+
+
+
+/*
+Node::Node( Node * node){  // Copy constructor
+  if (node->type()=="bool"){
+    FatherNode_ = node -> FatherNode();
+    NextNode1_ = node ->NextNode1();
+    NextNode2_ = node ->NextNode2();
+    type_= "bool";
+    bool_values_ = node->bool_values();
+
+  }
+  else{
+    FatherNode_ = node -> FatherNode();
+    NextNode1_ = node ->NextNode1();
+    NextNode2_ = node ->NextNode2();
+    type_= "op";
+    values_ = node->values();
+  }
+} 
+*/
+
+
 Node::Node(std::string str){
   values_ = str;
   FatherNode_ = nullptr;
   NextNode1_ = nullptr;
   NextNode2_ = nullptr;
-  type_= "op";
+  if (str=="true"){
+    type_= "bool";
+    bool_values_ =true;
+  }
+  if (str=="false"){
+    type_= "bool";
+    bool_values_ =false;
+  }
+  if (str=="x1" or str=="x2"){
+    type_="param";
+  }
+  else{
+    type_= "op";
+  }
 }
 
 Node::Node(bool boleen){
@@ -48,7 +96,21 @@ Node::Node(std::string str, Node* precedent){
   FatherNode_ = precedent; 
   NextNode1_ = nullptr;
   NextNode2_ = nullptr;
-  type_= "op";
+  
+  if (str=="true"){
+    type_= "bool";
+    bool_values_ =true;
+  }
+  if (str=="false"){
+    type_= "bool";
+    bool_values_ =false;
+  }
+  if (str=="x1" or str=="x2"){
+    type_="param";
+  }
+  else{
+    type_= "op";
+  }
 
   if (FatherNode_ ->NextNode1_ == nullptr){
     FatherNode_ ->NextNode1_ = this;

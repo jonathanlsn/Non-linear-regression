@@ -17,17 +17,54 @@ Tree::Tree(Node * node){
 
 
 
-Tree * Tree::copy(Tree tree){ 
-//Creation of a Tree by copy using Node copy
-  
-  
+
+Tree::Tree(Tree* tree){
+  Node * node =new Node (tree->FirstNode_);
+  FirstNode_ = node;
+  Fitness_ = 0;
+  NbrNode_ = tree->NbrNode_;
+  nextTree_ = nullptr; 
+  generation_ = tree->generation_;
+  //copy_nodes(FirstNode_);
 }
 
+/*
+
+void Tree::copy_nodes(Node * node,Node * tmp){
+  if (node->type()=="bool" or node->type()=="param"){
+    new Node * node_param(node);
+    node_param(node->values(),tmp);   
+  }
+  if (node->type()=="op"){
+    new Node * op_node(node->values ,tmp);
+    
+    tmp=node->NextNode1_;              // link les nextnode1 et 2 à tmp
+    new Node * nextnode1(nextnode1_init);    // nextnode1(node->values ,tmp)
+    copy_nodes(nextnode1_init,tmp);    // link les nodes en dessous
+    
+    tmp=node->NextNode2_;
+    new Node * nextnode2(nextnode2_init,tmp);
+    copy_nodes(nextnode2_init);
+  }
+}
+*/
+  
+  
+  
+/*
+Tree::Tree(Tree* tree){ 
+//Creation of a Tree by copy using Node copy
+  FirstNode_ = new Node * FirstNode();
+  Fitness_ = 0;
+  NbrNode_ = 1;
+  nextTree_ = nullptr; 
+  generation_ = -1;
+
+} */ 
 
 //getter
 
 Node * Tree:: FirstNode(){
-
   return FirstNode_;
 }
 
@@ -45,8 +82,8 @@ Tree * Tree::nextTree(){
   return(nextTree_);
 }
 
-void Tree::generation(){
-  std::cout << generation_ <<std::endl;
+void Tree::generation(int x){
+  generation_=x;
 }
 
 
@@ -374,7 +411,6 @@ bool Tree::cross(Node * node,int * x, int &nb_node_son){ // WARNING &nb_node_son
   if (node ->values()=="&&"){
     nb_node_son=nb_node_son+1;
     return (cross(node -> NextNode1(),x,nb_node_son) && cross(node -> NextNode2(),x,nb_node_son));
-
   }
   if (node -> values()=="||"){
     nb_node_son=nb_node_son+1;
@@ -395,61 +431,115 @@ bool Tree::cross(Node * node,int * x, int &nb_node_son){ // WARNING &nb_node_son
 }
 
 
-/*
-bool Tree::cross(Node * node, int &nb_node_son, bool copy, Node initialcopy ){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
+bool Tree::cross(Node * node, int &nb_node_son, bool copy, Node initialcopy, Node * passant  ){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
 //  +la posiiblite de copier
 
   if (copy==true){
     if (node ->values()=="&&"){
       Node* Nodecopy = new Node(node);
       if (&nb_node_son==0){
-        initialcopy= Nodecopy;
+        initialcopy= &Nodecopy;
+        passant=Nodecopy;
+        nb_node_son=nb_node_son+1;
       }
-      nb_node_son=nb_node_son+1;
-      return (cross(node -> NextNode1(),nb_node_son,copy, initialcopy) && cross(node -> NextNode2(),nb_node_son,copy,initialcopy));
+      else{
+        nb_node_son=nb_node_son+1;
+
+        if (Nodecopy ->NextNode1()==nullptr){
+          passant -> setNextNode (Nodecopy);
+        }
+        else{
+          passant -> setNextNode2(Nodecopy);
+        }
+        Nodecopy ->setFatherNode(passant);
+        passant=Nodecopy;
+      }
+      return (cross(node -> NextNode1(),nb_node_son,copy, initialcopy, passant ) && cross(node -> NextNode2(),nb_node_son,copy,initialcopy, passant));
 
     }
     if (node -> values()=="||"){
       Node* Nodecopy = new Node(node);
       if (&nb_node_son==0){
-        initialcopy= Nodecopy;
+        initialcopy= &Nodecopy;
+        passant=Nodecopy;
+        nb_node_son=nb_node_son+1;
       }
-      nb_node_son=nb_node_son+1;
-      return (cross(node -> NextNode1(),nb_node_son,copy,initialcopy) || cross(node -> NextNode2(),nb_node_son,copy,initialcopy));
+      else{
+        nb_node_son=nb_node_son+1;
+
+        if (Nodecopy ->NextNode1()==nullptr){
+          passant -> setNextNode (Nodecopy);
+        }
+        else{
+          passant -> setNextNode2(Nodecopy);
+        }
+        Nodecopy ->setFatherNode(passant);
+        passant=Nodecopy;
+      }
+      return (cross(node -> NextNode1(),nb_node_son,copy,initialcopy, passant) || cross(node -> NextNode2(),nb_node_son,copy,initialcopy,passant));
     }
     if (node -> values()=="!"){
       Node* Nodecopy = new Node(node);
       if (&nb_node_son==0){
-        initialcopy= Nodecopy;
+        initialcopy= &Nodecopy;
+        passant=Nodecopy;
+        nb_node_son=nb_node_son+1;
       }
-      nb_node_son=nb_node_son+1;
-      return (!cross(node -> NextNode1(),nb_node_son,copy,initialcopy));
+      else{
+        nb_node_son=nb_node_son+1;
+
+        if (Nodecopy ->NextNode1()==nullptr){
+          passant -> setNextNode (Nodecopy);
+        }
+        else{
+          passant -> setNextNode2(Nodecopy);
+        }
+        Nodecopy ->setFatherNode(passant);
+        passant=Nodecopy;
+      }
+      return (!cross(node -> NextNode1(),nb_node_son,copy,initialcopy,passant));
     }
   
     else{
       Node* Nodecopy = new Node(node);
+      std::cout<<&Nodecopy<< std::endl;
       if (&nb_node_son==0){
         initialcopy= Nodecopy;
+        passant=Nodecopy;
+        nb_node_son=nb_node_son+1;
       }
+      else{
       nb_node_son=nb_node_son+1;
+
+        if (Nodecopy ->NextNode1()==nullptr){
+          passant -> setNextNode (Nodecopy);
+        }
+        else{
+          passant -> setNextNode2(Nodecopy);
+        }
+        Nodecopy ->setFatherNode(passant);
+        passant=Nodecopy;
+        std::cout<<Nodecopy ->FatherNode()<< std::endl;
+      }
+    }
       return (node -> bool_values());
     }
-  }
+  
 
 
   else{
     if (node ->values()=="&&"){
       nb_node_son=nb_node_son+1;
-      return (cross(node -> NextNode1(),nb_node_son,copy,initialcopy) && cross(node -> NextNode2(),nb_node_son,copy,initialcopy));
+      return (cross(node -> NextNode1(),nb_node_son,copy,initialcopy,passant) && cross(node -> NextNode2(),nb_node_son,copy,initialcopy,passant));
 
     }
     if (node -> values()=="||"){
       nb_node_son=nb_node_son+1;
-      return (cross(node -> NextNode1(),nb_node_son,copy,initialcopy) || cross(node -> NextNode2(),nb_node_son,copy,initialcopy));
+      return (cross(node -> NextNode1(),nb_node_son,copy,initialcopy,passant) || cross(node -> NextNode2(),nb_node_son,copy,initialcopy,passant));
     }
     if (node -> values()=="!"){
       nb_node_son=nb_node_son+1;
-      return (!cross(node -> NextNode1(),nb_node_son,copy,initialcopy));
+      return (!cross(node -> NextNode1(),nb_node_son,copy,initialcopy,passant));
     }
   
     else{
@@ -458,7 +548,7 @@ bool Tree::cross(Node * node, int &nb_node_son, bool copy, Node initialcopy ){ /
     }
   }
 }
-*/
+
 
 
 
@@ -489,7 +579,7 @@ void Tree::link(Tree * tree){
 }
 
 
-/*
+
 bool Tree::cross(Node * node, int &nb_node_son ){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
 //  +la posiiblite de copier
 
@@ -513,5 +603,5 @@ bool Tree::cross(Node * node, int &nb_node_son ){ // WARNING &nb_node_son permet
       return (node -> bool_values());
     }
   }
-*/
+
 

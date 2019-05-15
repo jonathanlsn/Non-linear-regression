@@ -349,15 +349,17 @@ int main()
   
   std::cout<< std::endl;
   // Utilisation de la fiteness avec la matrice de données
-  std::string str1_="&&";
-  std::string str2_="||";
-  std::string str3_="!";
+  std::string et="&&";
+  std::string ou="||";
+  std::string non="!";
+  std::string True="true";
+  std::string False="false";
   std::string x1="x1";
   std::string x2="x2";
   
-  Node node4 (str2_);
-  Node node5 (str2_, &node4);
-  Node node6 (str1_, &node4);
+  Node node4 (ou);
+  Node node5 (ou, &node4);
+  Node node6 (et, &node4);
   Node node7 (x1, &node5);
   Node node8 (x2, &node5);
   Node node9 (x1, &node6);
@@ -365,7 +367,7 @@ int main()
   Tree tree2 (&node4);
   
   
-  Node node11 (str2_);
+  Node node11 (ou);
   Node node12 (x1, &node11);
   Node node13 (x2, &node11);
   Tree tree3 (&node11);
@@ -420,8 +422,14 @@ int main()
   //Test of new cross
 /*
   Node nod3(str2);
+
+  Node nod3(str1);
+>>>>>>> cf50ebf70c15082b9f74989a5a7c4d17fc06a312
   Node nod1(true,&nod3);
-  Node nod2(false,&nod3);
+  Node nod2(true,&nod3);
+
+  Node nodnull(false);
+  Node nodpassant(true);
 
   Tree tr1(&nod3);
 
@@ -429,6 +437,21 @@ int main()
 
   bool copy=true;
   int nb=0;
+
+
+
+  std::cout<<tr1.cross(tr1.FirstNode(),nb, copy, &nodnull,&nodpassant)<< std::endl;
+  std::cout<<nodnull.NextNode1()<< std::endl;
+  std::cout<<nodnull.NextNode2()<< std::endl;
+
+  Tree tr2(&nodnull);
+  std::cout<<tr2.show()<<std::endl;
+  std::cout<<tr1.show()<<std::endl;
+
+
+  std::cout<<tr2.cross(tr2.FirstNode(),nb)<< std::endl;
+
+/*
 
   std::cout<<tr1.cross(tr1.FirstNode(),nb, copy, &nod2)<< std::endl;
   Tree tr2(&nod2);
@@ -439,49 +462,118 @@ int main()
 
 
 
-/* 
+std::cout<<std::endl;
+std::cout<<std::endl;
 
   // Début du vrai programme
+  
+std::cout<< "Programme principal :" <<std::endl;
+std::cout<<std::endl;
   
 int tab3[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
 int nligne=3;
 int ncolonne=3;
-Matrix matrix(tab2,nligne,ncolonne);
+Matrix matrixdonne(tab2,nligne,ncolonne);
+
+std::cout<< "matrice :" <<std::endl;
 matrix.show();
-int ** x_=matrix.x();
-int * y_=matrix.y(); 
-  
+std::cout<<std::endl;
+
+int ** xt_=matrix.x();
+int * yt_=matrix.y(); 
+
 Forest forest;
+Node nodet(true);
+Tree Treet(&nodet);//Creation of firest Tree with variable
+forest.PushBack(&Treet);//Initialisation of forest
+
 //forest.init();   // Initialisation de la forêt
-int lambda=6;
-Tree * field[lambda];
-Tree * best;
-for (int g=0;g<10;++g){       // génération
-   Tree * parent=forest2.lastTree();
-   field[0]=parent;
-   best=parent;
-   for (int k=1;k<lambda;++k){   // potentiels enfants
-      //mutation
-     //field[k]=parent.mutation();
-     for (int i=0;i<matrix.nlignes();++i){
-       int * x[matrix.ncolonnes()];
-       x[0]=x_[i][0];
-       x[1]=x_[i][1];
-       int y=y_[i];
-       field[k] -> calcul_fitness(x,y);
-     }
-     if (best->Fitness()<field[k]->Fitness()){
-       best=field[k];
-     }
-   forest.PushBack(best);
+int lambda=5; //Nbe children tests
+Tree * fiel[lambda+1]; //Stock children and one parent
+Tree * best = &Treet; // To store the best individual
+
+for (int g=0;g<10;++g){       // génération (after while+condition)
+  Tree * parent=forest.lastTree(); 
+  fiel[0]=parent;
+  best=parent;
+
+  for (int k=1;k<lambda+1;++k){   // potentiels enfants
+    //mutation
+
+    //Tree cop_parent(parent);
+    fiel[k]=parent;//cop
+    //std::cout<<parent->show()<<std::endl;
+    //std::cout<<fiel[k]->show()<<std::endl;
+
+     //cop_parent.mutation();
+
+    for (int i=0;i<nligne;++i){//Calcul of fitness
+      int xt[ncolonne];
+      xt[0]=xt_[i][0];
+      xt[1]=xt_[i][1];
+      int yt=yt_[i];
+      //std::cout<<fiel[k]->show()<<std::endl;
+      fiel[k] -> calcul_fitness(xt,yt);
+    }
+    if (best->Fitness()<fiel[k]->Fitness()){
+      best=fiel[k];
+    }
+  }
+  forest.PushBack(best);
 }
 
 forest.show();
-*/  
+
+/*
+  std::cout<<" " <<std::endl;
+  std::cout<<"lala " <<tr1.nextTree()<<std::endl;
+  tr1.link(&Tree1);
+  std::cout<<"lala " <<tr1.nextTree()<<std::endl;
+  std::cout<<&Tree1<<std::endl;
+*/
+
+  Tree nodetTree(&nodet);
+
+  Node nodetest(&nodet);
+
+  Tree nodetestTree(&nodetest);
+  Tree nodetTree1(&nodet);
+  std::cout<<nodetTree1.show()<<std::endl;
+
+  std::cout<<nodetTree1.show()<<std::endl;
+  std::cout<<nodetTree.show()<<std::endl;
+  std::cout<<nodetestTree.show()<<std::endl;
   
+  std::cout<<std::endl;
   
+  Node n1(et);
+  Node n2(x1,&n1);
+  Node n3(x2,&n1);
+  Tree arbre(&n1);
+  std::cout<< arbre.show() <<std::endl;
   
+  int xtest[ncolonne];
+  xtest[0]=xt_[0][0];
+  xtest[1]=xt_[0][1];
+  bool ytest=yt_[0];
+  arbre.calcul_fitness(xtest,ytest);
+  std::cout<< arbre.Fitness() <<std::endl;
   
+  std::cout<<std::endl;
+  
+  Node new_n1(&n1);
+  Node n4(x1,&new_n1);
+  Node n5(x2,&new_n1);
+  Tree arbre2(&new_n1);
+  std::cout<< arbre2.show() <<std::endl;
+  
+  std::cout<<std::endl;
+  
+  std::cout<< "test copy arbre :" <<std::endl;
+  std::cout<<std::endl;
+  
+ // Tree arbre(&tree2);
+ //  std::cout<< arbre.show() <<std::endl;
   
   return 0;
 }
