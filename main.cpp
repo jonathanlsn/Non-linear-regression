@@ -263,6 +263,7 @@ int main()
     std::cout<< "   "<< std::endl;
     std::cout<< "mutation"<< i <<std::endl;
     Tree18.mutation();
+    
   }*/
 
 
@@ -348,12 +349,18 @@ int main()
   matrix.show();
   
   std::cout<< std::endl;
+
   // Utilisation de la fiteness avec la matrice de données
   std::string et="&&";
   std::string ou="||";
   std::string non="!";
   std::string True="true";
   std::string False="false";
+
+  // Utilisation de la fitness avec la matrice de données
+  std::string str1_="&&";
+  std::string str2_="||";
+  std::string str3_="!";
   std::string x1="x1";
   std::string x2="x2";
   
@@ -409,7 +416,9 @@ int main()
   
   //forest2.show();
   
+ 
   
+
   
 
   
@@ -423,13 +432,22 @@ int main()
 /*
   Node nod3(str2);
 
+  //Test of Tree by copy with cross
+  std::cout<<" "<< std::endl;
+  std::cout<<"Test of Tree by copy with cross"<< std::endl;
+>>>>>>> refs/remotes/origin/master
+
+  //Creation of a tree: true and true.
   Node nod3(str1);
 >>>>>>> cf50ebf70c15082b9f74989a5a7c4d17fc06a312
   Node nod1(true,&nod3);
   Node nod2(true,&nod3);
+  Tree tr1(&nod3);
 
-  Node nodnull(false);
+  //Initialisation of parameters
+  Node nodrecup(false);
   Node nodpassant(true);
+
 
   Tree tr1(&nod3);
 
@@ -437,6 +455,11 @@ int main()
 
   bool copy=true;
   int nb=0;
+
+  std::cout<<tr1.cross(tr1.FirstNode(),nb, copy, &nodrecup,&nodpassant)<< std::endl;
+  std::cout<<"les noeuds suivants"<< std::endl;
+  std::cout<<nodrecup.NextNode1()<< std::endl;
+  std::cout<<nodrecup.NextNode2()<< std::endl;
 
 
 
@@ -448,8 +471,13 @@ int main()
   std::cout<<tr2.show()<<std::endl;
   std::cout<<tr1.show()<<std::endl;
 
+  //Creation new tree with the new node
+  Tree tr2(&nodrecup);
+  std::cout<<"Trees:"<< std::endl;
+  std::cout<<"Tree :"<<tr1.show()<<std::endl;
+  std::cout<<"Tree copy :" <<tr2.show()<<std::endl;
 
-  std::cout<<tr2.cross(tr2.FirstNode(),nb)<< std::endl;
+
 
 /*
 
@@ -537,19 +565,9 @@ std::cout<<std::endl;
   tr1.link(&Tree1);
   std::cout<<"lala " <<tr1.nextTree()<<std::endl;
   std::cout<<&Tree1<<std::endl;
+
 */
 
-  Tree nodetTree(&nodet);
-
-  Node nodetest(&nodet);
-
-  Tree nodetestTree(&nodetest);
-  Tree nodetTree1(&nodet);
-  std::cout<<nodetTree1.show()<<std::endl;
-
-  std::cout<<nodetTree1.show()<<std::endl;
-  std::cout<<nodetTree.show()<<std::endl;
-  std::cout<<nodetestTree.show()<<std::endl;
   
   std::cout<<std::endl;
   
@@ -589,6 +607,32 @@ std::cout<<std::endl;
   
  // Tree arbre(&tree2);
  //  std::cout<< arbre.show() <<std::endl;
+
+
+   std::cout<<" " <<std::endl;
+
+  std::cout<<"Test of node by copy" <<std::endl;
+
+  Node no1(false);
+  Tree Treeno1(&no1);
+  Node nocopy(&no1);
+
+  Tree nodetestTree(&nocopy);
+
+  std::cout<<Treeno1.show()<<std::endl;
+  std::cout<<nodetestTree.show()<<std::endl;
+
+  std::cout<< nocopy.type()<<std::endl;
+  std::cout<< no1.type()<<std::endl;
+
+  for (int i=0; i<Nbrmutation; ++i){
+    std::cout<< "   "<< std::endl;
+    std::cout<< "mutation"<< i <<std::endl;
+    Tree18.mutation();
+
+    
+  }
+
   
   return 0;
 }
