@@ -91,6 +91,8 @@ Node::Node(bool boleen){
   type_= param;
 } */
 
+
+
 Node::Node(std::string str, Node* precedent){
   values_ = str;
   FatherNode_ = precedent; 
@@ -119,6 +121,8 @@ Node::Node(std::string str, Node* precedent){
     FatherNode_ ->NextNode2_ = this;
   }
 }
+
+
 
 Node::Node(bool boleen,Node* precedent){
   bool_values_ = boleen;

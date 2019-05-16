@@ -24,6 +24,7 @@ class Forest{
         // getter
     int nb_elmts(); // return the value of the attribut nb_elmts_ of the list.
     void show();
+    void show(int i);
     Tree * lastTree();
     Tree * firstTree();
     

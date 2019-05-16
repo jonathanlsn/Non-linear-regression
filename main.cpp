@@ -522,7 +522,7 @@ for (int g=0;g<10;++g){       // génération (after while+condition)
   forest.PushBack(best);
 }
 
-forest.show();
+forest.show(3);
 
 /*
   std::cout<<" " <<std::endl;
@@ -561,11 +561,19 @@ forest.show();
   
   std::cout<<std::endl;
   
+  std::cout<< "Test constructeur de Node par copy" <<std::endl;
   Node new_n1(&n1);
-  Node n4(x1,&new_n1);
-  Node n5(x2,&new_n1);
+  Node n4(True,&new_n1);
+  Node n5(False,&new_n1);
   Tree arbre2(&new_n1);
   std::cout<< arbre2.show() <<std::endl;
+  
+  std::cout<<std::endl;
+  
+  std::cout<< "Test constructeur de Tree par copy" <<std::endl;
+  Tree arbre3(&arbre2);
+  std::cout<< arbre2.show() <<std::endl;
+  std::cout<< arbre3.show() <<std::endl;
   
   std::cout<<std::endl;
   

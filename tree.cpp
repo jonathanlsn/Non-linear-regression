@@ -25,29 +25,39 @@ Tree::Tree(Tree* tree){
   NbrNode_ = tree->NbrNode_;
   nextTree_ = nullptr; 
   generation_ = tree->generation_;
-  //copy_nodes(FirstNode_);
+  Node * tmp;
+  copy_nodes(FirstNode_,tmp);
 }
 
-/*
 
-void Tree::copy_nodes(Node * node,Node * tmp){
-  if (node->type()=="bool" or node->type()=="param"){
-    new Node * node_param(node);
-    node_param(node->values(),tmp);   
-  }
+void Tree::copy_nodes(Node * node, Node * father){
+
+  
   if (node->type()=="op"){
-    new Node * op_node(node->values ,tmp);
+ 
+    Node * op_node=new Node(node->values(), father) ;
     
-    tmp=node->NextNode1_;              // link les nextnode1 et 2 à tmp
-    new Node * nextnode1(nextnode1_init);    // nextnode1(node->values ,tmp)
-    copy_nodes(nextnode1_init,tmp);    // link les nodes en dessous
+    father=op_node;  
+      
+    Node * nextnode1_init=node->NextNode1();
+    Node * nextnode2_init=node->NextNode2();
     
-    tmp=node->NextNode2_;
-    new Node * nextnode2(nextnode2_init,tmp);
-    copy_nodes(nextnode2_init);
+    std::cout<< "Hey" <<std::endl;
+    copy_nodes(nextnode1_init,op_node);
+    std::cout<< "Hey" <<std::endl;
+    
+    if (node->NextNode2() !=nullptr){
+      copy_nodes(nextnode2_init,op_node);
+    }
+  } 
+  else{
+    std::cout<< "Coucou" <<std::endl;
+    new Node(node->values(), father); 
+    std::cout<< "Coucou" <<std::endl; 
   }
+  
 }
-*/
+
   
   
   
