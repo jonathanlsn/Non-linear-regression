@@ -522,7 +522,14 @@ for (int g=0;g<10;++g){       // génération (after while+condition)
   forest.PushBack(best);
 }
 
-forest.show(3);
+forest.show();
+
+std::cout<<std::endl;
+
+Tree * Tree_i=forest.show(3);    // arbre de la 3ème génération
+std::cout<<Tree_i->show()<<std::endl;  //aperçu de l'arbre
+
+std::cout<<std::endl;
 
 /*
   std::cout<<" " <<std::endl;

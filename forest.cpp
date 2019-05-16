@@ -33,14 +33,14 @@ void Forest::show(){
   }
 }
 
-void Forest::show(int i){
+Tree * Forest::show(int i){
   Tree * tmp=firstTree_;
   int k=0;
   while (k != i){
     tmp = tmp->nextTree();
     ++k;
   }
-  std::cout<< "génération "  << i << " : " << tmp->show() <<std::endl;
+  return(tmp);
 }
 
 
