@@ -586,21 +586,39 @@ std::cout<<std::endl;
   
   std::cout<<std::endl;
   
+  
+  
   std::cout<< "Test constructeur de Node par copy" <<std::endl;
+  
   Node new_n1(&n1);
   Node n4(True,&new_n1);
   Node n5(False,&new_n1);
+  
+  std::cout<< new_n1.type() <<std::endl;
+  std::cout<< n4.type() <<std::endl;
+  std::cout<< n5.type() <<std::endl;
+
   Tree arbre2(&new_n1);
   std::cout<< arbre2.show() <<std::endl;
   
+  
+  
   std::cout<<std::endl;
+  
+  
   
   std::cout<< "Test constructeur de Tree par copy" <<std::endl;
   Tree arbre3(&arbre2);
   std::cout<< arbre2.show() <<std::endl;
   std::cout<< arbre3.show() <<std::endl;
   
+  
+  
+  
   std::cout<<std::endl;
+  
+  
+  
   
   std::cout<< "test copy arbre :" <<std::endl;
   std::cout<<std::endl;

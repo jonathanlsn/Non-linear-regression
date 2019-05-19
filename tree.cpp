@@ -19,6 +19,73 @@ Tree::Tree(Node * node){
 
 
 Tree::Tree(Tree* tree){
+  Node * FirstNode_init=tree->FirstNode();
+  //Node * node =new Node (tree->FirstNode_);
+  //FirstNode_ = node;
+  Fitness_ = 0;
+  NbrNode_ = tree->NbrNode_;
+  nextTree_ = nullptr; 
+  generation_ = tree->generation_;
+  Node * tmp=new Node(true);
+  int i=0;
+  copy_nodes(FirstNode_init,tmp,i);
+}
+
+
+void Tree::copy_nodes(Node * node, Node * father, int i){
+  
+  
+  std::cout<< "1" <<std::endl;
+  
+  if (node->values()=="&&" or node->values()=="||" or node->values()=="!"){
+    
+    std::cout<< "50" <<std::endl;
+    Node * op_node=new Node(node->values(), father) ;
+    std::cout<< "50" <<std::endl;
+    
+    if (i==0){
+      FirstNode_=op_node;
+    }
+    ++i;
+    
+    father=op_node;  
+    
+      std::cout<< "100" <<std::endl;
+    Node * nextnode1_init=node->NextNode1();
+    Node * nextnode2_init=node->NextNode2();
+      std::cout<< "100" <<std::endl;
+      
+    if (node->NextNode1() !=nullptr){  
+      std::cout<< "2" <<std::endl;
+      copy_nodes(nextnode1_init, father,i);
+      std::cout<< "3" <<std::endl;
+    }
+    if (node->NextNode2() !=nullptr){
+      std::cout<< "4" <<std::endl;
+      copy_nodes(nextnode2_init, father,i);
+      std::cout<< "5" <<std::endl;
+    }
+  } 
+  
+  else{
+    std::cout<< "6" <<std::endl;
+    
+    new Node (node->values(), father); 
+    
+    std::cout<< "7" <<std::endl; 
+  }
+  
+  std::cout<< "Hello" <<std::endl;
+  
+}
+
+
+
+
+
+
+/*
+Tree::Tree(Tree* tree){
   Node * node =new Node (tree->FirstNode_);
   FirstNode_ = node;
   Fitness_ = 0;
@@ -26,38 +93,51 @@ Tree::Tree(Tree* tree){
   nextTree_ = nullptr; 
   generation_ = tree->generation_;
   Node * tmp;
-  copy_nodes(FirstNode_,tmp);
+  copy_nodes(tree->FirstNode_,tmp);
 }
 
 
 void Tree::copy_nodes(Node * node, Node * father){
-
   
-  if (node->type()=="op"){
- 
+  std::cout<< "1" <<std::endl;
+  
+  if (node->values()=="&&" or node->values()=="||" or node->values()=="!"){
+    
+    std::cout<< "50" <<std::endl;
     Node * op_node=new Node(node->values(), father) ;
+    std::cout<< "50" <<std::endl;
     
     father=op_node;  
-      
+    
+      std::cout<< "100" <<std::endl;
     Node * nextnode1_init=node->NextNode1();
     Node * nextnode2_init=node->NextNode2();
-    
-    std::cout<< "Hey" <<std::endl;
-    copy_nodes(nextnode1_init,op_node);
-    std::cout<< "Hey" <<std::endl;
-    
+      std::cout<< "100" <<std::endl;
+      
+    if (node->NextNode1() !=nullptr){  
+      std::cout<< "2" <<std::endl;
+      copy_nodes(nextnode1_init, father);
+      std::cout<< "3" <<std::endl;
+    }
     if (node->NextNode2() !=nullptr){
-      copy_nodes(nextnode2_init,op_node);
+      std::cout<< "4" <<std::endl;
+      copy_nodes(nextnode2_init, father);
+      std::cout<< "5" <<std::endl;
     }
   } 
+  
   else{
-    std::cout<< "Coucou" <<std::endl;
-    new Node(node->values(), father); 
-    std::cout<< "Coucou" <<std::endl; 
+    std::cout<< "6" <<std::endl;
+    
+    Node * param=new Node (node->values(), father); 
+    
+    std::cout<< "7" <<std::endl; 
   }
   
+  std::cout<< "Hello" <<std::endl;
+  
 }
-
+*/
   
   
   

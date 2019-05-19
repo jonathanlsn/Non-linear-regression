@@ -37,7 +37,7 @@ class Tree{
     
     bool cross(Node * node,int &nb_elem, bool copy, Node initialcopy);
 
-    void copy_nodes(Node * node,Node * father);
+    void copy_nodes(Node * node,Node * father,int i);
 
     std::string show();
     std::string parcour(Node * node);

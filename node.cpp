@@ -41,8 +41,7 @@ Node::Node( Node * node){  // Copy constructor
     NextNode2_ = node ->NextNode2();
     type_= "bool";
     bool_values_ = node->bool_values();
-
-
+    
   }
   else{
     FatherNode_ = node -> FatherNode();
