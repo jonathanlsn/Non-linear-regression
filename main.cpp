@@ -608,8 +608,8 @@ std::cout<<std::endl;
   
   
   std::cout<< "Test constructeur de Tree par copy" <<std::endl;
-  Tree arbre3(&arbre2);
-  std::cout<< arbre2.show() <<std::endl;
+  Tree arbre3(&tree2);
+  std::cout<< tree2.show() <<std::endl;
   std::cout<< arbre3.show() <<std::endl;
   
   
