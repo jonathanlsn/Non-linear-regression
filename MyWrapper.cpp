@@ -6,157 +6,110 @@
 #include <zlib.h>
 #include <errno.h>
 #include "def_PyC.h"
+#include <iostream>
 #include "forest.h"
-#include "tree.h"
-#include "node.h"
+
 
 // Name for the cpp object "capsules"
-#define NAME_CAPSULE_A "forest"
-#define NAME_CAPSULE_B "tree"
-#define NAME_CAPSULE_C "node"
-
-#define NAME_CPASULE_Matrice "matrice"
+#define NAME_CAPSULE_FOREST "FOREST"
 
 
-// Receives a Python capsule for object A, and extracts the pointer of the C++ object
-static Forest* APythonToC(PyObject* args){
-	Forest* my_forest;
-	PyObject* capsule;
-	if (!PyArg_ParseTuple(args, "O", &capsule)){
-		return NULL;
-	}
-	my_forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_A);
-	return my_forest;
-}
-
-// Receives a Python capsule for object B, and extracts the pointer of the C++ object
-static Tree* BPythonToC(PyObject* args){
-	Tree* my_tree;
-	PyObject* capsule;
-	if (!PyArg_ParseTuple(args, "O", &capsule)){
-		return NULL;
-	}
-	my_tree = (Tree*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_B);
-	return my_tree;
-}
-
-// Receives a Python capsule for object C, and extracts the pointer of the C++ object
-static Node* CPythonToC(PyObject* args){
-	Node* my_node;
-	PyObject* capsule;
-	if (!PyArg_ParseTuple(args, "O", &capsule)){
-		return NULL;
-	}
-	my_node = (Node*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_C);
-	return my_node;
-}
-
-// Frees object A Python capsule
-void ACapsuleDestructor(PyObject* capsule){
-	Forest* my_forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_A);
-  delete my_forest;
-}
-
-// Frees object B Python capsule
-void BCapsuleDestructor(PyObject* capsule){
-	Tree* my_tree = (Tree*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_B);
-  delete my_tree;
-}
-
-// Frees object C Python capsule
-void CCapsuleDestructor(PyObject* capsule){
-	Node* my_node = (Node*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_C);
-  delete my_node;
-}
 /*
-// Calls the Print function of object A
-static PyObject*  PrintA(PyObject* self, PyObject* args){
-    Forest*  my_forest = APythonToC(args);
-    my_forest->Print();
-    Py_INCREF(Py_None);
-    return Py_None;
+// Receives a Python capsule for object A, and extracts the pointer of the C++ object
+// intégrer la fonction dans le sumlist pour créer la capsule.
+static A* APythonToC(PyObject* args){
+	A* my_A;
+	PyObject* capsule;
+	if (!PyArg_ParseTuple(args, "O", &capsule)){
+		return NULL;
+	}
+	my_A = (A*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_A);
+	return my_A;
+}
+
+// Frees object A Python capsule // changer la fonction
+void ACapsuleDestructor(PyObject* capsule){
+	A* my_A = (A*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_A);
+  delete my_A;
 }
 */
-// Calls the Print function of object B
-static PyObject*  PrintB(PyObject* self, PyObject* args){
-    Tree*  my_tree = BPythonToC(args);
-    my_tree->NbrNode();
-    Py_INCREF(Py_None);
-    return Py_None;
-}
-/*
-// Calls the Print function of object C
-static PyObject*  PrintC(PyObject* self, PyObject* args){
-    Node*  my_node = CPythonToC(args);
-    my_node->Print();
-    Py_INCREF(Py_None);
-    return Py_None;
-}
 
-// Receive and parse parameters, constructs an object A, encapsulate it and return the capsule
-///////////A REFLECHIR/////////////
-static PyObject* ATranslator(PyObject* self, PyObject* args){
-	int a;
-	if (!PyArg_ParseTuple(args, "h", &a)){
+
+static Forest* ForestPythontoC(PyObject* args){
+    Forest* my_Forest; 
+    PyObject* capsule; // là on prend les argumetns de la capsule pour créer la forêt
+// mais on veut créer une forêt vierge donc pas d'argument. Doit-on retirer args ?
+	if (!PyArg_ParseTuple(args, "O", &capsule)){
 		return NULL;
 	}
-	Forest* my_forest = new Forest(a);
-	PyObject* capsule = PyCapsule_New(my_A, NAME_CAPSULE_A, ACapsuleDestructor);
-	return capsule;
+    my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
+	return my_Forest;
 }
 
-// Receive and parse parameters, constructs an object B, encapsulate it and return the capsule
-static PyObject* BTranslator(PyObject* self, PyObject* args){
-	int b;
-  // parse the argument tuple: https://docs.python.org/3/c-api/arg.html
-	if (!PyArg_ParseTuple(args, "h", &b)){
+static PyObject* FitnessTreeInForest(PyObject* self, PyObject* args){
+    Forest* my_Forest;
+	PyObject* capsule;
+	int position;
+	if (!PyArg_ParseTuple(args, "Oi", &capsule,&position)){
 		return NULL;
 	}
-	Tree* my_tree = new Tree(b);
-	PyObject* capsule = PyCapsule_New(my_tree, NAME_CAPSULE_B, BCapsuleDestructor);
-	return capsule;
+	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
+    
+    return Py_BuildValue("f",my_Forest->show(position)->Fitness());
 }
 
-// Receive and parse parameters, constructs an object C, encapsulate it and return the capsule
-static PyObject* CTranslator(PyObject* self, PyObject* args){
-	int c;
-  // parse the argument tuple: https://docs.python.org/3/c-api/arg.html
-	if (!PyArg_ParseTuple(args, "h", &c)){
-		return NULL;
-	}
-	Node* my_node = new Node(c);
-	PyObject* capsule = PyCapsule_New(my_node, NAME_CAPSULE_C, CCapsuleDestructor);
-	return capsule;
-}
+
+
 
 static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
-    PyListObject* listOfAs;
-    int a = 0;
-    if (!PyArg_ParseTuple(args, "O", &listOfAs)){
-        return NULL;
-    }
-    int size = PyList_Size((PyObject*) listOfAs);
-    for (int i = 0; i < size; i++){
-        PyObject* capsule = (PyObject*) PyList_GetItem( (PyObject*) listOfAs, (Py_ssize_t) i);
-        A* my_A = (A*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_A);
-        a += my_A->a;
-    }
-    A* my_A = new A(a);
-  	PyObject* capsule = PyCapsule_New(my_A, NAME_CAPSULE_A, ACapsuleDestructor);
-  	return Py_BuildValue("Oi",capsule,a);
+	PyListObject* listOfYs;
+	PyListObject** listOfBs;
+    PyObject* capsule_forest;
+    Forest* my_Forest;
+    if (!PyArg_ParseTuple(args, "OO", &listOfYs, &listOfBs,&capsule_forest)){
+    	return NULL;
+	}	
+
+	my_Forest = (Forest*) PyCapsule_GetPointer(capsule_forest,NAME_CAPSULE_FOREST);
+
+    int sizeY = PyList_Size((PyObject*) listOfYs);
+	bool* my_Y = (bool*) malloc(sizeY*sizeof(bool));  	
+	for (int y = 0; y < sizeY; y++){
+		my_Y[y] = (bool) PyLong_AsLong(PyList_GetItem( (PyObject*) listOfYs, (Py_ssize_t) y));
+		std::cout << my_Y[y] << std::endl;
+	}
+	std::cout << "\n" << std::endl;
+    int size2 = PyList_Size((PyObject*) listOfBs);
+	bool** my_B = (bool**) malloc(size2*sizeof(bool*));  
+    
+	for (int i = 0; i < size2; i++){
+		PyListObject* listOfAs = (PyListObject*) PyList_GetItem( (PyObject*) listOfBs, (Py_ssize_t) i);
+		int size = PyList_Size((PyObject*) listOfAs);
+		bool* my_A = (bool*) malloc(size*sizeof(bool));  
+		my_B[i] = my_A;
+	    for (int j = 0; j < size; j++){ 
+			my_A[j] = (bool) PyLong_AsLong(PyList_GetItem( (PyObject*) listOfAs, (Py_ssize_t) j));
+			std::cout << my_A[j] << std::endl;
+		}	
+		std::cout << "\n" << std::endl;
+   
+	}
+    
+
+	for (int i = 0; i < size2; i++){
+		free(my_B[i]);	
+	}
+    free (my_Y);
+    free (my_B); 
+
+  	return Py_None;
 }
 
-*/
-// Module functions {<python function name>, <function in wrapper>, <parameters flag>, <doctring>}
-// https://docs.python.org/3/c-api/structures.html
+
 static PyMethodDef module_funcs[] = {
-    {"generate_A", (PyCFunction)ATranslator, METH_VARARGS, "Create an instance of class A\n\nArgs:\n\ta (int): the parameter\n\nReturns:\n\t capsule: Object A capsule"},
-		{"generate_B", (PyCFunction)BTranslator, METH_VARARGS, "Create an instance of class B\n\nArgs:\n\tb (int): the parameter\n\nReturns:\n\t capsule: Object B capsule "},
-		{"generate_C", (PyCFunction)CTranslator, METH_VARARGS, "Create an instance of class C\n\nArgs:\n\tc (int): the parameter\n\nReturns:\n\t capsule: Object C capsule"},
     {"sum_list_As", (PyCFunction)SumAsInPyList, METH_VARARGS, "Sum the As in a list\n\nArgs:\n\tlist_As (list): list of capsules A\n\nReturns:\n\t Capsules: Object A capsule\n\t int: sum of A's a"},
-    {"print_A", PrintA, METH_VARARGS,  "Print class A instance\n\n Args:\n\t capsuleA (Capsule) : object A capsule"},
-    {"print_B", PrintB, METH_VARARGS, "Print class B instance\n\n Args:\n\t capsuleB (Capsule) : object B capsule"},
-    {"print_C", PrintC, METH_VARARGS,  "Print class C instance\n\n Args:\n\t capsuleC (Capsule) : object C capsule"},
+	{"initiate_Forest" ,(PyCFunction)ForestPythontoC, METH_VARARGS},//METH_NOARGS ?
+	{"show_Fitness_Tree",(PyCFunction)FitnessTreeInForest,METH_VARARGS},
 		{NULL, NULL, METH_NOARGS, NULL}
 };
 
@@ -175,4 +128,5 @@ static struct PyModuleDef moduledef = {
 PyMODINIT_FUNC PyInit_my_wrapper_c(void){
     PyObject* module = PyModule_Create(&moduledef);
 		return module;
-}
+}    
+
