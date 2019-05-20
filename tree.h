@@ -49,6 +49,7 @@ class Tree{
     void mutation2();
     Node * choose();
     Node * crossing(Node * node);
+    void switch_op(Node * node);
     void substitution(Node * node);
     void insertion(Node * node);
 
