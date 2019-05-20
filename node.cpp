@@ -20,17 +20,18 @@ Node::Node(Node* node,std::string type){
 }
 
 
-Node::Node( Node * node){  // Copy constructor
+Node::Node(const Node * node){  // Copy constructor
   FatherNode_ = nullptr;
   NextNode1_ = nullptr;
   NextNode2_ = nullptr;
-  type_=node->type();
-  values_=node->values();
+  type_=this->type();
+  values_=this->values();
   if (type_=="bool"){
-    bool_values_=node->bool_values();
+    bool_values_=this->bool_values();
   }
 }
 
+Node::~Node(){}
 
 
 /*

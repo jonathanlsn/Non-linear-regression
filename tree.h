@@ -13,7 +13,7 @@ class Tree{
 
 //constructor
     Tree(Node* node);
-    Tree(Tree* Tree);
+    Tree( Tree* Tree);
 
 //getter
     Node* FirstNode();
@@ -42,7 +42,16 @@ class Tree{
     std::string show();
     std::string parcour(Node * node);
     void link(Tree * tree);
+    
+    void mutation2();
+    Node * choose();
+    Node * crossing(Node * node);
+    void substitution(Node * node);
+    void insertion(Node * node);
 
+//destructor
+
+    ~Tree();
 
   protected:
     Node * FirstNode_;

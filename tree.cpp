@@ -18,7 +18,7 @@ Tree::Tree(Node * node){
 
 
 
-Tree::Tree(Tree* tree){
+Tree::Tree( Tree* tree){
   Node * FirstNode_init=tree->FirstNode();
   //Node * node =new Node (tree->FirstNode_);
   //FirstNode_ = node;
@@ -65,10 +65,142 @@ void Tree::copy_nodes(Node * node, Node * father, int i){
 
 
 
+Tree::~Tree(){}  // Destructor
+
+
+void Tree::mutation2(){
+  int mut_type=rand()%2;
+  
+  std::cout<< "choix de la mutation : " << mut_type <<std::endl;
+  
+  Node * node=choose();
+  
+  std::cout<< "Hello" <<std::endl;
+  
+  if (mut_type==0){
+    //insertion de "!"
+    insertion(node);
+  }
+  
+  if (mut_type==1){
+    // Substitution
+    substitution(node);
+  }
+  
+}
+
+
+
+Node * Tree::choose(){
+  return(crossing(FirstNode_));
+}
+
+Node * Tree::crossing(Node * node){
+  int mutation_rate=rand()%3;  //taux de mutation
+  std::cout<< "taux de mutation : " << mutation_rate <<std::endl;
+  if (mutation_rate==0){
+    return(node);
+  }
+
+  else{
+    int left_right=rand()%2;
+    if (left_right==0){   // On se déplace vers le NextNode1
+      if (node->NextNode1()==nullptr){   //extrémité de l'arbre
+        return(crossing(FirstNode_));
+      }
+      else{  //coeur de l'arbre
+        return(crossing(node->NextNode1()));
+      }
+    }
+    else{  //On se déplace vers le NextNode2
+      if (node->NextNode2()==nullptr){   //extrémité de l'arbre
+        return(crossing(FirstNode_));
+      }
+      else{  //coeur de l'arbre
+        return(crossing(node->NextNode2()));
+      }
+    }
+  }
+}
 
 
 
 
+
+
+void Tree::insertion(Node * node){
+  
+  std::cout<< "Haaaa" <<std::endl;
+  
+  Node * father=node->FatherNode();
+  Node * new_node=new Node("!");
+  
+  if (father!=nullptr and father->NextNode1()==node){
+    father->setNextNode(new_node);
+  }
+  if (father!=nullptr and father->NextNode2()==node){
+    father->setNextNode2(new_node);
+  }
+  
+  new_node->setNextNode(node);
+  new_node->setFatherNode(father);
+  
+  node->setFatherNode(new_node);
+}
+
+
+void Tree::substitution(Node * node){
+  std::string options[]={"true","false","x1","x2","&&","||","!"};
+  
+  int i=rand()%6;   // Choix d'une option
+  std::cout<< "position : " << i <<std::endl;
+
+  Node * father=node->FatherNode();
+  Node * new_node= new Node(options[i]) ;
+  
+  if (options[i]=="&&" or options[i]=="||"){
+    std::cout<< "Hey" <<std::endl;
+  
+    int param1=rand()%3;  //choix d'un paramètre
+    int param2=rand()%3;  //choix d'un paramètre
+    
+    std::cout<< "param1 : " << param1 <<std::endl;
+    std::cout<< "param2 : " << param2 <<std::endl;
+    
+    new Node(options[param1],new_node);
+    new Node(options[param2],new_node);
+    
+    std::cout<< "Oooo " <<std::endl;
+  }
+  if (options[i]=="!"){
+    std::cout<< "Coucou" <<std::endl;
+  
+    int param1=rand()%3;  //choix d'un paramètre
+    new Node(options[param1],new_node);
+  }
+  
+  if (options[i]=="true"){
+    new_node->setboolvalues(true);
+  }
+  if (options[i]=="false"){
+    new_node->setboolvalues(false);
+  }
+  
+  
+  
+  if (father!=nullptr and father->NextNode1()==node){
+    father->setNextNode(new_node);
+    std::cout<< "1"<<std::endl;
+  }
+  if (father!=nullptr and father->NextNode2()==node){
+    father->setNextNode2(new_node);
+    std::cout<< "2" <<std::endl;
+  }
+  new_node->setFatherNode(father);
+}
+
+  
+  
   
   
 /*
@@ -382,6 +514,11 @@ void Tree::generation(int x){
 
 }
 
+
+
+
+
+
 void Tree::calcul_fitness(int * x,bool y){
   int nb_elem=0;
   if (cross(FirstNode_,x,nb_elem)!=y){
@@ -560,6 +697,9 @@ std::string Tree::parcour(Node * node){
 void Tree::link(Tree * tree){
   nextTree_=tree;
 }
+
+
+
 
 
 

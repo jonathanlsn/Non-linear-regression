@@ -501,14 +501,14 @@ std::cout<<std::endl;
 int tab3[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
 int nligne=3;
 int ncolonne=3;
-Matrix matrixdonne(tab2,nligne,ncolonne);
+Matrix matrix_(tab2,nligne,ncolonne);
 
 std::cout<< "matrice :" <<std::endl;
-matrix.show();
+matrix_.show();
 std::cout<<std::endl;
 
-int ** xt_=matrix.x();
-int * yt_=matrix.y(); 
+int ** xt_=matrix_.x();
+int * yt_=matrix_.y(); 
 
 Forest forest;
 Node nodet(true);
@@ -546,6 +546,7 @@ for (int g=0;g<10;++g){       // génération (after while+condition)
     if (best->Fitness()<fiel[k]->Fitness()){
       best=fiel[k];
     }
+    
   }
   forest.PushBack(best);
 }
@@ -588,7 +589,7 @@ std::cout<<std::endl;
   
   
   
-  std::cout<< "Test constructeur de Node par copy" <<std::endl;
+  std::cout<< "Test constructeur de Node par copie :" <<std::endl;
   
   Node new_n1(&n1);
   Node n4(True,&new_n1);
@@ -607,18 +608,27 @@ std::cout<<std::endl;
   
   
   
-  std::cout<< "Test constructeur de Tree par copy" <<std::endl;
+  std::cout<< "Test constructeur de Tree par copie :" <<std::endl;
   Tree arbre3(&tree2);
-  std::cout<< tree2.show() <<std::endl;
-  std::cout<< arbre3.show() <<std::endl;
+  std::cout<< "arbre d'origine : " << tree2.show() <<std::endl;
+  std::cout<< "arbre copié : " <<arbre3.show() <<std::endl;
   
   
   
   
   std::cout<<std::endl;
   
+
+  std::cout<< "Test mutations :" <<std::endl;
+  std::cout<< "arbre d'origine : " << tree2.show() <<std::endl;
+  tree2.mutation2();
+  std::cout<< "arbre muté : " <<tree2.show() <<std::endl;
+  tree2.mutation2();
+  std::cout<< "arbre muté 2 fois : " <<tree2.show() <<std::endl;
   
   
+  
+  /*
   
   std::cout<< "test copy arbre :" <<std::endl;
   std::cout<<std::endl;
@@ -647,10 +657,10 @@ std::cout<<std::endl;
     std::cout<< "   "<< std::endl;
     std::cout<< "mutation"<< i <<std::endl;
     Tree18.mutation();
-
+  
     
   }
-
+*/
   
   return 0;
 }
