@@ -46,6 +46,17 @@ static Forest* ForestPythontoC(PyObject* args){
 	return my_Forest;
 }
 
+static PyObject* nb_elmtsInForest(PyObject* self, PyObject* args){
+    Forest* my_Forest;
+	PyObject* capsule;
+	if (!PyArg_ParseTuple(args, "O", &capsule)){
+		return NULL;
+	}
+	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
+    
+    return Py_BuildValue("f",my_Forest->nb_elmts());
+}
+
 static PyObject* FitnessTreeInForest(PyObject* self, PyObject* args){
     Forest* my_Forest;
 	PyObject* capsule;
@@ -58,7 +69,17 @@ static PyObject* FitnessTreeInForest(PyObject* self, PyObject* args){
     return Py_BuildValue("f",my_Forest->show(position)->Fitness());
 }
 
-
+static PyObject* NbrNodeTreeInForest(PyObject* self, PyObject* args){
+    Forest* my_Forest;
+	PyObject* capsule;
+	int position;
+	if (!PyArg_ParseTuple(args, "Oi", &capsule,&position)){
+		return NULL;
+	}
+	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
+    
+    return Py_BuildValue("f",my_Forest->show(position)->NbrNode());
+}
 
 
 static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
@@ -110,6 +131,9 @@ static PyMethodDef module_funcs[] = {
     {"sum_list_As", (PyCFunction)SumAsInPyList, METH_VARARGS, "Sum the As in a list\n\nArgs:\n\tlist_As (list): list of capsules A\n\nReturns:\n\t Capsules: Object A capsule\n\t int: sum of A's a"},
 	{"initiate_Forest" ,(PyCFunction)ForestPythontoC, METH_VARARGS},//METH_NOARGS ?
 	{"show_Fitness_Tree",(PyCFunction)FitnessTreeInForest,METH_VARARGS},
+	{"show number of tree in the forest",(PyCFunction)nb_elmtsInForest,METH_VARARGS},
+	{"show number of node in a request tree of the forest",(PyCFunction)NbrNodeTreeInForest,METH_VARARGS},
+	
 		{NULL, NULL, METH_NOARGS, NULL}
 };
 
