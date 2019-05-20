@@ -27,6 +27,8 @@ class Tree{
 //method
 
     bool cross(Node * node,int &nb_elem, bool copy, Node initialcopy,  Node * passant);
+    
+    
     bool cross(Node * node, int &nb_node_son );
     void calcul_fitness(bool y);
     void mutation();
@@ -34,6 +36,7 @@ class Tree{
 
     bool cross(Node * node,int * x,int &nb_elem);
     void calcul_fitness(int * x, bool y);
+    
     
     bool cross(Node * node,int &nb_elem, bool copy, Node initialcopy);
 
