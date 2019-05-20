@@ -130,10 +130,11 @@ Node * Tree::crossing(Node * node){
 
 void Tree::insertion(Node * node){
   
-  std::cout<< "Haaaa" <<std::endl;
-  
   Node * father=node->FatherNode();
-  Node * new_node=new Node("!");
+  std::string non="!";
+  Node * new_node=new Node(non);
+  
+  if (node==FirstNode_){FirstNode_=new_node;}
   
   if (father!=nullptr and father->NextNode1()==node){
     father->setNextNode(new_node);
@@ -152,17 +153,18 @@ void Tree::insertion(Node * node){
 void Tree::substitution(Node * node){
   std::string options[]={"true","false","x1","x2","&&","||","!"};
   
-  int i=rand()%6;   // Choix d'une option
+  int i=rand()%7;   // Choix d'une option
   std::cout<< "position : " << i <<std::endl;
 
   Node * father=node->FatherNode();
   Node * new_node= new Node(options[i]) ;
   
-  if (options[i]=="&&" or options[i]=="||"){
-    std::cout<< "Hey" <<std::endl;
+  if (node==FirstNode_){FirstNode_=new_node;}
   
-    int param1=rand()%3;  //choix d'un paramètre
-    int param2=rand()%3;  //choix d'un paramètre
+  if (options[i]=="&&" or options[i]=="||"){
+  
+    int param1=rand()%4;  //choix d'un paramètre
+    int param2=rand()%4;  //choix d'un paramètre
     
     std::cout<< "param1 : " << param1 <<std::endl;
     std::cout<< "param2 : " << param2 <<std::endl;
@@ -170,12 +172,12 @@ void Tree::substitution(Node * node){
     new Node(options[param1],new_node);
     new Node(options[param2],new_node);
     
-    std::cout<< "Oooo " <<std::endl;
   }
   if (options[i]=="!"){
-    std::cout<< "Coucou" <<std::endl;
   
-    int param1=rand()%3;  //choix d'un paramètre
+    int param1=rand()%4;  //choix d'un paramètre
+    std::cout<< "param1 : " << param1 <<std::endl;
+    
     new Node(options[param1],new_node);
   }
   
@@ -187,14 +189,11 @@ void Tree::substitution(Node * node){
   }
   
   
-  
   if (father!=nullptr and father->NextNode1()==node){
     father->setNextNode(new_node);
-    std::cout<< "1"<<std::endl;
   }
   if (father!=nullptr and father->NextNode2()==node){
     father->setNextNode2(new_node);
-    std::cout<< "2" <<std::endl;
   }
   new_node->setFatherNode(father);
 }
