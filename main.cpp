@@ -528,12 +528,13 @@ for (int g=0;g<10;++g){       // génération (after while+condition)
   for (int k=1;k<lambda+1;++k){   // potentiels enfants
     //mutation
 
-    //Tree cop_parent(parent);
-    fiel[k]=parent;//cop
+    Tree enfant(parent);
+    //fiel[k]=parent;//cop
     //std::cout<<parent->show()<<std::endl;
     //std::cout<<fiel[k]->show()<<std::endl;
 
-     //cop_parent.mutation();
+     enfant.mutation2();
+     std::cout<<enfant.show()<<std::endl;
 
     for (int i=0;i<nligne;++i){//Calcul of fitness
       int xt[ncolonne];
@@ -541,10 +542,10 @@ for (int g=0;g<10;++g){       // génération (after while+condition)
       xt[1]=xt_[i][1];
       int yt=yt_[i];
       //std::cout<<fiel[k]->show()<<std::endl;
-      fiel[k] -> calcul_fitness(xt,yt);
+      enfant.calcul_fitness(xt,yt);
     }
-    if (best->Fitness()<fiel[k]->Fitness()){
-      best=fiel[k];
+    if (best->Fitness()<enfant.Fitness()){
+      best=&enfant;
     }
     
   }
