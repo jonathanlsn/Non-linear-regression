@@ -11,7 +11,7 @@ class Node{
     Node(bool boleen);
     //Node(std::string param,bool boleen);
     Node(Node* node,std::string type);
-    Node( Node * node);
+    Node(const Node * node);
     
 //getter
     std::string values();
@@ -38,6 +38,10 @@ class Node{
 
     void settype(std::string str);
 
+//destructor 
+   
+   ~Node();
+   
   protected:  
 
     std::string values_;
