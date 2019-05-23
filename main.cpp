@@ -569,7 +569,7 @@ std::cout<<std::endl;
 
 */
 
-  
+/*   
   std::cout<<std::endl;
   
   Node n1(et);
@@ -588,7 +588,7 @@ std::cout<<std::endl;
   std::cout<<std::endl;
   
   
-  
+ 
   std::cout<< "Test constructeur de Node par copie :" <<std::endl;
   
   Node new_n1(&n1);
@@ -596,28 +596,19 @@ std::cout<<std::endl;
   Node n5(False,&new_n1);
   
   std::cout<< new_n1.type() <<std::endl;
-  std::cout<< n4.type() <<std::endl;
-  std::cout<< n5.type() <<std::endl;
+  std::cout<< (n4.type()==n5.type()) <<std::endl;
 
-  Tree arbre2(&new_n1);
-  std::cout<< arbre2.show() <<std::endl;
-  
-  
-  
   std::cout<<std::endl;
+*/ 
+/*  
   
-  
-  
+  //Test constructor de Tree by copy 
   std::cout<< "Test constructeur de Tree par copie :" <<std::endl;
   Tree arbre3(&tree2);
   std::cout<< "arbre d'origine : " << tree2.show() <<std::endl;
   std::cout<< "arbre copié : " <<arbre3.show() <<std::endl;
   
-  
-  
-  
   std::cout<<std::endl;
-  
 
   std::cout<< "Test mutations :" <<std::endl;
   std::cout<< "arbre d'origine : " << tree2.show() <<std::endl;
@@ -625,42 +616,14 @@ std::cout<<std::endl;
   std::cout<< "arbre muté : " <<tree2.show() <<std::endl;
   tree2.mutation2();
   std::cout<< "arbre muté 2 fois : " <<tree2.show() <<std::endl;
-  
-  
-  
-  /*
-  
-  std::cout<< "test copy arbre :" <<std::endl;
-  std::cout<<std::endl;
-  
- // Tree arbre(&tree2);
- //  std::cout<< arbre.show() <<std::endl;
-
-
-   std::cout<<" " <<std::endl;
-
-  std::cout<<"Test of node by copy" <<std::endl;
-
-  Node no1(false);
-  Tree Treeno1(&no1);
-  Node nocopy(&no1);
-
-  Tree nodetestTree(&nocopy);
-
-  std::cout<<Treeno1.show()<<std::endl;
-  std::cout<<nodetestTree.show()<<std::endl;
-
-  std::cout<< nocopy.type()<<std::endl;
-  std::cout<< no1.type()<<std::endl;
-
-  for (int i=0; i<Nbrmutation; ++i){
-    std::cout<< "   "<< std::endl;
-    std::cout<< "mutation"<< i <<std::endl;
-    Tree18.mutation();
-  
-    
-  }
+  tree2.mutation2();
+  std::cout<< "arbre muté 3 fois : " <<tree2.show() <<std::endl;
+  tree2.mutation2();
+  std::cout<< "arbre muté 4 fois : " <<tree2.show() <<std::endl;
+  tree2.mutation2();
+  std::cout<< "arbre muté 5 fois : " <<tree2.show() <<std::endl;
 */
-  
+ 
+
   return 0;
 }
