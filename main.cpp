@@ -435,11 +435,11 @@ int main()
   //Test of Tree by copy with cross
   std::cout<<" "<< std::endl;
   std::cout<<"Test of Tree by copy with cross"<< std::endl;
->>>>>>> refs/remotes/origin/master
+
 
   //Creation of a tree: true and true.
   Node nod3(str1);
->>>>>>> cf50ebf70c15082b9f74989a5a7c4d17fc06a312
+
   Node nod1(true,&nod3);
   Node nod2(true,&nod3);
   Tree tr1(&nod3);
@@ -511,7 +511,7 @@ int ** xt_=matrix_.x();
 int * yt_=matrix_.y(); 
 
 Forest forest;
-Node nodet(true);
+Node nodet(True);
 Tree Treet(&nodet);//Creation of firest Tree with variable
 forest.PushBack(&Treet);//Initialisation of forest
 
@@ -600,14 +600,15 @@ std::cout<<std::endl;
 
   std::cout<<std::endl;
 */ 
-/*  
+ 
   
   //Test constructor de Tree by copy 
   std::cout<< "Test constructeur de Tree par copie :" <<std::endl;
   Tree arbre3(&tree2);
   std::cout<< "arbre d'origine : " << tree2.show() <<std::endl;
   std::cout<< "arbre copié : " <<arbre3.show() <<std::endl;
-  
+
+
   std::cout<<std::endl;
 
   std::cout<< "Test mutations :" <<std::endl;
@@ -622,20 +623,38 @@ std::cout<<std::endl;
   std::cout<< "arbre muté 4 fois : " <<tree2.show() <<std::endl;
   tree2.mutation2();
   std::cout<< "arbre muté 5 fois : " <<tree2.show() <<std::endl;
-*/
+
  
 
 Node no(et);
-Node no1(true,&no);
-Node no2(false,&no);
+Node no1(True,&no);
+Node no2(False,&no);
 Tree tr(&no);
 Forest fo;
-fo.PushBack(&tr);
+fo.PushBack(&arbre3);
 
 
 
 fo.generation(10,matrix_);
 fo.show();
+/*
+std::cout<<tr.show()<<std::endl;
+Tree tr1(&tr);
+std::cout<<tr1.show()<<std::endl;
+std::cout<<tr.FirstNode()->NextNode1()->bool_values()<<std::endl;
+std::cout<<tr.FirstNode()->NextNode2()->bool_values()<<std::endl;
 
+
+std::cout<<tr1.FirstNode()->NextNode1()->bool_values()<<std::endl;
+std::cout<<tr1.FirstNode()->NextNode2()->bool_values()<<std::endl;
+*/
+//tr1.substitution(&no);
+//std::cout<<tr1.show()<<std::endl;
+/*
+Tree tr2(&tr);
+std::cout<<tr2.show()<<std::endl;
+tr2.switch_op(&no);
+std::cout<<tr2.show()<<std::endl;
+*/
   return 0;
 }
