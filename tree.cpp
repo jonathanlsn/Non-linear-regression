@@ -70,23 +70,27 @@ Tree::~Tree(){}  // Destructor
 
 void Tree::mutation2(){
   int mut_type=rand()%2;
+  int mut_switch=rand()%2;
   
   std::cout<< "choix de la mutation : " << mut_type <<std::endl;
   
   Node * node=choose();
   
-  std::cout<< "Hello" <<std::endl;
-  
-  if (mut_type==0){
-    //insertion de "!"
-    insertion(node);
+  if (mut_switch==0){
+    if (node->values()=="&&" or node->values()=="||"){switch_op(node);}
   }
   
-  if (mut_type==1){
-    // Substitution
-    substitution(node);
-  }
+  else{
+    if (mut_type==0){
+      //insertion de "!"
+      insertion(node);
+    }
   
+    if (mut_type==1){
+      // Substitution
+      substitution(node);
+    }
+  }
 }
 
 
@@ -125,7 +129,12 @@ Node * Tree::crossing(Node * node){
 
 
 
-
+void Tree::switch_op(Node * node){
+  std::string ou="||";
+  std::string et="&&";
+  if (node->values()=="&&"){node->setvalues(ou);}
+  if (node->values()=="||"){node->setvalues(et);}
+}
 
 
 void Tree::insertion(Node * node){

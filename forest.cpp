@@ -7,6 +7,14 @@ Forest::Forest() {
   this -> nb_elmts_ = 0; 
   this -> firstTree_ = nullptr;
   this -> lastTree_= nullptr;
+  this -> lambda_= 5;
+}
+
+Forest::Forest(int lambda) {
+  this -> nb_elmts_ = 0; 
+  this -> firstTree_ = nullptr;
+  this -> lastTree_= nullptr;
+  this -> lambda_= lambda;
 }
 
 
@@ -56,3 +64,54 @@ Tree * Forest::firstTree(){
   return(firstTree_);
 }
 
+
+ void Forest::evolve(Matrix matrix_){
+
+   int ** xt_=matrix_.x();
+   int * yt_=matrix_.y(); 
+
+   int nligne=matrix_.nlignes();
+   int ncolonne=matrix_.ncolonnes();
+
+
+  Tree * fiel[lambda_+1]; //Stock children and one parent
+  Tree * best = this->lastTree();
+
+
+       // génération (after while+condition)
+    Tree * parent=lastTree(); 
+    fiel[0]=parent;
+    best=parent;
+	for (int k=1;k<lambda_+1;++k){   // potentiels enfants
+		//mutation
+
+		//Tree cop_parent(parent);
+		Tree enfant(parent);//cop
+		//std::cout<<parent->show()<<std::endl;
+		//std::cout<<fiel[k]->show()<<std::endl;
+
+		 enfant.mutation2();
+         std::cout<<enfant.show()<<std::endl;
+
+		for (int i=0;i<nligne;++i){//Calcul of fitness
+		  int xt[ncolonne];
+		  xt[0]=xt_[i][0];
+		  xt[1]=xt_[i][1];
+		  int yt=yt_[i];
+		  //std::cout<<fiel[k]->show()<<std::endl;
+		  enfant.calcul_fitness(xt,yt);
+		}
+		if (best->Fitness()<enfant.Fitness()){
+		  best=&enfant;
+		}
+		
+	  }
+	  PushBack(best);
+	
+	}
+
+void Forest::generation(int nb_gen,Matrix matrix_){
+  for (int g=0;g<nb_gen;++g){  
+    evolve(matrix_);
+  }
+}
