@@ -13,6 +13,7 @@ class Forest{
   public:
      // Methods for insertions
      void PushBack(Tree* tree); // this method allows us to add a Tree at the end. It takes a Tree as parameter.
+     void evolve(Matrix matrix_,int lambda);
 
 		// Constructors
     Forest();
