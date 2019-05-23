@@ -87,10 +87,9 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
     PyObject* capsule_forest;
     Forest* my_Forest;
 	int nbr_generation;
-    if (!PyArg_ParseTuple(args, "OOOi", &listOfYs, &listOfBs,&capsule_forest,nbr_generation)){
-    	return NULL;
+    if (!PyArg_ParseTuple(args, "OOOi", &listOfYs, &listOfBs,&capsule_forest,&nbr_generation)){
+      return NULL;
 	}	
-
 	my_Forest = (Forest*) PyCapsule_GetPointer(capsule_forest,NAME_CAPSULE_FOREST);
 
     int sizeY = PyList_Size((PyObject*) listOfYs);
@@ -100,30 +99,31 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 		
 	for (int y = 0; y < sizeY; y++){
 		my_Y[y] = (bool) PyLong_AsLong(PyList_GetItem( (PyObject*) listOfYs, (Py_ssize_t) y));
-		std::cout << my_Y[y] << std::endl;
 		nLignes +=1;
 	}
-	std::cout << "\n" << std::endl;
-    int size2 = PyList_Size((PyObject*) listOfBs);
+	std::cout<<"nombre de ligne:  "<<nLignes<<std::endl;
+  int size2 = PyList_Size((PyObject*) listOfBs);
+  std::cout<<size2<<std::endl;
 	bool** my_X = (bool**) malloc(size2*sizeof(bool*));  
 	
 	int nColonnes = 1;     
 
 	for (int i = 0; i < size2; i++){
-		PyListObject* listOfAs = (PyListObject*) PyList_GetItem( (PyObject*) listOfBs, (Py_ssize_t) i);
+	  
+		PyListObject* listOfAs = (PyListObject*) PyList_GetItem( (PyObject*) listOfBs, (Py_ssize_t) i); //fait de la merde
 		int size = PyList_Size((PyObject*) listOfAs);
-		bool* my_A = (bool*) malloc(size*sizeof(bool));  
-		my_X[i] = my_A;
+		std::cout<<size<<std::endl;
+		bool* my_A = (bool*) malloc(nLignes*sizeof(bool));  
 		nColonnes+=1;
-	    for (int j = 0; j < size; j++){ 
-			my_A[j] = (bool) PyLong_AsLong(PyList_GetItem( (PyObject*) listOfAs, (Py_ssize_t) j));
-			std::cout << my_A[j] << std::endl;
+	  for (int j = 0; j <= nLignes; ++j){ 
+	    my_A[j] = (bool) PyLong_AsLong(PyList_GetItem( (PyObject*) listOfAs, (Py_ssize_t) j));
+		  std::cout << my_A[j] << std::endl;
 		}	
-		std::cout << "\n" << std::endl;
-   
+		my_X[i]=my_A; //Vérifier que cette ligne marche bien
 	}
-
+	std::cout<<"nombre de colonnes :   "<<nColonnes<<std::endl;
 	Matrix matrix_ = Matrix(my_X,my_Y,nLignes,nColonnes); 
+	matrix_.show();
 	my_Forest->generation(nbr_generation, matrix_);
 
 	for (int i = 0; i < size2; i++){

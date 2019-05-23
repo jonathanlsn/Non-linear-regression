@@ -13,15 +13,17 @@ Matrix::Matrix(bool ** tab_X,bool* tab_Y, int nLignes,int nColonnes){
   for (int h=0; h < nLignes; h++){
     for (int j=0; j < nColonnes; j++){
       if (j == nColonnes-1){
+        //std::cout<<tab_Y[k]<<std::endl;
         matrix_[h][j] = tab_Y[k];
         k+=1;
 	  }
       else{
-		matrix_[h][j] = tab_X[k];
+		    matrix_[h][j] = tab_X[k];
         k+=1;
-	  }
+	    }
     }
   }
+  //std::cout<<k<<std::endl;
 }    
   
 //getters
