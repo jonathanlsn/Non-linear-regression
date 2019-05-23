@@ -2,18 +2,24 @@
 #include <iostream>
 
 //Constructor
-Matrix::Matrix(int * tab, int nLignes,int nColonnes){
+Matrix::Matrix(bool ** tab_X,bool* tab_Y, int nLignes,int nColonnes){
   nLignes_=nLignes;
   nColonnes_=nColonnes;
-  matrix_ = new int* [ nLignes ];
+  matrix_ = new bool* [nLignes ];
   for (int i=0; i < nLignes; i++){
-    matrix_[i] = new int[ nColonnes ];
+    matrix_[i] = new bool[nColonnes];
   }
   int k=0;
   for (int h=0; h < nLignes; h++){
     for (int j=0; j < nColonnes; j++){
-      matrix_[h][j] = tab[k];
-      k+=1;
+      if (j == nColonnes-1){
+        matrix_[h][j] = tab_Y[k];
+        k+=1;
+	  }
+      else{
+		matrix_[h][j] = tab_X[k];
+        k+=1;
+	  }
     }
   }
 }    
@@ -36,7 +42,7 @@ int Matrix::ncolonnes(){
   return(nColonnes_);
 }
 
-int **Matrix::matrix(){
+bool **Matrix::matrix(){
   return(matrix_);
 }
 
