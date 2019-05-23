@@ -624,14 +624,17 @@ std::cout<<std::endl;
   std::cout<< "arbre muté 5 fois : " <<tree2.show() <<std::endl;
 */
  
-Node no(false);
+
+Node no(et);
+Node no1(true,&no);
+Node no2(false,&no);
 Tree tr(&no);
 Forest fo;
 fo.PushBack(&tr);
 
-fo.evolve(matrix_,lambda);
-fo.show();
-fo.evolve(matrix_,lambda);
+
+
+fo.generation(10,matrix_);
 fo.show();
 
   return 0;

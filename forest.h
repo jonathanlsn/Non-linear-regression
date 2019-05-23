@@ -13,10 +13,12 @@ class Forest{
   public:
      // Methods for insertions
      void PushBack(Tree* tree); // this method allows us to add a Tree at the end. It takes a Tree as parameter.
-     void evolve(Matrix matrix_,int lambda);
+     void evolve(Matrix matrix_);
+     void generation(int nb_gen,Matrix matrix_);
 
 		// Constructors
     Forest();
+    Forest(int lambda);
     Forest(const Forest&)=delete;  
 
         // Destructors
@@ -34,5 +36,6 @@ class Forest{
     Tree* firstTree_;
     Tree* lastTree_; 
     int nb_elmts_;
+    int lambda_;
 };
 #endif // FOREST_
