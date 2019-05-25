@@ -5,20 +5,20 @@
 class Matrix{
   public:
 //constructeur
-    Matrix(int * tab, int nLignes,int nColonnes);
+    Matrix(bool * tab, int nLignes,int nColonnes);
 
 //getter
     int nlignes();
     int ncolonnes();
     void show();
-    int ** matrix();
-    int ** x();
-    int * y();
+    bool ** matrix();
+    bool ** x();
+    bool * y();
   
   protected:
     int nLignes_;
     int nColonnes_;
-    int **matrix_;
+    bool **matrix_;
 };
 
 #endif

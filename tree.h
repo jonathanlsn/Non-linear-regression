@@ -34,8 +34,8 @@ class Tree{
     void mutation();
 
 
-    bool cross(Node * node,int * x,int &nb_elem);
-    void calcul_fitness(int * x, bool y);
+    bool cross(Node * node,bool * x,int &nb_elem);
+    void calcul_fitness(bool * x, bool y);
     
     
     bool cross(Node * node,int &nb_elem, bool copy, Node initialcopy);
@@ -50,6 +50,7 @@ class Tree{
     Node * choose();
     Node * crossing(Node * node);
     void switch_op(Node * node);
+    void switch_param(Node * node);
     void substitution(Node * node);
     void insertion(Node * node);
 

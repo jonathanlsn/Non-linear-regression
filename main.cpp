@@ -12,7 +12,7 @@
 int main()
 {
   
-  int nulltab[2]={0,0};
+  bool nulltab[2]={0,0};
   //Creation on an environment of work
   /*std::cout<<"Hello World"<<std::endl;*/
   
@@ -54,7 +54,7 @@ int main()
   Tree Tree1(&Node1);  
   Tree Tree2(&Node3);
   
-
+/*
   //Test of cross
   std::cout<<"Test of cross"<<std::endl;
   int nb_elem=0; //we need to initialise it
@@ -212,10 +212,9 @@ int main()
   std::cout<< "   "<< std::endl;
   std::cout<< "Troisieme mutation"<< std::endl;
   Tree15.mutation();
-  std::cout <<"Le nombre de noeud après modification " << Tree15.NbrNode() << std::endl;*/
+  std::cout <<"Le nombre de noeud après modification " << Tree15.NbrNode() << std::endl;
 
   //Nouvel arbre
-
 
   Node Node37(str1);
   Node Node38(str2,&Node37);
@@ -230,6 +229,7 @@ int main()
 
   Tree Tree17(&Node37);
 
+*/
 /*  std::cout<< "   "<< std::endl;
   std::cout<< "Premiere mutation"<< std::endl;
   Tree17.mutation();
@@ -256,8 +256,8 @@ int main()
   //Creation of initial tree
   int Nbrmutation =20;
   
-  Node Node47(true);
-  Tree Tree18(&Node47);
+ /* Node Node47(true);
+  Tree Tree18(&Node47);*/
   
  /* for (int i=0; i<Nbrmutation; ++i){
     std::cout<< "   "<< std::endl;
@@ -341,8 +341,8 @@ int main()
   std::cout<< "tests matrix"<< std::endl;
   std::cout<< std::endl;
   
-  int tab[]={1,0,0,0,1,0,1,1,1};  // (!x1||!x2)||(x1&&x2)
-  int tab2[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
+  bool tab[]={1,0,0,0,1,0,1,1,1};  // (!x1||!x2)||(x1&&x2)
+  bool tab2[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
   int nligne_=3;
   int ncolonne_=3;
   Matrix matrix(tab2,nligne_,ncolonne_);
@@ -382,7 +382,7 @@ int main()
   
   std::cout<< "adresse tree2 : " <<&tree2<< " : "<<tree2.show()<<std::endl;
   std::cout<<"adresse tree3 : " <<&tree3<< " : "<<tree3.show()<<std::endl;
-  std::cout<<"adresse Tree10 : " <<&Tree10<< " : "<<Tree10.show()<<std::endl;
+ // std::cout<<"adresse Tree10 : " <<&Tree10<< " : "<<Tree10.show()<<std::endl;
   
   std::cout<<std::endl;
   
@@ -400,7 +400,7 @@ int main()
   //Tree * generation2=forest2.firstTree();
   //std::cout<<generation2->show()<<std::endl;
   
-  forest2.PushBack(&Tree10); 
+//  forest2.PushBack(&Tree10); 
   
   
   tree2.link(&tree3);
@@ -435,11 +435,11 @@ int main()
   //Test of Tree by copy with cross
   std::cout<<" "<< std::endl;
   std::cout<<"Test of Tree by copy with cross"<< std::endl;
->>>>>>> refs/remotes/origin/master
+
 
   //Creation of a tree: true and true.
   Node nod3(str1);
->>>>>>> cf50ebf70c15082b9f74989a5a7c4d17fc06a312
+
   Node nod1(true,&nod3);
   Node nod2(true,&nod3);
   Tree tr1(&nod3);
@@ -498,20 +498,23 @@ std::cout<<std::endl;
 std::cout<< "Programme principal :" <<std::endl;
 std::cout<<std::endl;
   
-int tab3[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
+bool tab3[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
 int nligne=3;
 int ncolonne=3;
-Matrix matrix_(tab2,nligne,ncolonne);
+Matrix matrix_(tab3,nligne,ncolonne);
 
 std::cout<< "matrice :" <<std::endl;
 matrix_.show();
 std::cout<<std::endl;
 
-int ** xt_=matrix_.x();
-int * yt_=matrix_.y(); 
+bool ** xt_=matrix_.x();
+bool * yt_=matrix_.y(); 
 
 Forest forest;
-Node nodet(true);
+Node nodet(et);
+Node nodet2(True,&nodet);
+Node nodet3(True,&nodet);
+
 Tree Treet(&nodet);//Creation of firest Tree with variable
 forest.PushBack(&Treet);//Initialisation of forest
 
@@ -537,10 +540,10 @@ for (int g=0;g<10;++g){       // génération (after while+condition)
      std::cout<<enfant.show()<<std::endl;
 
     for (int i=0;i<nligne;++i){//Calcul of fitness
-      int xt[ncolonne];
+      bool xt[ncolonne];
       xt[0]=xt_[i][0];
       xt[1]=xt_[i][1];
-      int yt=yt_[i];
+      bool yt=yt_[i];
       //std::cout<<fiel[k]->show()<<std::endl;
       enfant.calcul_fitness(xt,yt);
     }
@@ -570,7 +573,7 @@ std::cout<<std::endl;
 
 */
 
-  
+/*   
   std::cout<<std::endl;
   
   Node n1(et);
@@ -589,7 +592,7 @@ std::cout<<std::endl;
   std::cout<<std::endl;
   
   
-  
+ 
   std::cout<< "Test constructeur de Node par copie :" <<std::endl;
   
   Node new_n1(&n1);
@@ -597,28 +600,20 @@ std::cout<<std::endl;
   Node n5(False,&new_n1);
   
   std::cout<< new_n1.type() <<std::endl;
-  std::cout<< n4.type() <<std::endl;
-  std::cout<< n5.type() <<std::endl;
+  std::cout<< (n4.type()==n5.type()) <<std::endl;
 
-  Tree arbre2(&new_n1);
-  std::cout<< arbre2.show() <<std::endl;
-  
-  
-  
   std::cout<<std::endl;
+*/ 
+ 
   
-  
-  
+  //Test constructor de Tree by copy 
   std::cout<< "Test constructeur de Tree par copie :" <<std::endl;
   Tree arbre3(&tree2);
   std::cout<< "arbre d'origine : " << tree2.show() <<std::endl;
   std::cout<< "arbre copié : " <<arbre3.show() <<std::endl;
-  
-  
-  
-  
+
+
   std::cout<<std::endl;
-  
 
   std::cout<< "Test mutations :" <<std::endl;
   std::cout<< "arbre d'origine : " << tree2.show() <<std::endl;
@@ -626,42 +621,61 @@ std::cout<<std::endl;
   std::cout<< "arbre muté : " <<tree2.show() <<std::endl;
   tree2.mutation2();
   std::cout<< "arbre muté 2 fois : " <<tree2.show() <<std::endl;
-  
-  
-  
-  /*
-  
-  std::cout<< "test copy arbre :" <<std::endl;
-  std::cout<<std::endl;
-  
- // Tree arbre(&tree2);
- //  std::cout<< arbre.show() <<std::endl;
+  tree2.mutation2();
+  std::cout<< "arbre muté 3 fois : " <<tree2.show() <<std::endl;
+  tree2.mutation2();
+  std::cout<< "arbre muté 4 fois : " <<tree2.show() <<std::endl;
+  tree2.mutation2();
+  std::cout<< "arbre muté 5 fois : " <<tree2.show() <<std::endl;
+
+ 
+
+Node no(False);
+//Node no1(x1,&no);
+//Node no2(x2,&no);
+Tree tr(&no);
+
+for (int i=0;i<nligne;++i){//Calcul of fitness
+    bool xt[ncolonne];
+    xt[0]=xt_[i][0];
+    xt[1]=xt_[i][1];
+    bool yt=yt_[i];
+    //std::cout<<fiel[k]->show()<<std::endl;
+    tr.calcul_fitness(xt,yt);
+}
+std::cout<<std::endl;
+std::cout<< "1er arbre : " <<tr.show() <<std::endl;
+std::cout<< "fitness du 1er arbre : " <<tr.Fitness() <<std::endl;
+std::cout<<std::endl;
+
+Forest fo;
+fo.PushBack(&tr);
 
 
-   std::cout<<" " <<std::endl;
 
-  std::cout<<"Test of node by copy" <<std::endl;
+fo.generation(4,matrix_);
+fo.show();
 
-  Node no1(false);
-  Tree Treeno1(&no1);
-  Node nocopy(&no1);
 
-  Tree nodetestTree(&nocopy);
 
-  std::cout<<Treeno1.show()<<std::endl;
-  std::cout<<nodetestTree.show()<<std::endl;
+/*
+std::cout<<tr.show()<<std::endl;
+Tree tr1(&tr);
+std::cout<<tr1.show()<<std::endl;
+std::cout<<tr.FirstNode()->NextNode1()->bool_values()<<std::endl;
+std::cout<<tr.FirstNode()->NextNode2()->bool_values()<<std::endl;
 
-  std::cout<< nocopy.type()<<std::endl;
-  std::cout<< no1.type()<<std::endl;
 
-  for (int i=0; i<Nbrmutation; ++i){
-    std::cout<< "   "<< std::endl;
-    std::cout<< "mutation"<< i <<std::endl;
-    Tree18.mutation();
-  
-    
-  }
+std::cout<<tr1.FirstNode()->NextNode1()->bool_values()<<std::endl;
+std::cout<<tr1.FirstNode()->NextNode2()->bool_values()<<std::endl;
 */
-  
+//tr1.substitution(&no);
+//std::cout<<tr1.show()<<std::endl;
+/*
+Tree tr2(&tr);
+std::cout<<tr2.show()<<std::endl;
+tr2.switch_op(&no);
+std::cout<<tr2.show()<<std::endl;
+*/
   return 0;
 }
