@@ -1,6 +1,7 @@
 #include "tree.h"
 #include <iostream>
 #include "node.h"
+#include "matrix.h"
 
 int nulltab[2];
 
@@ -73,14 +74,33 @@ Tree::~Tree(){}  // Destructor
 
 
 void Tree::mutation2(){
-  int mut_type=rand()%2;
+  /*int mut_type=rand()%2;
   int mut_switch=rand()%2;
-  int mut_param=rand()%2;
+  int mut_param=rand()%2;*/
   
   //std::cout<< "choix de la mutation : " << mut_type <<std::endl;
   
   Node * node=choose();
   
+  if (node->values()=="&&" or node->values()=="||" ){
+    int mut_type=rand()%3;
+    if (mut_type==0){substitution(node);}
+    if (mut_type==1){insertion(node);}
+    else{switch_op(node);}
+  }
+  if ( node->values()=="!"){
+    int mut_type=rand()%2;
+    if (mut_type==0){substitution(node);}
+    if (mut_type==1){insertion(node);}
+  }
+  else{
+    int mut_type=rand()%2;
+    if (mut_type==0){substitution(node);}
+    if (mut_type==1){insertion(node);}
+    //else{switch_param(node);}
+  }
+  
+/*  
   if (mut_switch==0){
     if (node->values()=="&&" or node->values()=="||"){switch_op(node);}
   }
@@ -101,7 +121,7 @@ void Tree::mutation2(){
       // Substitution
       substitution(node);
     }
-  }
+  }*/
 }
 
 
@@ -111,7 +131,7 @@ Node * Tree::choose(){
 }
 
 Node * Tree::crossing(Node * node){
-  int mutation_rate=rand()%3;  //taux de mutation
+  int mutation_rate=rand()%5;  //taux de mutation
   //std::cout<< "taux de mutation : " << mutation_rate <<std::endl;
   if (mutation_rate==0){
     return(node);
@@ -271,12 +291,22 @@ void Tree::generation(int x){
 
 
 
-void Tree::calcul_fitness(bool * x,bool y){
+void Tree::calcul_fitness(Matrix matrix){
   int nb_elem=0;
-  bool fit=cross(FirstNode_,x,nb_elem);
-  if (fit!=y){
-    Fitness_-=1;
-  }
+  int nligne=matrix.nlignes();
+  int ncolonne=matrix.ncolonnes();
+  bool ** x_=matrix.x();
+  bool * y_=matrix.y(); 
+
+  for (int i=0;i<nligne;++i){//Calcul of fitness
+    bool x[ncolonne];
+    x[0]=x_[i][0];
+    x[1]=x_[i][1];
+    bool y=y_[i];
+    if (cross(FirstNode_,x,nb_elem)!=y){
+      Fitness_-=1;
+    }
+  } 
 }
 
 
@@ -302,123 +332,6 @@ bool Tree::cross(Node * node,bool * x, int &nb_node_son){ // WARNING &nb_node_so
 }
 
 
-bool Tree::cross(Node * node, int &nb_node_son, bool copy, Node initialcopy, Node * passant  ){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
-//  +la posiiblite de copier
-
-  if (copy==true){
-    if (node ->values()=="&&"){
-      Node* Nodecopy = new Node(node);
-      if (&nb_node_son==0){
-        initialcopy= &Nodecopy;
-        passant=Nodecopy;
-        nb_node_son=nb_node_son+1;
-      }
-      else{
-        nb_node_son=nb_node_son+1;
-
-        if (Nodecopy ->NextNode1()==nullptr){
-          passant -> setNextNode (Nodecopy);
-        }
-        else{
-          passant -> setNextNode2(Nodecopy);
-        }
-        Nodecopy ->setFatherNode(passant);
-        passant=Nodecopy;
-      }
-      return (cross(node -> NextNode1(),nb_node_son,copy, initialcopy, passant ) && cross(node -> NextNode2(),nb_node_son,copy,initialcopy, passant));
-
-    }
-    if (node -> values()=="||"){
-      Node* Nodecopy = new Node(node);
-      if (&nb_node_son==0){
-        initialcopy= &Nodecopy;
-        passant=Nodecopy;
-        nb_node_son=nb_node_son+1;
-      }
-      else{
-        nb_node_son=nb_node_son+1;
-
-        if (Nodecopy ->NextNode1()==nullptr){
-          passant -> setNextNode (Nodecopy);
-        }
-        else{
-          passant -> setNextNode2(Nodecopy);
-        }
-        Nodecopy ->setFatherNode(passant);
-        passant=Nodecopy;
-      }
-      return (cross(node -> NextNode1(),nb_node_son,copy,initialcopy, passant) || cross(node -> NextNode2(),nb_node_son,copy,initialcopy,passant));
-    }
-    if (node -> values()=="!"){
-      Node* Nodecopy = new Node(node);
-      if (&nb_node_son==0){
-        initialcopy= &Nodecopy;
-        passant=Nodecopy;
-        nb_node_son=nb_node_son+1;
-      }
-      else{
-        nb_node_son=nb_node_son+1;
-
-        if (Nodecopy ->NextNode1()==nullptr){
-          passant -> setNextNode (Nodecopy);
-        }
-        else{
-          passant -> setNextNode2(Nodecopy);
-        }
-        Nodecopy ->setFatherNode(passant);
-        passant=Nodecopy;
-      }
-      return (!cross(node -> NextNode1(),nb_node_son,copy,initialcopy,passant));
-    }
-  
-    else{
-      Node* Nodecopy = new Node(node);
-      std::cout<<&Nodecopy<< std::endl;
-      if (&nb_node_son==0){
-        initialcopy= Nodecopy;
-        passant=Nodecopy;
-        nb_node_son=nb_node_son+1;
-      }
-      else{
-      nb_node_son=nb_node_son+1;
-
-        if (Nodecopy ->NextNode1()==nullptr){
-          passant -> setNextNode (Nodecopy);
-        }
-        else{
-          passant -> setNextNode2(Nodecopy);
-        }
-        Nodecopy ->setFatherNode(passant);
-        passant=Nodecopy;
-        std::cout<<Nodecopy ->FatherNode()<< std::endl;
-      }
-    }
-      return (node -> bool_values());
-    }
-  
-
-
-  else{
-    if (node ->values()=="&&"){
-      nb_node_son=nb_node_son+1;
-      return (cross(node -> NextNode1(),nb_node_son,copy,initialcopy,passant) && cross(node -> NextNode2(),nb_node_son,copy,initialcopy,passant));
-
-    }
-    if (node -> values()=="||"){
-      nb_node_son=nb_node_son+1;
-      return (cross(node -> NextNode1(),nb_node_son,copy,initialcopy,passant) || cross(node -> NextNode2(),nb_node_son,copy,initialcopy,passant));
-    }
-    if (node -> values()=="!"){
-      nb_node_son=nb_node_son+1;
-      return (!cross(node -> NextNode1(),nb_node_son,copy,initialcopy,passant));
-    }
-  
-    else{
-      nb_node_son=nb_node_son+1;
-      return (node -> bool_values());
-    }
-  }
-}
 
 
 

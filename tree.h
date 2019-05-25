@@ -2,6 +2,7 @@
 #define TREE
 
 #include "node.h"
+#include "matrix.h"
 #include <cstdlib>
 
 
@@ -25,8 +26,6 @@ class Tree{
     void generation(int x);
 
 //method
-
-    bool cross(Node * node,int &nb_elem, bool copy, Node initialcopy,  Node * passant);
     
     
     bool cross(Node * node, int &nb_node_son );
@@ -35,7 +34,7 @@ class Tree{
 
 
     bool cross(Node * node,bool * x,int &nb_elem);
-    void calcul_fitness(bool * x, bool y);
+    void calcul_fitness(Matrix matrix);
     
     
     bool cross(Node * node,int &nb_elem, bool copy, Node initialcopy);
