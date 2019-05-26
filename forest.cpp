@@ -80,7 +80,7 @@ void Forest::evolve(Matrix matrix_){
 	for (int k=1;k<lambda_+1;++k){   // lambda enfants
 		//mutation
 		fiel[k]= new Tree(parent);  // Copie de l'arbre parent 
-		fiel[k]->mutation2();  // Mutation 
+		fiel[k]->mutation();  // Mutation 
 		
     std::cout<<fiel[k]->show()<<std::endl;
 

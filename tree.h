@@ -27,25 +27,22 @@ class Tree{
 
 //method
     
-    
-    bool cross(Node * node, int &nb_node_son );
     void calcul_fitness(bool y);
-    void mutation();
+    void cross(Node * node);
 
 
-    bool cross(Node * node,bool * x,int &nb_elem);
+    bool cross(Node * node,bool * x);
     void calcul_fitness(Matrix matrix);
     
-    
-    bool cross(Node * node,int &nb_elem, bool copy, Node initialcopy);
 
     void copy_nodes(Node * node,Node * father,int i);
 
     std::string show();
     std::string parcour(Node * node);
+    
     void link(Tree * tree);
     
-    void mutation2();
+    void mutation();
     Node * choose();
     Node * crossing(Node * node);
     void switch_op(Node * node);

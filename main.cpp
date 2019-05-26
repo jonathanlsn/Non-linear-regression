@@ -96,7 +96,7 @@ Matrix matrix2_(x,y,nligne,ncolonne);
 matrix2_.show();
 std::cout<<std::endl;
 
-/*
+
 Node no(True);
 //Node no1(x1,&no);
 //Node no2(x2,&no);
@@ -120,13 +120,6 @@ fo.generation(10,matrix_);
 
 Tree * t=fo.show(fo.nb_elmts()-1);
 std::cout<< "solution : " << t->show() <<std::endl;
-*/
-
-/*
-srand(time(NULL));
-for (int i=0;i<10;++i){
-  std::cout<< rand()%6 <<std::endl;
-} */
 
 
 //resolve(matrix_);

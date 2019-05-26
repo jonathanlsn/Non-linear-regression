@@ -73,10 +73,9 @@ Tree::~Tree(){}  // Destructor
 
 
 
-void Tree::mutation2(){
+void Tree::mutation(){
   
   Node * node=choose();
-  //srand(time(NULL));
   if (node->values()=="&&" or node->values()=="||" ){
     int mut_type=rand()%3;
     if (mut_type==0){substitution(node);}
@@ -98,14 +97,14 @@ void Tree::mutation2(){
 
 
 Node * Tree::choose(){
+  cross(FirstNode_);
   return(crossing(FirstNode_));
 }
 
 
 Node * Tree::crossing(Node * node){
-  //srand(time(NULL));
-  int mutation_rate=rand()%5;  //taux de mutation
-  //std::cout<< "taux de mutation : " << mutation_rate <<std::endl;
+  int mutation_rate=rand()%NbrNode_;  //taux de mutation
+
   if (mutation_rate==0){
     return(node);
   }
@@ -227,8 +226,30 @@ int Tree::Fitness(){
 
 
 int Tree::NbrNode(){
+  cross(FirstNode_);
   return NbrNode_;
 }
+
+void Tree::cross(Node * node){ 
+  if (node ->values()=="&&"){
+    NbrNode_=NbrNode_+1;
+    cross(node -> NextNode1());
+    cross(node -> NextNode2());
+  }
+  if (node -> values()=="||"){
+    NbrNode_=NbrNode_+1;
+    cross(node -> NextNode1());
+    cross(node -> NextNode2());
+  }
+  if (node -> values()=="!"){
+    NbrNode_=NbrNode_+1;
+    cross(node -> NextNode1());
+  }
+  else{
+    NbrNode_=NbrNode_+1;
+  }
+}
+
 
 
 //setter
@@ -249,7 +270,6 @@ void Tree::generation(int x){
 
 void Tree::calcul_fitness(Matrix matrix){
 
-  int nb_elem=0;
   int nligne=matrix.nlignes();
   int ncolonne=matrix.ncolonnes();
   bool ** x_=matrix.x();
@@ -261,22 +281,22 @@ void Tree::calcul_fitness(Matrix matrix){
     x[1]=x_[i][1];
     x[2]=x_[i][2];
     bool y=y_[i];
-    if (cross(FirstNode_,x,nb_elem)!=y){
+    if (cross(FirstNode_,x)!=y){
       Fitness_-=1;
     }
   } 
 }
 
 
-bool Tree::cross(Node * node,bool * x, int &nb_node_son){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
+bool Tree::cross(Node * node,bool * x){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
   if (node ->values()=="&&"){
-    return (cross(node -> NextNode1(),x,nb_node_son) and cross(node -> NextNode2(),x,nb_node_son));
+    return (cross(node -> NextNode1(),x) and cross(node -> NextNode2(),x));
   }
   if (node -> values()=="||"){
-    return (cross(node -> NextNode1(),x,nb_node_son) or cross(node -> NextNode2(),x,nb_node_son));
+    return (cross(node -> NextNode1(),x) or cross(node -> NextNode2(),x));
   }
   if (node -> values()=="!"){
-    return (not cross(node -> NextNode1(),x,nb_node_son));
+    return (not cross(node -> NextNode1(),x));
   }
   if (node -> values()=="x1"){
     return (x[0]);
@@ -325,27 +345,4 @@ void Tree::link(Tree * tree){
 }
 
 
-bool Tree::cross(Node * node, int &nb_node_son ){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
-//  +la posiiblite de copier
-
-
-    if (node ->values()=="&&"){
-      nb_node_son=nb_node_son+1;
-      return (cross(node -> NextNode1(),nb_node_son) && cross(node -> NextNode2(),nb_node_son));
-
-    }
-    if (node -> values()=="||"){
-      nb_node_son=nb_node_son+1;
-      return (cross(node -> NextNode1(),nb_node_son) || cross(node -> NextNode2(),nb_node_son));
-    }
-    if (node -> values()=="!"){
-      nb_node_son=nb_node_son+1;
-      return (!cross(node -> NextNode1(),nb_node_son));
-    }
-  
-    else{
-      nb_node_son=nb_node_son+1;
-      return (node -> bool_values());
-    }
-  }
 
