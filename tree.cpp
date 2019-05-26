@@ -3,20 +3,19 @@
 #include "node.h"
 #include "matrix.h"
 
+
 int nulltab[2];
 
+ 
 //constructor
 Tree::Tree(Node * node){
-//Initialisation of a tree
+  //Initialisation of a tree
   FirstNode_ = node;
   Fitness_ = 0;
   NbrNode_ = 1;
   nextTree_ = nullptr; 
   generation_ = -1;
 }
-
-
-
 
 
 Tree::Tree( Tree* tree){
@@ -33,9 +32,7 @@ Tree::Tree( Tree* tree){
 }
 
 
-
 void Tree::copy_nodes(Node * node, Node * father, int i){
-  
   if (node->values()=="&&" or node->values()=="||" or node->values()=="!"){
    
     Node * op_node=new Node(node->values(), father);
@@ -64,13 +61,16 @@ void Tree::copy_nodes(Node * node, Node * father, int i){
     if (i==0){
       FirstNode_=param_node;
     }
-    ++i;
-  } 
+    ++i; 
+  }
 }
 
 
 
+
 Tree::~Tree(){}  // Destructor
+
+
 
 
 void Tree::mutation2(){
@@ -94,36 +94,13 @@ void Tree::mutation2(){
     if (mut_type==1){insertion(node);}
     //else{switch_param(node);}
   }
-  
-/*  
-  if (mut_switch==0){
-    if (node->values()=="&&" or node->values()=="||"){switch_op(node);}
-  }
-  
-  if (mut_param==0){
-    if (node->values()=="true" or node->values()=="false" or node->values()=="x1" or node->values()=="x2"){
-      switch_param(node);
-    }
-  }
-  
-  else{
-    if (mut_type==0){
-      //insertion de "!"
-      insertion(node);
-    }
-  
-    if (mut_type==1){
-      // Substitution
-      substitution(node);
-    }
-  }*/
 }
-
 
 
 Node * Tree::choose(){
   return(crossing(FirstNode_));
 }
+
 
 Node * Tree::crossing(Node * node){
   //srand(time(NULL));
@@ -132,7 +109,6 @@ Node * Tree::crossing(Node * node){
   if (mutation_rate==0){
     return(node);
   }
-
   else{
     int left_right=rand()%2;
     if (left_right==0){   // On se déplace vers le NextNode1
@@ -153,7 +129,6 @@ Node * Tree::crossing(Node * node){
     }
   }
 }
-
 
 
 void Tree::switch_op(Node * node){
@@ -238,41 +213,29 @@ void Tree::substitution(Node * node){
   }
   new_node->setFatherNode(father);
 }
-
-  
-  
-  
-  
-/*
-Tree::Tree(Tree* tree){ 
-//Creation of a Tree by copy using Node copy
-  FirstNode_ = new Node  (FirstNode());
-  Fitness_ = 0;
-  NbrNode_ = 1;
-  nextTree_ = nullptr; 
-  generation_ = -1;
-
-} */ 
+ 
 
 //getter
-
 Node * Tree:: FirstNode(){
   return FirstNode_;
 }
+
 
 int Tree::Fitness(){
   return Fitness_;
 }
 
+
 int Tree::NbrNode(){
   return NbrNode_;
 }
 
-//setter
 
+//setter
 Tree * Tree::nextTree(){
   return(nextTree_);
 }
+
 
 void Tree::generation(int x){
   generation_=x;
@@ -285,6 +248,7 @@ void Tree::generation(int x){
 
 
 void Tree::calcul_fitness(Matrix matrix){
+
   int nb_elem=0;
   int nligne=matrix.nlignes();
   int ncolonne=matrix.ncolonnes();
@@ -333,6 +297,7 @@ bool Tree::cross(Node * node,bool * x, int &nb_node_son){ // WARNING &nb_node_so
 
 
 
+
 std::string Tree::show(){
   return(parcour(FirstNode_));
 }
@@ -360,10 +325,6 @@ void Tree::link(Tree * tree){
 }
 
 
-
-
-
-
 bool Tree::cross(Node * node, int &nb_node_son ){ // WARNING &nb_node_son permet de compter le nombre de noeud à partir du node passé en paramètre, ce n'est pas le nombre d'élément de l'arbre en entier!!! Il est passé en adresse et oblige de l'initialiser à 0 à chaque utilisation de cross//
 //  +la posiiblite de copier
 
@@ -387,5 +348,4 @@ bool Tree::cross(Node * node, int &nb_node_son ){ // WARNING &nb_node_son permet
       return (node -> bool_values());
     }
   }
-
 

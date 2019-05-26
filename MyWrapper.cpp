@@ -26,11 +26,13 @@ static Forest* ForestPythontoC(PyObject* args){
 }
 */
 
+// destructor
 void ForestCapsuleDestructor(PyObject* capsule){
 	Forest* my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
-  delete my_A;
+  delete my_Forest;
 }
 
+// fucntion that make the forest capsul
 static PyObject* ForestTranslator(PyObject* self, PyObject* args){
 	int a;
 	if (!PyArg_ParseTuple(args, "h", &a)){
@@ -41,6 +43,7 @@ static PyObject* ForestTranslator(PyObject* self, PyObject* args){
 	return capsule;
 }
 
+//methods permiting to get the results which are in the forest object
 static PyObject* nb_elmtsInForest(PyObject* self, PyObject* args){
     Forest* my_Forest;
 	PyObject* capsule;
@@ -76,46 +79,58 @@ static PyObject* NbrNodeTreeInForest(PyObject* self, PyObject* args){
     return Py_BuildValue("f",my_Forest->show(position)->NbrNode());
 }
 
+// function that permit to get the matrice between the two languages
+// and to solve the problem 
 static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 	PyListObject* listOfYs;
 	PyListObject** listOfBs;
     PyObject* capsule_forest;
     Forest* my_Forest;
-    if (!PyArg_ParseTuple(args, "OOO", &listOfYs, &listOfBs,&capsule_forest)){
-    	return NULL;
+	int nbr_generation;
+    if (!PyArg_ParseTuple(args, "OOOi", &listOfYs, &listOfBs,&capsule_forest,&nbr_generation)){
+      return NULL;
 	}	
-
 	my_Forest = (Forest*) PyCapsule_GetPointer(capsule_forest,NAME_CAPSULE_FOREST);
 
     int sizeY = PyList_Size((PyObject*) listOfYs);
-	bool* my_Y = (bool*) malloc(sizeY*sizeof(bool));  	
+	bool* my_Y = (bool*) malloc(sizeY*sizeof(bool));  
+	
+	int nLignes = 0;
+		
 	for (int y = 0; y < sizeY; y++){
 		my_Y[y] = (bool) PyLong_AsLong(PyList_GetItem( (PyObject*) listOfYs, (Py_ssize_t) y));
-		std::cout << my_Y[y] << std::endl;
+		nLignes +=1;
 	}
-	std::cout << "\n" << std::endl;
-    int size2 = PyList_Size((PyObject*) listOfBs);
-	bool** my_B = (bool**) malloc(size2*sizeof(bool*));  
-    
-	for (int i = 0; i < size2; i++){
-		PyListObject* listOfAs = (PyListObject*) PyList_GetItem( (PyObject*) listOfBs, (Py_ssize_t) i);
-		int size = PyList_Size((PyObject*) listOfAs);
-		bool* my_A = (bool*) malloc(size*sizeof(bool));  
-		my_B[i] = my_A;
-	    for (int j = 0; j < size; j++){ 
-			my_A[j] = (bool) PyLong_AsLong(PyList_GetItem( (PyObject*) listOfAs, (Py_ssize_t) j));
-			std::cout << my_A[j] << std::endl;
-		}	
-		std::cout << "\n" << std::endl;
-   
-	}
-    
+	std::cout<<"nombre de ligne:  "<<nLignes<<std::endl;
+  int size2 = PyList_Size((PyObject*) listOfBs);
+  std::cout<<size2<<std::endl;
+	bool** my_X = (bool**) malloc(size2*sizeof(bool*));  
+	
+	int nColonnes = 1;     
 
 	for (int i = 0; i < size2; i++){
-		free(my_B[i]);	
+	  
+		PyListObject* listOfAs = (PyListObject*) PyList_GetItem( (PyObject*) listOfBs, (Py_ssize_t) i); //fait de la merde
+		int size = PyList_Size((PyObject*) listOfAs);
+		std::cout<<size<<std::endl;
+		bool* my_A = (bool*) malloc(nLignes*sizeof(bool));  
+		nColonnes+=1;
+	  for (int j = 0; j <= nLignes; ++j){ 
+	    my_A[j] = (bool) PyLong_AsLong(PyList_GetItem( (PyObject*) listOfAs, (Py_ssize_t) j));
+		  std::cout << my_A[j] << std::endl;
+		}	
+		my_X[i]=my_A; //Vérifier que cette ligne marche bien
+	}
+	std::cout<<"nombre de colonnes :   "<<nColonnes<<std::endl;
+	Matrix matrix_ = Matrix(my_X,my_Y,nLignes,nColonnes); 
+	matrix_.show();
+	my_Forest->generation(nbr_generation, matrix_);
+
+	for (int i = 0; i < size2; i++){
+		free(my_X[i]);	
 	}
     free (my_Y);
-    free (my_B); 
+    free (my_X); 
 
   	return Py_None;
 }
@@ -124,9 +139,9 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 static PyMethodDef module_funcs[] = {
     {"sum_list_As", (PyCFunction)SumAsInPyList, METH_VARARGS, "Sum the As in a list\n\nArgs:\n\tlist_As (list): list of capsules A\n\nReturns:\n\t Capsules: Object A capsule\n\t int: sum of A's a"},
 	{"initiate_Forest" ,(PyCFunction)ForestTranslator, METH_VARARGS},
-	{"show_Fitness_Tree",(PyCFunction)FitnessTreeInForest,METH_VARARGS},
-	{"show number of tree in the forest",(PyCFunction)nb_elmtsInForest,METH_VARARGS},
-	{"show number of node in a request tree of the forest",(PyCFunction)NbrNodeTreeInForest,METH_VARARGS},
+	{"fitnessTree",(PyCFunction)FitnessTreeInForest,METH_VARARGS},
+	{"nbrTinF",(PyCFunction)nb_elmtsInForest,METH_VARARGS},
+	{"nbrNinTinF",(PyCFunction)NbrNodeTreeInForest,METH_VARARGS},
 	
 		{NULL, NULL, METH_NOARGS, NULL}
 };

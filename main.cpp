@@ -87,13 +87,22 @@ std::cout<< "matrice :" <<std::endl;
 matrix_.show();
 std::cout<<std::endl;
 
+std::cout<<"test du nouveau constructeur de matrice : " <<std::endl;
 
+bool **x=matrix_.x();
+bool *y=matrix_.y();
 
+Matrix matrix2_(x,y,nligne,ncolonne);
+matrix2_.show();
+std::cout<<std::endl;
+
+/*
 Node no(True);
 //Node no1(x1,&no);
 //Node no2(x2,&no);
 Tree tr(&no);
 tr.calcul_fitness(matrix_);
+
 
 std::cout<<std::endl;
 std::cout<< "1er arbre : " <<tr.show() <<std::endl;
@@ -111,7 +120,7 @@ fo.generation(10,matrix_);
 
 Tree * t=fo.show(fo.nb_elmts()-1);
 std::cout<< "solution : " << t->show() <<std::endl;
-
+*/
 
 /*
 srand(time(NULL));
