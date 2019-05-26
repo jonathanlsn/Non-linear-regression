@@ -66,13 +66,14 @@ Tree * Forest::firstTree(){
 
 
 void Forest::evolve(Matrix matrix_){
-  srand(time(NULL));
+  
   Tree * fiel[lambda_+1]; //Stock children and one parent
   Tree * best = this->lastTree();
 
   Tree * parent=lastTree_; 
   fiel[0]=parent;
   best=parent;
+  srand(time(NULL));
 	for (int k=1;k<lambda_+1;++k){   // lambda enfants
 		//mutation
 		fiel[k]= new Tree(parent);
@@ -83,7 +84,7 @@ void Forest::evolve(Matrix matrix_){
 		fiel[k]->calcul_fitness(matrix_);
 		
 	  std::cout<< "fitness : " << fiel[k]->Fitness() <<std::endl;
-	  if (best->Fitness()<fiel[k]->Fitness()){
+	  if (best->Fitness()<=fiel[k]->Fitness()){
 	    best=fiel[k];
   	}
   }
@@ -96,11 +97,33 @@ void Forest::evolve(Matrix matrix_){
 }
 
 void Forest::generation(int nb_gen,Matrix matrix_){
-  for (int g=0;g<nb_gen;++g){ 
-  //while(last->Fitness()!=0){
-    Tree * last=lastTree_;
+  //for (int g=0;g<nb_gen;++g){ 
+  Tree * last=lastTree_;
+  while(last->Fitness()!=0){
+    last=lastTree_;
     if(last->Fitness()==0){return;}
     evolve(matrix_);
     
   }
 }
+
+
+/*
+void Forest::resolve(Matrix matrix_){
+  std::string True="true";
+  Node no(True);
+  Tree tr(&no);
+  tr.calcul_fitness(matrix_);
+
+  std::cout<<std::endl;
+  std::cout<< "1er arbre : " <<tr.show() <<std::endl;
+  std::cout<< "fitness du 1er arbre : " <<tr.Fitness() <<std::endl;
+  std::cout<<std::endl;
+
+  Forest fo(10);
+  fo.PushBack(&tr);
+  
+  fo.generation(10,matrix_);
+  fo.show(fo.nb_elmts()-1);  
+}
+*/

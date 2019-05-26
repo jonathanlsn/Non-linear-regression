@@ -78,9 +78,10 @@ std::cout<<std::endl;
  
 
 bool tab3[]={1,0,0,0,1,0,1,1,1};  // (x1||x2)||(x1&&x2)
-int nligne=3;
-int ncolonne=3;
-Matrix matrix_(tab3,nligne,ncolonne);
+bool tab4[]={1,0,0,0,0,1,1,0,1,1,1,1,1,0,1,1,0,0,1,0};
+int nligne=5;
+int ncolonne=4;
+Matrix matrix_(tab4,nligne,ncolonne);
 
 std::cout<< "matrice :" <<std::endl;
 matrix_.show();
@@ -99,15 +100,27 @@ std::cout<< "1er arbre : " <<tr.show() <<std::endl;
 std::cout<< "fitness du 1er arbre : " <<tr.Fitness() <<std::endl;
 std::cout<<std::endl;
 
-Forest fo(10);
+Forest fo(15);
 fo.PushBack(&tr);
 
 
 
 fo.generation(10,matrix_);
-fo.show();
+//fo.show();
 
 
+Tree * t=fo.show(fo.nb_elmts()-1);
+std::cout<< "solution : " << t->show() <<std::endl;
+
+
+/*
+srand(time(NULL));
+for (int i=0;i<10;++i){
+  std::cout<< rand()%6 <<std::endl;
+} */
+
+
+//resolve(matrix_);
 
 
   return 0;

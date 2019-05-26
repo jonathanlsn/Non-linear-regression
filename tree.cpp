@@ -59,7 +59,7 @@ void Tree::copy_nodes(Node * node, Node * father, int i){
   } 
   
   else{
-    std::cout<<"lala"<<std::endl;
+    std::cout<<std::endl;
     Node * param_node=new Node (node->values(), father); 
     if (i==0){
       FirstNode_=param_node;
@@ -74,14 +74,9 @@ Tree::~Tree(){}  // Destructor
 
 
 void Tree::mutation2(){
-  /*int mut_type=rand()%2;
-  int mut_switch=rand()%2;
-  int mut_param=rand()%2;*/
-  
-  //std::cout<< "choix de la mutation : " << mut_type <<std::endl;
   
   Node * node=choose();
-  
+  //srand(time(NULL));
   if (node->values()=="&&" or node->values()=="||" ){
     int mut_type=rand()%3;
     if (mut_type==0){substitution(node);}
@@ -131,6 +126,7 @@ Node * Tree::choose(){
 }
 
 Node * Tree::crossing(Node * node){
+  //srand(time(NULL));
   int mutation_rate=rand()%5;  //taux de mutation
   //std::cout<< "taux de mutation : " << mutation_rate <<std::endl;
   if (mutation_rate==0){
@@ -168,8 +164,9 @@ void Tree::switch_op(Node * node){
 }
 
 void Tree::switch_param(Node * node){
-  std::string param[]={"true","false","x1","x2"};
-  int i=rand()%4;
+  //srand(time(NULL));
+  std::string param[]={"true","false","x1","x2","x3"};
+  int i=rand()%5;
   if (node->values()==param[i]){switch_param(node);}
   else {node->setvalues(param[i]);}
   
@@ -199,9 +196,9 @@ void Tree::insertion(Node * node){
 
 
 void Tree::substitution(Node * node){
-  std::string options[]={"true","false","x1","x2","&&","||","!"};
-  
-  int i=rand()%7;   // Choix d'une option
+  std::string options[]={"true","false","x1","x2","x3","&&","||","!"};
+  //srand(time(NULL));
+  int i=rand()%8;   // Choix d'une option
   //std::cout<< "position : " << i <<std::endl;
 
   Node * father=node->FatherNode();
@@ -211,11 +208,8 @@ void Tree::substitution(Node * node){
   
   if (options[i]=="&&" or options[i]=="||"){
   
-    int param1=rand()%4;  //choix d'un paramètre
-    int param2=rand()%4;  //choix d'un paramètre
-    
-    //std::cout<< "param1 : " << param1 <<std::endl;
-    //std::cout<< "param2 : " << param2 <<std::endl;
+    int param1=rand()%5;  //choix d'un paramètre
+    int param2=rand()%5;  //choix d'un paramètre
     
     new Node(options[param1],new_node);
     new Node(options[param2],new_node);
@@ -223,8 +217,7 @@ void Tree::substitution(Node * node){
   }
   if (options[i]=="!"){
   
-    int param1=rand()%4;  //choix d'un paramètre
-    //std::cout<< "param1 : " << param1 <<std::endl;
+    int param1=rand()%5;  //choix d'un paramètre
     
     new Node(options[param1],new_node);
   }
@@ -302,6 +295,7 @@ void Tree::calcul_fitness(Matrix matrix){
     bool x[ncolonne];
     x[0]=x_[i][0];
     x[1]=x_[i][1];
+    x[2]=x_[i][2];
     bool y=y_[i];
     if (cross(FirstNode_,x,nb_elem)!=y){
       Fitness_-=1;
@@ -325,6 +319,9 @@ bool Tree::cross(Node * node,bool * x, int &nb_node_son){ // WARNING &nb_node_so
   }
   if (node -> values()=="x2"){
     return (x[1]);
+  }
+  if (node -> values()=="x3"){
+    return (x[2]);
   }
   else{
     return (node->bool_values());
