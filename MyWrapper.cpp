@@ -13,19 +13,6 @@
 // Name for the cpp object "capsules"
 #define NAME_CAPSULE_FOREST "FOREST"
 
-/*
-static Forest* ForestPythontoC(PyObject* args){
-    Forest* my_Forest; 
-    PyObject* capsule; // là on prend les argumetns de la capsule pour créer la forêt
-// mais on veut créer une forêt vierge donc pas d'argument. Doit-on retirer args ?
-	if (!PyArg_ParseTuple(args, "O", &capsule)){
-		return NULL;
-	}
-    my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
-	return my_Forest;
-}
-*/
-
 // destructor
 void ForestCapsuleDestructor(PyObject* capsule){
 	Forest* my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
@@ -101,9 +88,7 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 	for (int y = 0; y < sizeY; y++){
 		my_Y[y] = (bool) PyLong_AsLong(PyList_GetItem( (PyObject*) listOfYs, (Py_ssize_t) y));
 		nLignes +=1;
-		std::cout << my_Y[y] << std::endl;
 	}
-	std::cout << "\n" << std::endl;
 
     int size2 = PyList_Size((PyObject*) listOfBs);
 	bool** my_X = (bool**) malloc(size2*sizeof(bool*));  
@@ -120,16 +105,12 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 
 	    for (int j = 0; j < size; ++j){ 
 	    	my_A[j] = (bool) PyLong_AsLong(PyList_GetItem( (PyObject*) listOfAs, (Py_ssize_t) j));
-		    std::cout << my_A[j] << std::endl;
 		}	
 		my_X[i]=my_A; 
-		std::cout << "\n" << std::endl;
 	}
 
 	Matrix matrix_ = Matrix(my_X,my_Y,nLignes,nColonnes);
-	matrix_.show(); 
 	my_Forest->generation(nbr_generation, matrix_);
-
 
 	for (int i = 0; i < size2; i++){
 		free(my_X[i]);	
