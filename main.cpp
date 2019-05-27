@@ -41,7 +41,7 @@ int main()
 
 
 
-
+/*
 std::cout<<std::endl;
 std::cout<<std::endl;
 
@@ -50,7 +50,7 @@ std::cout<<std::endl;
 std::cout<< "Programme principal :" <<std::endl;
 std::cout<<std::endl;
   
-bool tab3[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
+bool tab2[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
 int nligne=3;
 int ncolonne=3;
 Matrix matrix_(tab2,nligne,ncolonne);
@@ -59,8 +59,8 @@ std::cout<< "matrice :" <<std::endl;
 matrix_.show();
 std::cout<<std::endl;
 
-int ** xt_=matrix_.x();
-int * yt_=matrix_.y(); 
+bool ** xt_=matrix_.x();
+bool * yt_=matrix_.y(); 
 
 Forest forest;
 Node nodet(True);
@@ -93,7 +93,7 @@ for (int g=0;g<10;++g){       // génération (after while+condition)
       xt[1]=xt_[i][1];
       int yt=yt_[i];
       //std::cout<<fiel[k]->show()<<std::endl;
-      fiel[k] -> calcul_fitness(xt,yt);
+      fiel[k] -> calcul_fitness(m);
     }
     if (best->Fitness()<fiel[k]->Fitness()){
       best=fiel[k];
@@ -111,7 +111,7 @@ Tree * Tree_i=forest.show(3);    // arbre de la 3ème génération
 std::cout<<Tree_i->show()<<std::endl;  //aperçu de l'arbre
 
 std::cout<<std::endl;
-
+*/
 /*
   std::cout<<" " <<std::endl;
   std::cout<<"lala " <<tr1.nextTree()<<std::endl;
