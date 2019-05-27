@@ -38,8 +38,9 @@ static PyObject* nb_elmtsInForest(PyObject* self, PyObject* args){
 		return NULL;
 	}
 	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
+	std::cout << my_Forest->nb_elmts() << std::endl;
     
-    return Py_BuildValue("f",my_Forest->nb_elmts());
+    return Py_BuildValue("i",my_Forest->nb_elmts());
 }
 
 static PyObject* FitnessTreeInForest(PyObject* self, PyObject* args){
@@ -50,8 +51,8 @@ static PyObject* FitnessTreeInForest(PyObject* self, PyObject* args){
 		return NULL;
 	}
 	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
-    
-    return Py_BuildValue("f",my_Forest->showlast()->Fitness());
+    std::cout << my_Forest->showlast()->Fitness()<< std::endl;
+    return Py_BuildValue("i",my_Forest->showlast()->Fitness());
 }
 
 static PyObject* NbrNodeTreeInForest(PyObject* self, PyObject* args){
@@ -62,8 +63,9 @@ static PyObject* NbrNodeTreeInForest(PyObject* self, PyObject* args){
 		return NULL;
 	}
 	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
+    std::cout << my_Forest->showlast()->Fitness()<< std::endl;
     
-    return Py_BuildValue("f",my_Forest->showlast()->NbrNode());
+    return Py_BuildValue("i",my_Forest->showlast()->NbrNode());
 }
 
 // function that permit to get the matrice between the two languages
@@ -117,7 +119,7 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 	}
     free (my_Y);
     free (my_X); 
-
+//free (matrix_);
   	return Py_None;
 }
 

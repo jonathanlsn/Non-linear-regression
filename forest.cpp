@@ -12,10 +12,13 @@ Forest::Forest() {
 
 
 Forest::Forest(int lambda) {
-  this -> nb_elmts_ = 0; 
-  this -> firstTree_ = nullptr;
-  this -> lastTree_= nullptr;
+  this -> nb_elmts_ = 1; 
   this -> lambda_= lambda;
+  std::string True="true";
+  Node * node = new Node (True);
+  Tree * tree = new Tree (node);
+  this -> firstTree_ = tree;
+  this -> lastTree_= tree;
 }
 
 
@@ -42,6 +45,7 @@ void Forest::show(){
 
 
 Tree * Forest::showlast(){
+  //std::cout<< lastTree_->show() << " : " << lastTree_->Fitness() << std::endl;
   return(lastTree_);
 }
 
@@ -63,7 +67,8 @@ Tree * Forest::firstTree(){
 
 void Forest::evolve(Matrix matrix_){
 
-  
+  if (lastTree_==firstTree_){firstTree_->calcul_fitness(matrix_);}  
+
   Tree * fiel[lambda_+1]; //Stock children and one parent
   Tree * best = this->lastTree();
   
@@ -86,7 +91,7 @@ void Forest::evolve(Matrix matrix_){
   	}
   }
 	std::cout<<std::endl;
-  std::cout<< "Best : " << best->show() <<std::endl;
+  std::cout<< "Best : " << best->show() << " ||| "<< best->Fitness()  <<std::endl;
   std::cout<<std::endl;
   
 	PushBack(best);
@@ -94,11 +99,12 @@ void Forest::evolve(Matrix matrix_){
 
 
 void Forest::generation(int nb_gen,Matrix matrix_){
-  //for (int g=0;g<nb_gen;++g){ 
-  Tree * last=lastTree_;
-  while(last->Fitness()!=0){
-    last=lastTree_;
-    if(last->Fitness()==0){return;}
+  for (int g=0;g<nb_gen;++g){ 
+  //Tree * last=lastTree_;
+  //while(last->Fitness()!=0){
+
+    //last=lastTree_;
+    //if(last->Fitness()==0){return;}
     evolve(matrix_);
     
   }
