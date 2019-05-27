@@ -88,7 +88,7 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
     Forest* my_Forest;
 	int nbr_generation;
 
-    if (!PyArg_ParseTuple(args, "OOOi", &listOfBs,&listOfYs, &capsule_forest,&nbr_generation)){
+    if (!PyArg_ParseTuple(args, "OOOi", &listOfBs, &listOfYs, &capsule_forest, &nbr_generation)){
     	return NULL;
 	}	
 	my_Forest = (Forest*) PyCapsule_GetPointer(capsule_forest,NAME_CAPSULE_FOREST);
@@ -101,9 +101,10 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 	for (int y = 0; y < sizeY; y++){
 		my_Y[y] = (bool) PyLong_AsLong(PyList_GetItem( (PyObject*) listOfYs, (Py_ssize_t) y));
 		nLignes +=1;
+		std::cout << my_Y[y] << std::endl;
 	}
+
     int size2 = PyList_Size((PyObject*) listOfBs);
-    std::cout<<size2<<std::endl;
 	bool** my_X = (bool**) malloc(size2*sizeof(bool*));  
 	
 	int nColonnes = 1;     
@@ -117,8 +118,8 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 		nColonnes+=1;
 
 	    for (int j = 0; j < size; ++j){ 
-	    my_A[j] = (bool) PyLong_AsLong(PyList_GetItem( (PyObject*) listOfAs, (Py_ssize_t) j));
-		  std::cout << my_A[j] << std::endl;
+	    	my_A[j] = (bool) PyLong_AsLong(PyList_GetItem( (PyObject*) listOfAs, (Py_ssize_t) j));
+		    std::cout << my_A[j] << std::endl;
 		}	
 		my_X[i]=my_A; 
 	}
