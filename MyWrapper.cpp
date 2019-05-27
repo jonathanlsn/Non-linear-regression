@@ -103,6 +103,7 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 		nLignes +=1;
 		std::cout << my_Y[y] << std::endl;
 	}
+	std::cout << "\n" << std::endl;
 
     int size2 = PyList_Size((PyObject*) listOfBs);
 	bool** my_X = (bool**) malloc(size2*sizeof(bool*));  
@@ -122,10 +123,11 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 		    std::cout << my_A[j] << std::endl;
 		}	
 		my_X[i]=my_A; 
+		std::cout << "\n" << std::endl;
 	}
 
 	Matrix matrix_ = Matrix(my_X,my_Y,nLignes,nColonnes); 
-	//my_Forest->generation(nbr_generation, matrix_);
+	my_Forest->generation(nbr_generation, matrix_);
 
 
 	for (int i = 0; i < size2; i++){
