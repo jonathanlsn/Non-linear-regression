@@ -117,17 +117,17 @@ static PyObject* Solver(PyObject* self, PyObject* args){
 	}
     free (my_Y);
     free (my_X); 
-//free (matrix_);
+    //free (matrix_);
   	return Py_None;
 }
 
 
 static PyMethodDef module_funcs[] = {
     {"solve", (PyCFunction)Solver, METH_VARARGS, "Solve the problem and gives the Best Tree and it fitness\n\nArgs:\n\tlistOfBs (list): list of Xi variables\n\tlistOfYs (list): list of Y values\n\tcapsule_forest (Capsule): forest object\n\tnbr_generation (int): nbr of loop that will make the solver to give the best tree possible \n\nReturns:\n\t Nothing"},
-	{"initiate_Forest" ,(PyCFunction)ForestTranslator, METH_VARARGS,"Creat a forest capsule that will ocntain all the results\n\nArgs:\n\t"},
-	{"fitnessTree",(PyCFunction)FitnessTreeInForest,METH_VARARGS},
-	{"nbrTinF",(PyCFunction)nb_elmtsInForest,METH_VARARGS},
-	{"nbrNinTinF",(PyCFunction)NbrNodeTreeInForest,METH_VARARGS},
+	{"initiate_Forest" ,(PyCFunction)ForestTranslator, METH_VARARGS,"Creat a forest capsule that will contain all the results\n\nArgs: \n\ta (int): number of child per generation\n\nReturns:\n\tcapsule: the encapsulate forest which will be use to contain the solver results"},
+	{"fitnessTree",(PyCFunction)FitnessTreeInForest,METH_VARARGS,"Get the last tree's fitness\n\nArgs:\n\tcapsule (Forest object): forest object that has already benn used in the solver\n\tposition (int): this args is useless but we do not know how to code a void fonction in the wrapper\n\nReturns:\n\tcapsule: capsule that contain the last tree fitness"},
+	{"nbrTinF",(PyCFunction)nb_elmtsInForest,METH_VARARGS, "Get the Tree number in the forest\n\nArgs:\n\tcapsule (Forest Object): forest object that has already benn used in the solver\n\tRetunrs\n\tcapsule (int): contain the number of Tree"},
+	{"nbrNinTinF",(PyCFunction)NbrNodeTreeInForest,METH_VARARGS,"Get the Node Number in the last Tree of the forest\n\nArgs:\n\tcapsule (Forest Object): forest object that has already benn used in the solver\n\tRetunrs\n\tcapsule (int): contain the number of Node"},
 	
 		{NULL, NULL, METH_NOARGS, NULL}
 };
