@@ -340,14 +340,14 @@ int main()
   // test matrix
   std::cout<< "tests matrix"<< std::endl;
   std::cout<< std::endl;
-  
+/*  
   int tab[]={1,0,0,0,1,0,1,1,1};  // (!x1||!x2)||(x1&&x2)
-  int tab2[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
+  bool tab2[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
   int nligne_=3;
   int ncolonne_=3;
   Matrix matrix(tab2,nligne_,ncolonne_);
   matrix.show();
-  
+  */
   std::cout<< std::endl;
 
   // Utilisation de la fiteness avec la matrice de données
@@ -498,7 +498,7 @@ std::cout<<std::endl;
 std::cout<< "Programme principal :" <<std::endl;
 std::cout<<std::endl;
   
-int tab3[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
+bool tab3[]={1,0,1,0,1,1,1,1,1};  // (x1||x2)||(x1&&x2)
 int nligne=3;
 int ncolonne=3;
 Matrix matrix_(tab2,nligne,ncolonne);

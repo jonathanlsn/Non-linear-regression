@@ -101,7 +101,6 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 		my_Y[y] = (bool) PyLong_AsLong(PyList_GetItem( (PyObject*) listOfYs, (Py_ssize_t) y));
 		nLignes +=1;
 	}
-	std::cout<<"nombre de ligne:  "<<nLignes<<std::endl;
   int size2 = PyList_Size((PyObject*) listOfBs);
   std::cout<<size2<<std::endl;
 	bool** my_X = (bool**) malloc(size2*sizeof(bool*));  
