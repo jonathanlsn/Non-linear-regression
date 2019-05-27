@@ -87,7 +87,7 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
     PyObject* capsule_forest;
     Forest* my_Forest;
 	int nbr_generation;
-    if (!PyArg_ParseTuple(args, "OOOi", &listOfYs, &listOfBs,&capsule_forest,nbr_generation)){
+    if (!PyArg_ParseTuple(args, "OOOi", &listOfBs,&listOfYs, &capsule_forest,&nbr_generation)){
     	return NULL;
 	}	
 
@@ -111,7 +111,7 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 
 	for (int i = 0; i < size2; i++){
 		PyListObject* listOfAs = (PyListObject*) PyList_GetItem( (PyObject*) listOfBs, (Py_ssize_t) i);
-		int size = PyList_Size((PyObject*) listOfAs);
+		int size = PyList_Size((PyObject*) listOfAs);	
 		bool* my_A = (bool*) malloc(size*sizeof(bool));  
 		my_X[i] = my_A;
 		nColonnes+=1;
@@ -124,7 +124,7 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 	}
 
 	Matrix matrix_ = Matrix(my_X,my_Y,nLignes,nColonnes); 
-	my_Forest->generation(nbr_generation, matrix_);
+	//my_Forest->generation(nbr_generation, matrix_);
 
 	for (int i = 0; i < size2; i++){
 		free(my_X[i]);	
