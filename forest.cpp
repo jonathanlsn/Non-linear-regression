@@ -41,14 +41,8 @@ void Forest::show(){
 }
 
 
-Tree * Forest::show(int i){
-  Tree * tmp=firstTree_;
-  int k=0;
-  while (k != i){
-    tmp = tmp->nextTree();
-    ++k;
-  }
-  return(tmp);
+Tree * Forest::showlast(){
+  return(lastTree_);
 }
 
 
