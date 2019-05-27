@@ -80,19 +80,13 @@ void Forest::evolve(Matrix matrix_){
 		//mutation
 		fiel[k]= new Tree(parent);  // Copie de l'arbre parent 
 		fiel[k]->mutation();  // Mutation 
-		
-    std::cout<<fiel[k]->show()<<std::endl;
 
 		fiel[k]->calcul_fitness(matrix_);  // Calcul la fitness de l'enfant
 		
-	  std::cout<< "fitness : " << fiel[k]->Fitness() <<std::endl;
 	  if (best->Fitness()<=fiel[k]->Fitness()){
 	    best=fiel[k];
   	}
   }
-	std::cout<<std::endl;
-  std::cout<< "Best : " << best->show() << " ||| "<< best->Fitness()  <<std::endl;
-  std::cout<<std::endl;
   
 	PushBack(best);
 }
@@ -108,27 +102,7 @@ void Forest::generation(int nb_gen,Matrix matrix_){
     evolve(matrix_);
     
   }
+  std::cout<< "Best : " << lastTree_->show() << " ||| Fitness : "<< lastTree_->Fitness()  <<std::endl;
 }
 
-
-
-/*
-void Forest::resolve(Matrix matrix_){
-  std::string True="true";
-  Node no(True);
-  Tree tr(&no);
-  tr.calcul_fitness(matrix_);
-
-  std::cout<<std::endl;
-  std::cout<< "1er arbre : " <<tr.show() <<std::endl;
-  std::cout<< "fitness du 1er arbre : " <<tr.Fitness() <<std::endl;
-  std::cout<<std::endl;
-
-  Forest fo(10);
-  fo.PushBack(&tr);
-  
-  fo.generation(10,matrix_);
-  fo.show(fo.nb_elmts()-1);  
-}
-*/
 

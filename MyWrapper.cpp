@@ -38,7 +38,6 @@ static PyObject* nb_elmtsInForest(PyObject* self, PyObject* args){
 		return NULL;
 	}
 	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
-	std::cout << my_Forest->nb_elmts() << std::endl;
     
     return Py_BuildValue("i",my_Forest->nb_elmts());
 }
@@ -51,7 +50,7 @@ static PyObject* FitnessTreeInForest(PyObject* self, PyObject* args){
 		return NULL;
 	}
 	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
-    std::cout << my_Forest->showlast()->Fitness()<< std::endl;
+
     return Py_BuildValue("i",my_Forest->showlast()->Fitness());
 }
 
@@ -63,14 +62,13 @@ static PyObject* NbrNodeTreeInForest(PyObject* self, PyObject* args){
 		return NULL;
 	}
 	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
-    std::cout << my_Forest->showlast()->Fitness()<< std::endl;
     
     return Py_BuildValue("i",my_Forest->showlast()->NbrNode());
 }
 
 // function that permit to get the matrice between the two languages
 // and to solve the problem 
-static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
+static PyObject* Solver(PyObject* self, PyObject* args){
 	PyListObject* listOfYs;
 	PyListObject** listOfBs;
     PyObject* capsule_forest;
@@ -125,8 +123,8 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 
 
 static PyMethodDef module_funcs[] = {
-    {"sum_list_As", (PyCFunction)SumAsInPyList, METH_VARARGS, "Sum the As in a list\n\nArgs:\n\tlist_As (list): list of capsules A\n\nReturns:\n\t Capsules: Object A capsule\n\t int: sum of A's a"},
-	{"initiate_Forest" ,(PyCFunction)ForestTranslator, METH_VARARGS},
+    {"solve", (PyCFunction)Solver, METH_VARARGS, "Solve the problem and gives the Best Tree and it fitness\n\nArgs:\n\tlistOfBs (list): list of Xi variables\n\tlistOfYs (list): list of Y values\n\tcapsule_forest (Capsule): forest object\n\tnbr_generation (int): nbr of loop that will make the solver to give the best tree possible \n\nReturns:\n\t Nothing"},
+	{"initiate_Forest" ,(PyCFunction)ForestTranslator, METH_VARARGS,"Creat a forest capsule that will ocntain all the results\n\nArgs:\n\t"},
 	{"fitnessTree",(PyCFunction)FitnessTreeInForest,METH_VARARGS},
 	{"nbrTinF",(PyCFunction)nb_elmtsInForest,METH_VARARGS},
 	{"nbrNinTinF",(PyCFunction)NbrNodeTreeInForest,METH_VARARGS},
