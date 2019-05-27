@@ -69,7 +69,7 @@ Node::Node(std::string str){
     type_= "bool";
     bool_values_ =false;
   }
-  if (str=="x1" or str=="x2"){
+  if (str=="x1" or str=="x2" or str=="x3"){
     type_="param";
   }
   else{
@@ -109,7 +109,7 @@ Node::Node(std::string str, Node* precedent){
     type_= "bool";
     bool_values_ =false;
   }
-  if (str=="x1" or str=="x2"){
+  if (str=="x1" or str=="x2" or str=="x3"){
     type_="param";
   }
   else{

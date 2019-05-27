@@ -31,6 +31,7 @@ class Forest{
     Tree * lastTree();
     Tree * firstTree();
     
+    //void resolve(Matrix matrix_);
   
   protected:
     Tree* firstTree_;
@@ -38,4 +39,12 @@ class Forest{
     int nb_elmts_;
     int lambda_;
 };
+
+
 #endif // FOREST_
+
+
+
+
+
+

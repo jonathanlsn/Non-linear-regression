@@ -9,7 +9,7 @@ main.o: main.cpp forest.h tree.h node.h
 node.o: node.cpp node.h 
 	g++ -o node.o -c node.cpp
 
-tree.o: tree.cpp tree.h node.h 
+tree.o: tree.cpp tree.h node.h matrix.h
 	g++ -o tree.o -c tree.cpp
 	
 forest.o: forest.cpp forest.h tree.h node.h matrix.h

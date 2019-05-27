@@ -2,6 +2,7 @@
 #define TREE
 
 #include "node.h"
+#include "matrix.h"
 #include <cstdlib>
 
 
@@ -25,31 +26,27 @@ class Tree{
     void generation(int x);
 
 //method
-
-    bool cross(Node * node,int &nb_elem, bool copy, Node initialcopy,  Node * passant);
     
-    
-    bool cross(Node * node, int &nb_node_son );
     void calcul_fitness(bool y);
-    void mutation();
+    void cross(Node * node);
 
 
-    bool cross(Node * node,int * x,int &nb_elem);
-    void calcul_fitness(int * x, bool y);
+    bool cross(Node * node,bool * x);
+    void calcul_fitness(Matrix matrix);
     
-    
-    bool cross(Node * node,int &nb_elem, bool copy, Node initialcopy);
 
     void copy_nodes(Node * node,Node * father,int i);
 
     std::string show();
     std::string parcour(Node * node);
+    
     void link(Tree * tree);
     
-    void mutation2();
+    void mutation();
     Node * choose();
     Node * crossing(Node * node);
     void switch_op(Node * node);
+    void switch_param(Node * node);
     void substitution(Node * node);
     void insertion(Node * node);
 
@@ -65,5 +62,9 @@ class Tree{
     int generation_;
 };
 #endif
+
+
+
+
 
 
