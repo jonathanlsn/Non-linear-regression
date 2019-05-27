@@ -118,7 +118,7 @@ fo.generation(10,matrix_);
 //fo.show();
 
 
-Tree * t=fo.show(fo.nb_elmts()-1);
+Tree * t=fo.showlast();
 std::cout<< "solution : " << t->show() <<std::endl;
 
 
