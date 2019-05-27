@@ -26,14 +26,13 @@ Matrix::Matrix(bool ** tab_X,bool* tab_Y, int nLignes,int nColonnes){
   for (int i=0; i < nLignes; i++){
     matrix_[i] = new bool[nColonnes];
   }
-  int k=0;
   for (int h=0; h < nLignes; h++){
     for (int j=0; j < nColonnes; j++){
       if (j == nColonnes-1){
         matrix_[h][j] = tab_Y[h];
 	  }
       else{
-		    matrix_[h][j] = tab_X[h][j];
+		    matrix_[h][j] = tab_X[j][h];
 	    }
     }
   }

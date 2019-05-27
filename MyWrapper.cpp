@@ -64,7 +64,7 @@ static PyObject* FitnessTreeInForest(PyObject* self, PyObject* args){
 	}
 	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
     
-    return Py_BuildValue("f",my_Forest->show(position)->Fitness());
+    return Py_BuildValue("f",my_Forest->showlast()->Fitness());
 }
 
 static PyObject* NbrNodeTreeInForest(PyObject* self, PyObject* args){
@@ -76,7 +76,7 @@ static PyObject* NbrNodeTreeInForest(PyObject* self, PyObject* args){
 	}
 	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
     
-    return Py_BuildValue("f",my_Forest->show(position)->NbrNode());
+    return Py_BuildValue("f",my_Forest->showlast()->NbrNode());
 }
 
 // function that permit to get the matrice between the two languages
@@ -126,7 +126,8 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 		std::cout << "\n" << std::endl;
 	}
 
-	Matrix matrix_ = Matrix(my_X,my_Y,nLignes,nColonnes); 
+	Matrix matrix_ = Matrix(my_X,my_Y,nLignes,nColonnes);
+	matrix_.show(); 
 	my_Forest->generation(nbr_generation, matrix_);
 
 
