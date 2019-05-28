@@ -10,6 +10,9 @@ class Matrix{
 
     Matrix(bool ** tab_X,bool* tab_Y, int nLignes,int nColonnes);  // add a new matrix from a matrix of xi arguments and an array of y values
 
+//destructor
+	~Matrix()=default;
+
 
 //getter
     int nlignes();  // return the number of lines of the matrix
