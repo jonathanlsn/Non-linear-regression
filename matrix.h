@@ -9,7 +9,8 @@ class Matrix{
     Matrix(bool * tab, int nLignes,int nColonnes);
 
     Matrix(bool ** tab_X,bool* tab_Y, int nLignes,int nColonnes);
-
+//destructor
+	~Matrix()=default;
 
 //getter
     int nlignes();
