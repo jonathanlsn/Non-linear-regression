@@ -17,7 +17,7 @@ class Forest{
      void generation(int nb_gen,Matrix matrix_);
 
 		// Constructors
-    Forest();
+    Forest();  
     Forest(int lambda);
     Forest(const Forest&)=delete;  
 
