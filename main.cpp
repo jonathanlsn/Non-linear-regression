@@ -68,21 +68,20 @@ Node no(True);
 //Node no1(x1,&no);
 //Node no2(x2,&no);
 Tree tr(&no);
-tr.calcul_fitness(matrix_);
+Forest fo(15);
+fo.PushBack(&tr);
 
+
+tr.calcul_fitness(matrix_);
 
 std::cout<<std::endl;
 std::cout<< "1er arbre : " <<tr.show() <<std::endl;
 std::cout<< "fitness du 1er arbre : " <<tr.Fitness() <<std::endl;
 std::cout<<std::endl;
 
-Forest fo(15);
-fo.PushBack(&tr);
-
-
 
 fo.generation(10,matrix_);
-//fo.show();
+
 
 
 Tree * t=fo.showlast();

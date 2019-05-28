@@ -13,19 +13,6 @@
 // Name for the cpp object "capsules"
 #define NAME_CAPSULE_FOREST "FOREST"
 
-/*
-static Forest* ForestPythontoC(PyObject* args){
-    Forest* my_Forest; 
-    PyObject* capsule; // là on prend les argumetns de la capsule pour créer la forêt
-// mais on veut créer une forêt vierge donc pas d'argument. Doit-on retirer args ?
-	if (!PyArg_ParseTuple(args, "O", &capsule)){
-		return NULL;
-	}
-    my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
-	return my_Forest;
-}
-*/
-
 // destructor
 void ForestCapsuleDestructor(PyObject* capsule){
 	Forest* my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
@@ -52,36 +39,47 @@ static PyObject* nb_elmtsInForest(PyObject* self, PyObject* args){
 	}
 	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
     
-    return Py_BuildValue("f",my_Forest->nb_elmts());
+    return Py_BuildValue("i",my_Forest->nb_elmts());
 }
 
 static PyObject* FitnessTreeInForest(PyObject* self, PyObject* args){
     Forest* my_Forest;
 	PyObject* capsule;
-	int position;
-	if (!PyArg_ParseTuple(args, "Oi", &capsule,&position)){
+	if (!PyArg_ParseTuple(args, "O", &capsule)){
 		return NULL;
 	}
 	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
-    
-    return Py_BuildValue("f",my_Forest->show(position)->Fitness());
+
+    return Py_BuildValue("i",my_Forest->showlast()->Fitness());
+}
+
+static PyObject* ShowTreeFormula(PyObject* self, PyObject* args){
+    Forest* my_Forest;
+	PyObject* capsule;
+	if (!PyArg_ParseTuple(args, "O", &capsule)){
+		return NULL;
+	}
+	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
+	
+	std::cout << my_Forest->showlast()->show() << std::endl;
+
+    return Py_None;
 }
 
 static PyObject* NbrNodeTreeInForest(PyObject* self, PyObject* args){
     Forest* my_Forest;
 	PyObject* capsule;
-	int position;
-	if (!PyArg_ParseTuple(args, "Oi", &capsule,&position)){
+	if (!PyArg_ParseTuple(args, "O", &capsule)){
 		return NULL;
 	}
 	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
     
-    return Py_BuildValue("f",my_Forest->show(position)->NbrNode());
+    return Py_BuildValue("i",my_Forest->showlast()->NbrNode());
 }
 
 // function that permit to get the matrice between the two languages
 // and to solve the problem 
-static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
+static PyObject* Solver(PyObject* self, PyObject* args){
 	PyListObject* listOfYs;
 	PyListObject** listOfBs;
     PyObject* capsule_forest;
@@ -101,7 +99,6 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 	for (int y = 0; y < sizeY; y++){
 		my_Y[y] = (bool) PyLong_AsLong(PyList_GetItem( (PyObject*) listOfYs, (Py_ssize_t) y));
 		nLignes +=1;
-		std::cout << my_Y[y] << std::endl;
 	}
 
     int size2 = PyList_Size((PyObject*) listOfBs);
@@ -119,31 +116,30 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 
 	    for (int j = 0; j < size; ++j){ 
 	    	my_A[j] = (bool) PyLong_AsLong(PyList_GetItem( (PyObject*) listOfAs, (Py_ssize_t) j));
-		    std::cout << my_A[j] << std::endl;
 		}	
 		my_X[i]=my_A; 
 	}
 
-	Matrix matrix_ = Matrix(my_X,my_Y,nLignes,nColonnes); 
-	//my_Forest->generation(nbr_generation, matrix_);
-
+	Matrix matrix_ = Matrix(my_X,my_Y,nLignes,nColonnes);
+	my_Forest->generation(nbr_generation, matrix_);
 
 	for (int i = 0; i < size2; i++){
 		free(my_X[i]);	
 	}
     free (my_Y);
     free (my_X); 
-
+    //free (matrix_);
   	return Py_None;
 }
 
 
 static PyMethodDef module_funcs[] = {
-    {"sum_list_As", (PyCFunction)SumAsInPyList, METH_VARARGS, "Sum the As in a list\n\nArgs:\n\tlist_As (list): list of capsules A\n\nReturns:\n\t Capsules: Object A capsule\n\t int: sum of A's a"},
-	{"initiate_Forest" ,(PyCFunction)ForestTranslator, METH_VARARGS},
-	{"fitnessTree",(PyCFunction)FitnessTreeInForest,METH_VARARGS},
-	{"nbrTinF",(PyCFunction)nb_elmtsInForest,METH_VARARGS},
-	{"nbrNinTinF",(PyCFunction)NbrNodeTreeInForest,METH_VARARGS},
+    {"solve", (PyCFunction)Solver, METH_VARARGS, "Solve the problem and gives the Best Tree and it fitness\n\nArgs:\n\tlistOfBs (list): list of Xi variables\n\tlistOfYs (list): list of Y values\n\tcapsule_forest (Capsule): forest object\n\tnbr_generation (int): nbr of loop that will make the solver to give the best tree possible \n\nReturns:\n\t Nothing"},
+	{"initiate_Forest" ,(PyCFunction)ForestTranslator, METH_VARARGS,"Creat a forest capsule that will contain all the results\n\nArgs: \n\ta (int): number of child per generation\n\nReturns:\n\tcapsule: the encapsulate forest which will be use to contain the solver results"},
+	{"fitnessTree",(PyCFunction)FitnessTreeInForest,METH_VARARGS,"Get the last tree's fitness\n\nArgs:\n\tcapsule (Forest object): forest object that has already benn used in the solver\n\nReturns:\n\tcapsule: capsule that contains the last tree fitness"},
+	{"nbrTinF",(PyCFunction)nb_elmtsInForest,METH_VARARGS, "Get the Tree number in the forest\n\nArgs:\n\tcapsule (Forest Object): forest object that has already been used in the solver\n\tRetunrs\n\tcapsule (int): contain the number of Tree"},
+	{"nbrNinTinF",(PyCFunction)NbrNodeTreeInForest,METH_VARARGS,"Get the Node Number in the last Tree of the forest\n\nArgs:\n\tcapsule (Forest Object): forest object that has already been used in the solver\n\tRetunrs\n\tcapsule (int): contains the number of Node"},
+	{"showFormula",(PyCFunction)ShowTreeFormula,METH_VARARGS,"Get the formula of the best tree in the forest\n\nArgs:\n\tcapsule (Forest Object): forest object that has already been used in the solver\n\tRetunrs\n\tcapsule (string): contains the formula"},
 	
 		{NULL, NULL, METH_NOARGS, NULL}
 };

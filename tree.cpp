@@ -56,7 +56,6 @@ void Tree::copy_nodes(Node * node, Node * father, int i){
   } 
   
   else{
-    std::cout<<std::endl;
     Node * param_node=new Node (node->values(), father); 
     if (i==0){
       FirstNode_=param_node;
@@ -173,7 +172,6 @@ void Tree::substitution(Node * node){
   std::string options[]={"true","false","x1","x2","x3","&&","||","!"};
   //srand(time(NULL));
   int i=rand()%8;   // Choix d'une option
-  //std::cout<< "position : " << i <<std::endl;
 
   Node * father=node->FatherNode();
   Node * new_node= new Node(options[i]) ;
