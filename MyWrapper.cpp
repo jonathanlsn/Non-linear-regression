@@ -45,8 +45,7 @@ static PyObject* nb_elmtsInForest(PyObject* self, PyObject* args){
 static PyObject* FitnessTreeInForest(PyObject* self, PyObject* args){
     Forest* my_Forest;
 	PyObject* capsule;
-	int position;
-	if (!PyArg_ParseTuple(args, "Oi", &capsule,&position)){
+	if (!PyArg_ParseTuple(args, "O", &capsule)){
 		return NULL;
 	}
 	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
@@ -54,11 +53,23 @@ static PyObject* FitnessTreeInForest(PyObject* self, PyObject* args){
     return Py_BuildValue("i",my_Forest->showlast()->Fitness());
 }
 
+static PyObject* ShowTreeFormula(PyObject* self, PyObject* args){
+    Forest* my_Forest;
+	PyObject* capsule;
+	if (!PyArg_ParseTuple(args, "O", &capsule)){
+		return NULL;
+	}
+	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
+	
+	std::cout << my_Forest->showlast()->show() << std::endl;
+
+    return Py_None;
+}
+
 static PyObject* NbrNodeTreeInForest(PyObject* self, PyObject* args){
     Forest* my_Forest;
 	PyObject* capsule;
-	int position;
-	if (!PyArg_ParseTuple(args, "Oi", &capsule,&position)){
+	if (!PyArg_ParseTuple(args, "O", &capsule)){
 		return NULL;
 	}
 	my_Forest = (Forest*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_FOREST);
@@ -125,9 +136,10 @@ static PyObject* Solver(PyObject* self, PyObject* args){
 static PyMethodDef module_funcs[] = {
     {"solve", (PyCFunction)Solver, METH_VARARGS, "Solve the problem and gives the Best Tree and it fitness\n\nArgs:\n\tlistOfBs (list): list of Xi variables\n\tlistOfYs (list): list of Y values\n\tcapsule_forest (Capsule): forest object\n\tnbr_generation (int): nbr of loop that will make the solver to give the best tree possible \n\nReturns:\n\t Nothing"},
 	{"initiate_Forest" ,(PyCFunction)ForestTranslator, METH_VARARGS,"Creat a forest capsule that will contain all the results\n\nArgs: \n\ta (int): number of child per generation\n\nReturns:\n\tcapsule: the encapsulate forest which will be use to contain the solver results"},
-	{"fitnessTree",(PyCFunction)FitnessTreeInForest,METH_VARARGS,"Get the last tree's fitness\n\nArgs:\n\tcapsule (Forest object): forest object that has already benn used in the solver\n\tposition (int): this args is useless but we do not know how to code a void fonction in the wrapper\n\nReturns:\n\tcapsule: capsule that contain the last tree fitness"},
-	{"nbrTinF",(PyCFunction)nb_elmtsInForest,METH_VARARGS, "Get the Tree number in the forest\n\nArgs:\n\tcapsule (Forest Object): forest object that has already benn used in the solver\n\tRetunrs\n\tcapsule (int): contain the number of Tree"},
-	{"nbrNinTinF",(PyCFunction)NbrNodeTreeInForest,METH_VARARGS,"Get the Node Number in the last Tree of the forest\n\nArgs:\n\tcapsule (Forest Object): forest object that has already benn used in the solver\n\tRetunrs\n\tcapsule (int): contain the number of Node"},
+	{"fitnessTree",(PyCFunction)FitnessTreeInForest,METH_VARARGS,"Get the last tree's fitness\n\nArgs:\n\tcapsule (Forest object): forest object that has already benn used in the solver\n\nReturns:\n\tcapsule: capsule that contains the last tree fitness"},
+	{"nbrTinF",(PyCFunction)nb_elmtsInForest,METH_VARARGS, "Get the Tree number in the forest\n\nArgs:\n\tcapsule (Forest Object): forest object that has already been used in the solver\n\tRetunrs\n\tcapsule (int): contain the number of Tree"},
+	{"nbrNinTinF",(PyCFunction)NbrNodeTreeInForest,METH_VARARGS,"Get the Node Number in the last Tree of the forest\n\nArgs:\n\tcapsule (Forest Object): forest object that has already been used in the solver\n\tRetunrs\n\tcapsule (int): contains the number of Node"},
+	{"showFormula",(PyCFunction)ShowTreeFormula,METH_VARARGS,"Get the formula of the best tree in the forest\n\nArgs:\n\tcapsule (Forest Object): forest object that has already been used in the solver\n\tRetunrs\n\tcapsule (string): contains the formula"},
 	
 		{NULL, NULL, METH_NOARGS, NULL}
 };
