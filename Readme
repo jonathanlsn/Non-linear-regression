@@ -1,0 +1,38 @@
+Class Forest:
+	Contains all the trees that led to the final formula.
+	Composed of a number of elements(nb_elmts_); Adress of the first tree (firstTree_); Adress of the last tree (lastTree_).
+	Function PushBack(Tree newTree) -> Add newTree at the end of the forest by linking the last tree to newTree.
+	Function show() -> show the forest generation (each selected tree with it formula).
+	
+	
+Class Tree:
+	Contains the actual tree.
+	Composed of the adress of it first Node (FirstNode_); the number of Nodes in the tree (NbrNode_); the adress of the next tree (initialize at nullptr / nextTree_); and the actual generation of the tree (generation_); the fitness of the tree (Fitness_).
+	Getters of FirstNode_, Fitness_ and NbrNode_.
+	Setters of nextTree_ and generation_.
+	Function calcul_fitness(Matrix matrix) -> calcul the fitness of the tree comparing to the Matrix passed in parameters.
+	Function cross(Node * node) -> Travel the tree and count the number of nodes
+	Function cross(Node * node,bool * x) -> Travel the tree recursively and calculate the result with the variables.
+	Function copy_nodes(Node * node,Node * father,int i) -> copy a node in order to add it in a new tree after mutation
+	Function show() -> use the function "parcour" in order to print the tree
+	Function parcour(Node * node) -> print with the correct synthaxe a node.
+	Function mutation() -> use the function choose and crossing in order to choose the mutation for a tree.
+	Function choose() ->
+	Function crossing(Node * node) ->
+	function switch_op(Node * node) -> change the operator "or" by the operator "and" and reverse
+	Function switch_param(Node * node) -> 
+	Function substitution(Node * node) -> make a substitution
+	Function insertion(Node * node) -> make an insertion
+	
+	
+Class Node:
+	Contains the actual node.
+	Composed of the values of the Node (values_ if it's an operator or a variable and bool_values_ if it's a random boolean (true/false)); it's father node (FatherNode_); the potential two next ndode it can have (NextNode1_ and NextNode2_); the type of the node (boolean or operator).
+	Only compose of getters and setters.
+	
+Class Matrix:
+	Contains the matrix for comparison.
+	Composed of the number of lines (nLignes_); the number of columns (nColonnes_); the ... (**matrix)
+	Function show() -> return the matrix
+	Function x() -> return the matrix of variables 
+	Function y() -> return a vector with the observation
