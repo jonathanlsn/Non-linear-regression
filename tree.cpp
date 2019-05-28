@@ -26,7 +26,8 @@ Tree::Tree( Tree* tree){
   NbrNode_ = tree->NbrNode_;
   nextTree_ = nullptr; 
   generation_ = tree->generation_;
-  Node * tmp=new Node(true);
+  std::string True="true";
+  Node * tmp=new Node(True);
   int i=0;
   copy_nodes(FirstNode_init,tmp,i);
 }
@@ -64,10 +65,6 @@ void Tree::copy_nodes(Node * node, Node * father, int i){
   }
 }
 
-
-
-
-Tree::~Tree(){}  // Destructor
 
 
 
@@ -342,5 +339,9 @@ void Tree::link(Tree * tree){
   nextTree_=tree;
 }
 
+void Tree::sup(){
+  FirstNode_->sup();
+  delete this;
+}
 
 

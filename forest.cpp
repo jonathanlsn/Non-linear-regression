@@ -86,6 +86,9 @@ void Forest::evolve(Matrix matrix_){
 	  if (best->Fitness()<=fiel[k]->Fitness()){
 	    best=fiel[k];
   	}
+  	else{
+	    delete fiel[k];
+  	}
   }
   
 	PushBack(best);

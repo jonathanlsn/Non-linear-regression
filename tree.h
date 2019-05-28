@@ -13,8 +13,8 @@ class Tree{
   public:
 
 //constructor
-    Tree(Node* node);
-    Tree( Tree* Tree);
+    Tree(Node* node);  // Constructor from 
+    Tree( Tree* Tree);  // Copy constructor
 
 //getter
     Node* FirstNode();
@@ -52,7 +52,8 @@ class Tree{
 
 //destructor
 
-    ~Tree();
+    ~Tree()=default;
+    void sup();
 
   protected:
     Node * FirstNode_;

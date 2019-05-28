@@ -3,21 +3,6 @@
 
 //constructor
 
-Node::Node(Node* node,std::string type){
-
-  FatherNode_ = nullptr;
-  NextNode1_ = nullptr;
-  NextNode2_ = nullptr;
-
-  if (type=="op"){
-    type_= "op";
-    values_ = node->values_;
-  }
-  else{
-    type_= "bool";
-    bool_values_ = node->bool_values_;
-  }
-}
 
 
 Node::Node(const Node * node){  // Copy constructor
@@ -31,29 +16,6 @@ Node::Node(const Node * node){  // Copy constructor
   }
 }
 
-Node::~Node(){}
-
-
-/*
-Node::Node( Node * node){  // Copy constructor
-  if (node->type()=="bool"){
-    FatherNode_ = node -> FatherNode();
-    NextNode1_ = node ->NextNode1();
-    NextNode2_ = node ->NextNode2();
-    type_= "bool";
-    bool_values_ = node->bool_values();
-    
-  }
-  else{
-    FatherNode_ = node -> FatherNode();
-    NextNode1_ = node ->NextNode1();
-    NextNode2_ = node ->NextNode2();
-    type_= "op";
-    values_ = node->values();
-
-  }
-} 
-*/
 
 
 Node::Node(std::string str){
@@ -77,21 +39,6 @@ Node::Node(std::string str){
   }
 }
 
-Node::Node(bool boleen){
-  bool_values_ = boleen;
-  FatherNode_ = nullptr;
-  NextNode1_ = nullptr;
-  NextNode2_ = nullptr;
-  type_= "bool";
-}
-
-/* Node::Node(std::string param,bool boleen){
-  bool_values_ = boleen;
-  FatherNode_ = nullptr;
-  NextNode1_ = nullptr;
-  NextNode2_ = nullptr;
-  type_= param;
-} */
 
 
 
@@ -126,23 +73,6 @@ Node::Node(std::string str, Node* precedent){
 
 
 
-Node::Node(bool boleen,Node* precedent){
-  bool_values_ = boleen;
-  FatherNode_ = precedent; 
-  NextNode1_ = nullptr;
-  NextNode2_ = nullptr;
-  type_= "bool";
-
-
- 
-  if (FatherNode_ ->NextNode1_ == nullptr){
-    FatherNode_ ->NextNode1_ = this;
-
-  }
-  else {
-    FatherNode_ ->NextNode2_ = this;
-  }
-}
 
 //getter
 std::string Node::values(){
@@ -197,3 +127,24 @@ void Node::setboolvalues(bool str){
 void Node::settype(std::string str){
   type_=str;
 }
+
+
+
+void Node::deleted(Node * node){
+  if (node->values()=="x" or node->values()=="num"){
+    delete node;
+  }
+  else{
+    deleted(NextNode1_);
+    deleted(NextNode2_);
+    delete node;
+  }
+}
+
+
+void Node::sup(){
+  deleted(this);
+}
+
+
+
